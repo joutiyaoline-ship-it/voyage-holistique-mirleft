@@ -1,0 +1,37 @@
+# Browser testing profiles
+edgeprofile-*/
+chromeprofile-*/
+firefoxprofile-*/
+
+# Claude Code / agent directories
+.agents/
+.claude/
+
+# Development & debug screenshots
+hero-*.png
+gallery-*.png
+*-check*.png
+*-verifier*/
+
+# Dev/patch scripts
+patch*.py
+patch_*.py
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Logs & temp files
+*.log
+*.tmp
+*.lock
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor directories
+.vscode/
+.idea/

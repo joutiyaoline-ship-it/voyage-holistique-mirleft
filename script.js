@@ -1,7 +1,7 @@
 ﻿const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyDKkpHSq5SnDfMMQQfVof6SAJkr6KEhaqQkxgKBaPnC_9R-GHyoYvAL1VtFaCPunkz/exec";
 const META_PIXEL_ID = "PASTE_META_PIXEL_ID_HERE";
 const WHATSAPP_URL =
-  "https://wa.me/31625375673?text=Bonjour%20je%20souhaite%20obtenir%20plus%20d'informations%20concernant%20le%20Voyage%20Holistique%20du%206%20au%2013%20ao%C3%BBt%20%C3%A0%20Mirleft.";
+  "https://wa.me/31625375673?text=Bonjour%20je%20souhaite%20obtenir%20plus%20d'informations%20concernant%20le%20Voyage%20Holistique%20du%2010%20au%2017%20ao%C3%BBt%202026%20%C3%A0%20Mirleft.";
 
 const header = document.querySelector(".site-header");
 const hero = document.querySelector(".hero");
@@ -154,6 +154,113 @@ document.querySelectorAll(".gallery-item").forEach((button) => {
     document.body.classList.add("modal-open");
   });
 });
+
+function getGalleryStep(gallery) {
+  const visibleImages = [
+    ...gallery.querySelectorAll(".mirleft-gallery-mobile-card, .mirleft-gallery-column img:not([aria-hidden='true'])"),
+  ].filter((img) => getComputedStyle(img).display !== "none");
+  if (visibleImages.length >= 2) {
+    const step = visibleImages[1].offsetLeft - visibleImages[0].offsetLeft;
+    if (step > 0) return step;
+  }
+
+  const firstImage = visibleImages[0];
+  const gap = parseFloat(getComputedStyle(gallery).gap || getComputedStyle(gallery).columnGap || "0") || 0;
+  return firstImage ? firstImage.getBoundingClientRect().width + gap : gallery.clientWidth * 0.85;
+}
+
+function updateMirleftArrowState() {
+  const gallery = document.querySelector("#accommodation .mirleft-gallery-scroll");
+  if (!gallery) return;
+
+  const arrows = document.querySelectorAll(".mirleft-gallery-arrow");
+  const maxScrollLeft = Math.max(gallery.scrollWidth - gallery.clientWidth, 0);
+  const atStart = gallery.scrollLeft <= 1;
+  const atEnd = gallery.scrollLeft >= maxScrollLeft - 1;
+
+  arrows.forEach((button) => {
+    const direction = Number(button.dataset.galleryDirection || 1);
+    button.disabled = direction < 0 ? atStart : atEnd;
+    button.setAttribute("aria-disabled", button.disabled ? "true" : "false");
+  });
+}
+
+const mirleftGallery = document.querySelector("#accommodation .mirleft-gallery-scroll");
+const mirleftGalleryDesktopMarkup = mirleftGallery?.innerHTML || "";
+const mirleftGallerySourceImages = mirleftGallery
+  ? [...new Map(
+      [...mirleftGallery.querySelectorAll(".mirleft-gallery-column img:not([aria-hidden='true'])")].map((img) => [
+        img.getAttribute("src"),
+        img,
+      ])
+    ).values()]
+  : [];
+const mirleftGalleryMobileQuery = window.matchMedia("(max-width: 768px)");
+
+function setMirleftGalleryMode(isMobile) {
+  if (!mirleftGallery) return;
+
+  if (isMobile) {
+    if (!mirleftGallery.classList.contains("is-mobile-flat")) {
+      mirleftGallery.classList.add("is-mobile-flat");
+      mirleftGallery.innerHTML = "";
+      mirleftGallerySourceImages.forEach((img) => {
+        const clone = img.cloneNode(true);
+        clone.classList.add("mirleft-gallery-mobile-card");
+        clone.removeAttribute("aria-hidden");
+        mirleftGallery.appendChild(clone);
+      });
+    }
+  } else if (mirleftGallery.classList.contains("is-mobile-flat")) {
+    mirleftGallery.classList.remove("is-mobile-flat");
+    mirleftGallery.innerHTML = mirleftGalleryDesktopMarkup;
+  }
+
+  updateMirleftArrowState();
+}
+
+function scrollMirleftGallery(direction) {
+  const gallery = document.querySelector("#accommodation .mirleft-gallery-scroll");
+  if (!gallery) return;
+
+  const step = getGalleryStep(gallery);
+  const maxScrollLeft = Math.max(gallery.scrollWidth - gallery.clientWidth, 0);
+  const atStart = gallery.scrollLeft <= 1;
+  const atEnd = gallery.scrollLeft >= maxScrollLeft - 1;
+
+  if (direction > 0 && atEnd) {
+    gallery.scrollTo({ left: 0, behavior: "smooth" });
+  } else if (direction < 0 && atStart) {
+    gallery.scrollTo({ left: maxScrollLeft, behavior: "smooth" });
+  } else {
+    gallery.scrollBy({
+      left: direction * step,
+      behavior: "smooth",
+    });
+  }
+}
+
+document.querySelectorAll(".mirleft-gallery-arrow").forEach((button) => {
+  button.addEventListener("click", () => {
+    const direction = Number(button.dataset.galleryDirection || 1);
+    scrollMirleftGallery(direction);
+  });
+});
+
+if (mirleftGallery) {
+  setMirleftGalleryMode(mirleftGalleryMobileQuery.matches);
+  if (typeof mirleftGalleryMobileQuery.addEventListener === "function") {
+    mirleftGalleryMobileQuery.addEventListener("change", (event) => setMirleftGalleryMode(event.matches));
+  } else if (typeof mirleftGalleryMobileQuery.addListener === "function") {
+    mirleftGalleryMobileQuery.addListener((event) => setMirleftGalleryMode(event.matches));
+  }
+  mirleftGallery.addEventListener("scroll", updateMirleftArrowState, { passive: true });
+  window.addEventListener("resize", updateMirleftArrowState, { passive: true });
+  updateMirleftArrowState();
+}
+
+window.setMirleftGalleryMode = setMirleftGalleryMode;
+window.scrollMirleftGallery = scrollMirleftGallery;
 
 function hideLightbox() {
   if (!lightbox) return;
@@ -372,6 +479,23 @@ reservationForm?.addEventListener("submit", async (event) => {
 
 
 
+
+/* -------------------------------------------------------
+   Sticky Reserve — hide when reservation section visible
+------------------------------------------------------- */
+(function initStickyObserver() {
+  const reservationSection = document.getElementById('reservation');
+  const stickyReserve = document.querySelector('.sticky-reserve');
+  if (!reservationSection || !stickyReserve || !('IntersectionObserver' in window)) return;
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      stickyReserve.classList.toggle('sticky-hidden', entry.isIntersecting);
+    },
+    { threshold: 0.15 }
+  );
+  observer.observe(reservationSection);
+})();
 
 /* -------------------------------------------------------
    Custom Accordion (FAQ)
