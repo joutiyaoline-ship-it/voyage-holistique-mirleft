@@ -4158,26 +4158,6 @@ textarea:focus {
   }
 }
 
-/* ── Orphan last card: 9 cards leaves 1 alone in the final row on
-   4-col desktop and 2-col tablet grids — centre it instead of
-   leaving empty trailing cells. Single-column mobile is unaffected
-   since every card already fills the row there. ── */
-@media (min-width: 1025px) {
-  .activite-card:last-child {
-    grid-column: 1 / -1;
-    justify-self: center;
-    max-width: 25%;
-  }
-}
-
-@media (min-width: 761px) and (max-width: 1024px) {
-  .activite-card:last-child {
-    grid-column: 1 / -1;
-    justify-self: center;
-    max-width: 50%;
-  }
-}
-
 @media (max-width: 480px) {
   .activites-grid {
     grid-template-columns: minmax(0, 1fr);
