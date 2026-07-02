@@ -6385,15 +6385,69 @@ select {
 }
 
 /* ── Responsive — Mobile ── */
-@media (max-width: 640px) {
-  .album-carousel {
-    gap: 10px;
+@media (max-width: 767px) {
+  /*
+   * Section side padding controls image width.
+   * 22 px each side on 390 px → carousel = 346 px ≈ 88.7 vw.
+   */
+  .album-voyage.section {
+    padding-left: 22px;
+    padding-right: 22px;
   }
 
+  /*
+   * Carousel: no gap (arrows are absolute overlays, not in flow).
+   * Reset the overflow/padding hacks from the previous attempt.
+   */
+  .album-carousel {
+    gap: 0;
+    overflow: visible;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
+  /*
+   * Track-wrapper clips the sliding track (overflow: hidden).
+   * An element's OWN box-shadow is never clipped by its own overflow,
+   * only child content is — so radius + shadow both work correctly here.
+   */
+  .album-track-wrapper {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    aspect-ratio: unset;
+    height: clamp(260px, 72vw, 320px);
+    border-radius: 16px;
+    box-shadow:
+      0 14px 40px rgba(31, 61, 54, 0.16),
+      0 4px 12px rgba(31, 61, 54, 0.09);
+    background: #D8CEBC;
+  }
+
+  /* Slides fill the wrapper exactly — no padding, no box-sizing override */
+  .album-slide {
+    padding: 0;
+    box-sizing: content-box;
+  }
+
+  /* Images fill the slide; radius and shadow live on the wrapper above */
+  .album-slide img {
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  /* Arrows: frosted-glass overlays, vertically centred on the image */
   .album-arrow {
-    width: 38px;
-    height: 38px;
-    box-shadow: 0 2px 10px rgba(31, 61, 54, 0.12);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 4;
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 2px 12px rgba(31, 61, 54, 0.16);
   }
 
   .album-arrow svg {
@@ -6401,13 +6455,12 @@ select {
     height: 16px;
   }
 
-  .album-track-wrapper {
-    border-radius: 16px;
-    aspect-ratio: 4 / 3;
-  }
+  .album-prev { left: 10px; }
+  .album-next { right: 10px; }
 
   .album-dots {
     gap: 6px;
+    margin-top: 20px;
   }
 
   .album-dot {
@@ -6416,7 +6469,7 @@ select {
   }
 
   .album-cta {
-    margin-top: 32px;
+    margin-top: 28px;
   }
 }
 
