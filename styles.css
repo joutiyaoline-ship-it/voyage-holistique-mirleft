@@ -6387,18 +6387,15 @@ select {
 /* ── Responsive — Mobile ── */
 @media (max-width: 767px) {
   /*
-   * Section side padding controls image width.
-   * 22 px each side on 390 px → carousel = 346 px ≈ 88.7 vw.
+   * 5 vw each side → carousel = exactly 90 vw on every screen.
+   * 390 px: 5 vw = 19.5 px → carousel = 351 px = 90 vw.
    */
   .album-voyage.section {
-    padding-left: 22px;
-    padding-right: 22px;
+    padding-left: 5vw;
+    padding-right: 5vw;
   }
 
-  /*
-   * Carousel: no gap (arrows are absolute overlays, not in flow).
-   * Reset the overflow/padding hacks from the previous attempt.
-   */
+  /* Arrows are absolute overlays — no gap needed in the flex row */
   .album-carousel {
     gap: 0;
     overflow: visible;
@@ -6407,16 +6404,16 @@ select {
   }
 
   /*
-   * Track-wrapper clips the sliding track (overflow: hidden).
-   * An element's OWN box-shadow is never clipped by its own overflow,
-   * only child content is — so radius + shadow both work correctly here.
+   * Fixed 300 px frame — every image (portrait or landscape) fills
+   * this card cleanly via object-fit: cover.
+   * overflow: hidden clips both the sliding track and image edges.
    */
   .album-track-wrapper {
     flex: 1;
     min-width: 0;
     overflow: hidden;
     aspect-ratio: unset;
-    height: clamp(260px, 72vw, 320px);
+    height: 300px;
     border-radius: 16px;
     box-shadow:
       0 14px 40px rgba(31, 61, 54, 0.16),
@@ -6424,19 +6421,22 @@ select {
     background: #D8CEBC;
   }
 
-  /* Slides fill the wrapper exactly — no padding, no box-sizing override */
+  /* Slides fill the wrapper width exactly — zero padding, zero drift */
   .album-slide {
     padding: 0;
     box-sizing: content-box;
+    background: transparent;
   }
 
-  /* Images fill the slide; radius and shadow live on the wrapper above */
+  /* cover + center: fills the fixed frame on every aspect ratio, no white space */
   .album-slide img {
+    object-fit: cover;
+    object-position: center;
     border-radius: 0;
     box-shadow: none;
   }
 
-  /* Arrows: frosted-glass overlays, vertically centred on the image */
+  /* Frosted-glass arrows overlaid on the card */
   .album-arrow {
     position: absolute;
     top: 50%;
