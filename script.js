@@ -155,112 +155,6 @@ document.querySelectorAll(".gallery-item").forEach((button) => {
   });
 });
 
-function getGalleryStep(gallery) {
-  const visibleImages = [
-    ...gallery.querySelectorAll(".mirleft-gallery-mobile-card, .mirleft-gallery-column img:not([aria-hidden='true'])"),
-  ].filter((img) => getComputedStyle(img).display !== "none");
-  if (visibleImages.length >= 2) {
-    const step = visibleImages[1].offsetLeft - visibleImages[0].offsetLeft;
-    if (step > 0) return step;
-  }
-
-  const firstImage = visibleImages[0];
-  const gap = parseFloat(getComputedStyle(gallery).gap || getComputedStyle(gallery).columnGap || "0") || 0;
-  return firstImage ? firstImage.getBoundingClientRect().width + gap : gallery.clientWidth * 0.85;
-}
-
-function updateMirleftArrowState() {
-  const gallery = document.querySelector("#accommodation .mirleft-gallery-scroll");
-  if (!gallery) return;
-
-  const arrows = document.querySelectorAll(".mirleft-gallery-arrow");
-  const maxScrollLeft = Math.max(gallery.scrollWidth - gallery.clientWidth, 0);
-  const atStart = gallery.scrollLeft <= 1;
-  const atEnd = gallery.scrollLeft >= maxScrollLeft - 1;
-
-  arrows.forEach((button) => {
-    const direction = Number(button.dataset.galleryDirection || 1);
-    button.disabled = direction < 0 ? atStart : atEnd;
-    button.setAttribute("aria-disabled", button.disabled ? "true" : "false");
-  });
-}
-
-const mirleftGallery = document.querySelector("#accommodation .mirleft-gallery-scroll");
-const mirleftGalleryDesktopMarkup = mirleftGallery?.innerHTML || "";
-const mirleftGallerySourceImages = mirleftGallery
-  ? [...new Map(
-      [...mirleftGallery.querySelectorAll(".mirleft-gallery-column img:not([aria-hidden='true'])")].map((img) => [
-        img.getAttribute("src"),
-        img,
-      ])
-    ).values()]
-  : [];
-const mirleftGalleryMobileQuery = window.matchMedia("(max-width: 768px)");
-
-function setMirleftGalleryMode(isMobile) {
-  if (!mirleftGallery) return;
-
-  if (isMobile) {
-    if (!mirleftGallery.classList.contains("is-mobile-flat")) {
-      mirleftGallery.classList.add("is-mobile-flat");
-      mirleftGallery.innerHTML = "";
-      mirleftGallerySourceImages.forEach((img) => {
-        const clone = img.cloneNode(true);
-        clone.classList.add("mirleft-gallery-mobile-card");
-        clone.removeAttribute("aria-hidden");
-        mirleftGallery.appendChild(clone);
-      });
-    }
-  } else if (mirleftGallery.classList.contains("is-mobile-flat")) {
-    mirleftGallery.classList.remove("is-mobile-flat");
-    mirleftGallery.innerHTML = mirleftGalleryDesktopMarkup;
-  }
-
-  updateMirleftArrowState();
-}
-
-function scrollMirleftGallery(direction) {
-  const gallery = document.querySelector("#accommodation .mirleft-gallery-scroll");
-  if (!gallery) return;
-
-  const step = getGalleryStep(gallery);
-  const maxScrollLeft = Math.max(gallery.scrollWidth - gallery.clientWidth, 0);
-  const atStart = gallery.scrollLeft <= 1;
-  const atEnd = gallery.scrollLeft >= maxScrollLeft - 1;
-
-  if (direction > 0 && atEnd) {
-    gallery.scrollTo({ left: 0, behavior: "smooth" });
-  } else if (direction < 0 && atStart) {
-    gallery.scrollTo({ left: maxScrollLeft, behavior: "smooth" });
-  } else {
-    gallery.scrollBy({
-      left: direction * step,
-      behavior: "smooth",
-    });
-  }
-}
-
-document.querySelectorAll(".mirleft-gallery-arrow").forEach((button) => {
-  button.addEventListener("click", () => {
-    const direction = Number(button.dataset.galleryDirection || 1);
-    scrollMirleftGallery(direction);
-  });
-});
-
-if (mirleftGallery) {
-  setMirleftGalleryMode(mirleftGalleryMobileQuery.matches);
-  if (typeof mirleftGalleryMobileQuery.addEventListener === "function") {
-    mirleftGalleryMobileQuery.addEventListener("change", (event) => setMirleftGalleryMode(event.matches));
-  } else if (typeof mirleftGalleryMobileQuery.addListener === "function") {
-    mirleftGalleryMobileQuery.addListener((event) => setMirleftGalleryMode(event.matches));
-  }
-  mirleftGallery.addEventListener("scroll", updateMirleftArrowState, { passive: true });
-  window.addEventListener("resize", updateMirleftArrowState, { passive: true });
-  updateMirleftArrowState();
-}
-
-window.setMirleftGalleryMode = setMirleftGalleryMode;
-window.scrollMirleftGallery = scrollMirleftGallery;
 
 function hideLightbox() {
   if (!lightbox) return;
@@ -392,7 +286,6 @@ function getFormPayload(form) {
     phone: String(formData.get("phone") || "").trim(),
     email: String(formData.get("email") || "").trim(),
     city: String(formData.get("city") || "").trim(),
-    budget: String(formData.get("budget") || "").trim(),
     guests: String(formData.get("guests") || "").trim(),
     status: "new",
     message: String(formData.get("message") || "").trim(),
@@ -461,7 +354,6 @@ reservationForm?.addEventListener("submit", async (event) => {
     setFeedback("Votre demande est enregistree. Redirection vers WhatsApp...", "success");
     trackEvent("Lead", {
       cta_location: payload.cta_location,
-      budget: payload.budget,
       guests: payload.guests,
     }, { once: true });
     setTimeout(() => {
@@ -547,4 +439,286 @@ reservationForm?.addEventListener("submit", async (event) => {
       }
     });
   });
+})();
+
+/* ── ALBUM DU VOYAGE — CAROUSEL ─────────────────────────── */
+(function () {
+  'use strict';
+
+  var albumSection = document.getElementById('album');
+  if (!albumSection) return;
+
+  var wrapper  = albumSection.querySelector('.album-track-wrapper');
+  var track    = albumSection.querySelector('#albumTrack');
+  var dotsWrap = albumSection.querySelector('#albumDots');
+  var prevBtn  = albumSection.querySelector('.album-prev');
+  var nextBtn  = albumSection.querySelector('.album-next');
+  var carousel = albumSection.querySelector('.album-carousel');
+  if (!wrapper || !track || !dotsWrap) return;
+
+  var slides = Array.from(track.querySelectorAll('.album-slide'));
+  var total  = slides.length;
+  if (total === 0) return;
+
+  var current      = 0;
+  var autoTimer    = null;
+  var resumeTimer  = null;
+  var INTERVAL     = 3500;
+  var RESUME_DELAY = 2000;
+  var isDragging   = false;
+  var isTouching   = false;
+
+  var TRANSITION = 'transform 0.52s cubic-bezier(0.4, 0, 0.2, 1)';
+
+  function sw()    { return wrapper.offsetWidth || wrapper.getBoundingClientRect().width || 600; }
+  function px(i)   { return i * sw(); }
+  function wrap(i) { return ((i % total) + total) % total; }
+
+  function enableTransition()  { track.style.transition = TRANSITION; }
+  function disableTransition() { track.style.transition = 'none'; }
+
+  function snapTo(idx) {
+    disableTransition();
+    current = wrap(idx);
+    track.style.transform = 'translateX(-' + px(current) + 'px)';
+    requestAnimationFrame(function () { requestAnimationFrame(enableTransition); });
+  }
+
+  function goTo(idx) {
+    var n = wrap(idx);
+    syncDots(n);
+    current = n;
+    enableTransition();
+    track.style.transform = 'translateX(-' + px(n) + 'px)';
+  }
+
+  /* ── Dots ── */
+  slides.forEach(function (_, i) {
+    var dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'album-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('role', 'tab');
+    dot.setAttribute('aria-label', 'Image ' + (i + 1) + ' sur ' + total);
+    dot.setAttribute('aria-selected', String(i === 0));
+    dot.addEventListener('click', function () { goTo(i); stopAuto(); scheduleResume(); });
+    dotsWrap.appendChild(dot);
+  });
+
+  function syncDots(n) {
+    var dots = dotsWrap.querySelectorAll('.album-dot');
+    if (!dots[current] || !dots[n]) return;
+    dots[current].classList.remove('active');
+    dots[current].setAttribute('aria-selected', 'false');
+    dots[n].classList.add('active');
+    dots[n].setAttribute('aria-selected', 'true');
+  }
+
+  /* ── Autoplay — always starts; prefers-reduced-motion only removes the CSS transition ── */
+  function startAuto() {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(function () {
+      if (!isDragging && !isTouching) goTo(current + 1);
+    }, INTERVAL);
+  }
+  function stopAuto() { clearInterval(autoTimer); autoTimer = null; }
+  function scheduleResume() {
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(startAuto, RESUME_DELAY);
+  }
+
+  /* ── Arrows ── */
+  if (prevBtn) {
+    prevBtn.addEventListener('click', function () { goTo(current - 1); stopAuto(); scheduleResume(); });
+  }
+  if (nextBtn) {
+    nextBtn.addEventListener('click', function () { goTo(current + 1); stopAuto(); scheduleResume(); });
+  }
+
+  /* ── Keyboard ── */
+  if (carousel) {
+    carousel.setAttribute('tabindex', '0');
+    carousel.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft')  { goTo(current - 1); stopAuto(); scheduleResume(); e.preventDefault(); }
+      if (e.key === 'ArrowRight') { goTo(current + 1); stopAuto(); scheduleResume(); e.preventDefault(); }
+    });
+  }
+
+  /* ── Hover pause / resume ── */
+  if (carousel) {
+    carousel.addEventListener('mouseenter', function () { if (!isDragging) { clearTimeout(resumeTimer); stopAuto(); } });
+    carousel.addEventListener('mouseleave', function () { if (!isDragging) startAuto(); });
+  }
+
+  /* ── Mouse drag ── */
+  var dragStartX = 0;
+  var dragBaseX  = 0;
+  track.style.cursor     = 'grab';
+  track.style.userSelect = 'none';
+
+  track.addEventListener('mousedown', function (e) {
+    if (e.button !== 0) return;
+    isDragging = true;
+    dragStartX = e.clientX;
+    dragBaseX  = px(current);
+    disableTransition();
+    track.style.cursor = 'grabbing';
+    clearTimeout(resumeTimer);
+    stopAuto();
+    e.preventDefault();
+  });
+
+  document.addEventListener('mousemove', function (e) {
+    if (!isDragging) return;
+    track.style.transform = 'translateX(-' + (dragBaseX - (e.clientX - dragStartX)) + 'px)';
+  });
+
+  document.addEventListener('mouseup', function (e) {
+    if (!isDragging) return;
+    isDragging = false;
+    track.style.cursor = 'grab';
+    var delta = e.clientX - dragStartX;
+    var thr   = sw() * 0.18;
+    if      (delta < -thr) goTo(current + 1);
+    else if (delta >  thr) goTo(current - 1);
+    else                   goTo(current);
+    scheduleResume();
+  });
+
+  track.addEventListener('dragstart', function (e) { e.preventDefault(); });
+
+  /* ── Touch swipe ── */
+  var touchStartX = 0;
+  var touchStartY = 0;
+  var touchBaseX  = 0;
+  var touchIsH    = null;
+
+  track.addEventListener('touchstart', function (e) {
+    isTouching  = true;
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    touchBaseX  = px(current);
+    touchIsH    = null;
+    disableTransition();
+    clearTimeout(resumeTimer);
+    stopAuto();
+  }, { passive: true });
+
+  track.addEventListener('touchmove', function (e) {
+    if (!isTouching) return;
+    var dx = e.touches[0].clientX - touchStartX;
+    var dy = e.touches[0].clientY - touchStartY;
+    if (touchIsH === null) touchIsH = Math.abs(dx) > Math.abs(dy);
+    if (touchIsH) track.style.transform = 'translateX(-' + (touchBaseX - dx) + 'px)';
+  }, { passive: true });
+
+  track.addEventListener('touchend', function (e) {
+    if (!isTouching) return;
+    isTouching = false;
+    var dx  = e.changedTouches[0].clientX - touchStartX;
+    var thr = sw() * 0.18;
+    if (touchIsH) {
+      if      (dx < -thr) goTo(current + 1);
+      else if (dx >  thr) goTo(current - 1);
+      else                goTo(current);
+    } else {
+      goTo(current);
+    }
+    scheduleResume();
+  }, { passive: true });
+
+  /* ── Resize: re-snap without animation ── */
+  var resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () { snapTo(current); }, 100);
+  });
+
+  /* ── prefers-reduced-motion: keep movement, remove CSS animation ── */
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    disableTransition();
+  } else {
+    enableTransition();
+  }
+
+  /* ── Init: defer one frame so flex/aspect-ratio layout is painted ── */
+  requestAnimationFrame(function () {
+    track.style.transform = 'translateX(0)';
+    startAuto();
+  });
+})();
+
+/* ── MOBILE STICKY CTA BAR ───────────────────────────── */
+(function initMobileCTABar() {
+  'use strict';
+  var bar         = document.getElementById('mobileCTABar');
+  var reserveForm = document.getElementById('reservationForm');
+  var feedback    = document.getElementById('formFeedback');
+  if (!bar) return;
+
+  /* Permanently dismissed this session (form was submitted) */
+  if (sessionStorage.getItem('ctaBarDismissed')) {
+    bar.style.display = 'none';
+    return;
+  }
+
+  var SHOW_AFTER_PX = 150;   /* ~15% scroll before bar appears */
+  var isVisible     = false;
+  var formDone      = false;
+
+  var focusables = bar.querySelectorAll('a');
+
+  function setVisible(show) {
+    if (show === isVisible) return;
+    isVisible = show;
+    bar.classList.toggle('is-visible', show);
+    bar.setAttribute('aria-hidden', String(!show));
+    focusables.forEach(function (el) {
+      el.setAttribute('tabindex', show ? '0' : '-1');
+    });
+  }
+
+  function calcShouldShow() {
+    if (formDone) return false;
+
+    /* Wait for initial scroll — avoids distracting users who just arrived */
+    if ((window.pageYOffset || window.scrollY) < SHOW_AFTER_PX) return false;
+
+    /* Hide only while the booking form is visible in the viewport */
+    if (reserveForm) {
+      var r = reserveForm.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) return false;
+    }
+
+    return true;   /* visible everywhere else on the page */
+  }
+
+  function onScroll() { setVisible(calcShouldShow()); }
+
+  /* Click: smooth-scroll to form and focus first field */
+  var reserveLink = bar.querySelector('.mcb-reserve');
+  if (reserveLink && reserveForm) {
+    reserveLink.addEventListener('click', function (e) {
+      e.preventDefault();
+      reserveForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      var firstInput = reserveForm.querySelector('input, select, textarea');
+      if (firstInput) {
+        setTimeout(function () { firstInput.focus(); }, 650);
+      }
+      setVisible(false);
+    });
+  }
+
+  /* Permanent hide after successful submission — persisted in sessionStorage */
+  if (feedback) {
+    new MutationObserver(function () {
+      if (feedback.classList.contains('is-success')) {
+        formDone = true;
+        sessionStorage.setItem('ctaBarDismissed', '1');
+        setVisible(false);
+      }
+    }).observe(feedback, { attributes: true, attributeFilter: ['class'] });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();   /* handle reload-at-scroll-position edge case */
 })();

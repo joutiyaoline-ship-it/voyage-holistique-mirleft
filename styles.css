@@ -12,6 +12,7 @@
   --glass: rgba(255, 250, 242, 0.74);
   --shadow-base: 0 8px 24px rgba(31, 61, 54, 0.06);
   --shadow-hover: 0 16px 40px rgba(31, 61, 54, 0.12);
+  --shadow: 0 8px 24px rgba(31, 61, 54, 0.06);
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 24px;
@@ -692,94 +693,6 @@ h3 {
 }
 
 
-/* Expertise Section */
-.expertise {
-  background: #D8C5B9;
-  border-radius: 64px;
-  margin: 0 clamp(16px, 3vw, 40px);
-  padding: 110px 20px;
-}
-
-.expertise .section-heading {
-  margin: 0 auto 60px;
-  text-align: center;
-}
-
-.expertise .section-heading h2 {
-  color: #111111;
-  font-size: clamp(30px, 4vw, 42px);
-  font-weight: 500;
-  font-family: var(--serif);
-  line-height: 1.1;
-  margin: 0;
-}
-
-.expertise .section-heading h2 em {
-  font-style: italic;
-  font-weight: 500;
-}
-
-.expertise-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 26px;
-  width: min(980px, 100%);
-  margin: 0 auto;
-}
-
-.expertise-card {
-  background: #FFFFFF;
-  border-radius: var(--radius-md);
-  padding: 28px 36px;
-  text-align: center;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 140px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 1px solid transparent;
-}
-
-.expertise-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-base);
-  border-color: var(--summer-orange);
-}
-
-.expertise-card p {
-  margin: 0;
-  color: #333333;
-  font-family: var(--sans);
-  font-size: 17px;
-  line-height: 1.5;
-}
-
-.expertise-card em {
-  font-style: italic;
-  font-weight: 600;
-  color: #111111;
-}
-
-@media (max-width: 1120px) {
-  .expertise-grid {
-    grid-template-columns: minmax(0, 1fr);
-    max-width: 540px;
-  }
-}
-
-@media (max-width: 760px) {
-  .expertise {
-    padding: 70px 16px;
-    border-radius: 40px;
-    margin: 0 12px;
-  }
-  
-  .expertise-card {
-    padding: 24px;
-  }
-}
-
 .philosophy {
   display: grid;
   grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
@@ -1163,31 +1076,28 @@ h3 {
 
 .reservation {
   position: relative;
-  min-height: 92vh;
-  overflow: hidden;
-  display: grid;
-  place-items: center;
+  overflow: visible;
+  display: block;
   padding: clamp(86px, 10vw, 150px) 22px;
-  color: var(--warm-white);
-}
-
-.reservation-overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(90deg, rgba(31, 61, 54, 0.8), rgba(31, 61, 54, 0.56)),
-    linear-gradient(rgba(31, 61, 54, 0.52), rgba(31, 61, 54, 0.82));
+  color: var(--forest);
+  background: var(--beige);
 }
 
 .reservation-content {
   position: relative;
   z-index: 2;
-  width: min(760px, 100%);
+  width: min(1120px, 100%);
+  margin: 0 auto;
   text-align: center;
 }
 
+.booking-content {
+  display: grid;
+  gap: clamp(36px, 5vw, 60px);
+}
+
 .reservation-content p {
-  color: rgba(255, 250, 242, 0.82);
+  color: var(--muted);
 }
 
 .reservation-form,
@@ -1198,12 +1108,14 @@ h3 {
 
 .reservation-form {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-top: 30px;
-  padding: 12px;
-  background: rgba(255, 250, 242, 0.12);
-  border: 1px solid rgba(255, 250, 242, 0.26);
-  border-radius: var(--radius-md);
-  backdrop-filter: blur(16px);
+  margin-top: 0;
+  padding: clamp(24px, 3vw, 32px);
+  background: var(--warm-white);
+  border: 1px solid rgba(189, 169, 135, 0.22);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 16px 56px rgba(31, 61, 54, 0.06),
+              0 4px 16px rgba(31, 61, 54, 0.03);
+  backdrop-filter: none;
 }
 
 .reservation-form label {
@@ -1213,7 +1125,7 @@ h3 {
 }
 
 .reservation-form span {
-  color: rgba(255, 250, 242, 0.72);
+  color: var(--muted);
   font-size: 0.78rem;
 }
 
@@ -1274,7 +1186,7 @@ button[disabled] {
 .form-feedback {
   min-height: 24px;
   margin: 0;
-  color: rgba(255, 250, 242, 0.86);
+  color: var(--muted);
   font-size: 0.92rem;
   text-align: center;
 }
@@ -1285,6 +1197,48 @@ button[disabled] {
 
 .form-feedback.is-success {
   color: #dff5dc;
+}
+
+.booking-heading {
+  max-width: 860px;
+  margin: 0 auto clamp(48px, 6vw, 64px);
+}
+
+.booking-subtitle {
+  font-size: clamp(1rem, 1.3vw, 1.1rem);
+  color: var(--muted);
+  line-height: 1.78;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.booking-pricing {
+  max-width: 580px;
+}
+
+.pricing-payment,
+.pricing-note {
+  font-size: 0.92rem;
+  color: var(--muted);
+  line-height: 1.72;
+  margin: 0;
+}
+
+.pricing-payment {
+  margin-top: -8px;
+}
+
+.pricing-note {
+  margin-top: 10px;
+}
+
+.booking-form-note {
+  grid-column: 1 / -1;
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  text-align: center;
 }
 
 .sticky-reserve {
@@ -2204,8 +2158,8 @@ button[disabled] {
 .footer {
   display: block;
   padding: clamp(60px, 8vw, 100px) clamp(22px, 7vw, 110px) 100px;
-  color: #FFFFFF;
-  background: linear-gradient(180deg, #1F3D36 0%, #1F3D36 100%);
+  color: #F8F5F0;
+  background: linear-gradient(180deg, #5E5146 0%, #5E5146 100%);
   position: relative;
   overflow: hidden;
 }
@@ -2217,8 +2171,8 @@ button[disabled] {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: radial-gradient(circle at 20% 30%, rgba(247, 198, 75, 0.05) 0%, transparent 40%),
-                    radial-gradient(circle at 80% 70%, rgba(50, 198, 198, 0.05) 0%, transparent 40%);
+  background-image: radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.04) 0%, transparent 40%),
+                    radial-gradient(circle at 80% 70%, rgba(63, 197, 196, 0.08) 0%, transparent 40%);
   pointer-events: none;
 }
 
@@ -2246,7 +2200,7 @@ button[disabled] {
 }
 
 .footer-description {
-  color: rgba(255, 255, 255, 0.78);
+  color: #D9CCBE;
   font-family: var(--sans);
   font-size: 1rem;
   line-height: 1.8;
@@ -2264,10 +2218,10 @@ button[disabled] {
   height: 38px;
   display: grid;
   place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(248, 245, 240, 0.18);
   border-radius: 50%;
   background: transparent;
-  color: rgba(255, 255, 255, 0.82);
+  color: #F8F5F0;
   transition: all 0.3s ease;
 }
 
@@ -2278,9 +2232,9 @@ button[disabled] {
 
 .social-link:hover {
   transform: translateY(-3px);
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(216, 178, 106, 0.4);
-  color: #32C6C6;
+  background: rgba(63, 197, 196, 0.10);
+  border-color: rgba(63, 197, 196, 0.40);
+  color: #3FC5C4;
 }
 
 .footer-title {
@@ -2288,12 +2242,12 @@ button[disabled] {
   font-size: 1.25rem;
   font-weight: 600;
   margin: 0 0 10px;
-  color: #FFFFFF;
+  color: #F8F5F0;
 }
 
 .footer-column a,
 .footer-column button {
-  color: rgba(255, 255, 255, 0.82);
+  color: #F8F5F0;
   font-family: var(--sans);
   font-size: 0.98rem;
   text-decoration: none;
@@ -2310,7 +2264,7 @@ button[disabled] {
 
 .footer-column a:hover,
 .footer-column button:hover {
-  color: #32C6C6;
+  color: #3FC5C4;
 }
 
 .footer-column a svg,
@@ -2324,7 +2278,7 @@ button[disabled] {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: rgba(255, 255, 255, 0.82);
+  color: #D9CCBE;
   font-family: var(--sans);
   font-size: 0.98rem;
   padding: 4px 0;
@@ -2335,7 +2289,7 @@ button[disabled] {
   z-index: 1;
   padding-top: 25px;
   padding-bottom: 80px;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid rgba(248, 245, 240, 0.16);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -2345,7 +2299,7 @@ button[disabled] {
 
 .footer-bottom p {
   margin: 0;
-  color: rgba(255, 255, 255, 0.65);
+  color: #D9CCBE;
   font-family: var(--sans);
   font-size: 0.9rem;
 }
@@ -2905,8 +2859,8 @@ button[disabled] {
 
 .location-container {
   display: grid;
-  grid-template-columns: 1fr 2px 1fr;
-  gap: 0 clamp(40px, 6vw, 72px);
+  grid-template-columns: 1fr 1fr;
+  gap: 0 clamp(48px, 6vw, 80px);
   align-items: start;
   max-width: 1240px;
   margin: 0 auto;
@@ -2959,103 +2913,20 @@ button[disabled] {
   margin: 0;
 }
 
-.mirleft-gallery-scroll {
-  width: 100%;
-  max-width: 100%;
-  height: 520px;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(16px, 1.8vw, 22px);
-  overflow: hidden;
-  padding: 2px;
-  border-radius: 26px;
-  mask-image: linear-gradient(to bottom, transparent 0%, #000 9%, #000 91%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 9%, #000 91%, transparent 100%);
-  -webkit-overflow-scrolling: touch;
+/* ── Mirleft section: single hero image ── */
+.location-image {
+  align-self: start;
 }
 
-.mirleft-gallery-scroll::-webkit-scrollbar {
-  display: none;
-}
-
-.location-images {
-  position: relative;
-}
-
-.mirleft-gallery-arrow {
-  display: none;
-}
-
-.mirleft-gallery-column {
-  min-width: 0;
-  overflow: hidden;
-  border-radius: 24px;
-}
-
-.mirleft-gallery-track {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(16px, 1.8vw, 22px);
-  animation: scrollUp 34s linear infinite;
-  will-change: transform;
-}
-
-.mirleft-gallery-column:nth-child(3) .mirleft-gallery-track {
-  animation: scrollUp 36s linear infinite;
-}
-
-.mirleft-gallery-column-reverse .mirleft-gallery-track {
-  animation: scrollDown 38s linear infinite;
-}
-
-.mirleft-gallery-scroll:hover .mirleft-gallery-track {
-  animation-play-state: paused;
-}
-
-.mirleft-gallery-column img {
+.location-image img {
   display: block;
   width: 100%;
-  height: clamp(190px, 16vw, 245px);
+  height: clamp(500px, 52vw, 680px);
   object-fit: cover;
-  object-position: center;
   border-radius: 24px;
-  box-shadow: 0 20px 48px rgba(31, 61, 54, 0.16);
-}
-
-@keyframes scrollUp {
-  from {
-    transform: translateY(0);
-  }
-
-  to {
-    transform: translateY(-50%);
-  }
-}
-
-@keyframes scrollDown {
-  from {
-    transform: translateY(-50%);
-  }
-
-  to {
-    transform: translateY(0);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) and (min-width: 769px) {
-  .mirleft-gallery-track {
-    animation: scrollUp 34s linear infinite !important;
-    animation-iteration-count: infinite !important;
-    will-change: transform;
-  }
-
-  .mirleft-gallery-column-reverse .mirleft-gallery-track {
-    animation: scrollDown 38s linear infinite !important;
-  }
-
-  .mirleft-gallery-column:nth-child(3) .mirleft-gallery-track {
-    animation: scrollUp 36s linear infinite !important;
-  }
+  box-shadow:
+    0 24px 64px rgba(31, 61, 54, 0.18),
+    0 6px 20px  rgba(31, 61, 54, 0.10);
 }
 
 @media (max-width: 1120px) {
@@ -3064,21 +2935,8 @@ button[disabled] {
     gap: clamp(30px, 5vw, 46px);
   }
 
-  .location-divider {
-    display: none;
-  }
-
-  .mirleft-gallery-scroll {
-    height: 500px;
-    gap: 16px;
-  }
-
-  .mirleft-gallery-track {
-    gap: 16px;
-  }
-
-  .mirleft-gallery-column img {
-    height: clamp(180px, 23vw, 230px);
+  .location-image img {
+    height: clamp(380px, 55vw, 540px);
   }
 }
 
@@ -3091,102 +2949,13 @@ button[disabled] {
     gap: 32px;
   }
 
-  .location-images {
-    min-height: 0;
-    height: auto;
-    padding-bottom: 0;
-    margin-bottom: 0;
+  /* Image moves above the text on mobile */
+  .location-image {
+    order: -1;
   }
 
-  .mirleft-gallery-scroll {
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    height: auto;
-    min-height: 0;
-    max-height: none;
-    gap: 16px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    margin-inline: calc(50% - 50vw);
-    padding: 8px 7.5vw 0;
-    border-radius: 0;
-    mask-image: none;
-    -webkit-mask-image: none;
-    overscroll-behavior-x: contain;
-  }
-
-  .mirleft-gallery-scroll.is-mobile-flat {
-    padding-left: 7.5vw;
-    padding-right: 7.5vw;
-  }
-
-  .mirleft-gallery-scroll.is-mobile-flat > .mirleft-gallery-mobile-card {
-    flex: 0 0 85%;
-    width: 85%;
-    aspect-ratio: 4 / 3;
-    height: auto;
-    scroll-snap-align: center;
-    border-radius: 22px;
-    display: block;
-    object-fit: cover;
-    object-position: center;
-    box-shadow: 0 20px 48px rgba(31, 61, 54, 0.16);
-  }
-
-  .mirleft-gallery-arrow {
-    position: absolute;
-    top: 50%;
-    z-index: 5;
-    display: grid;
-    place-items: center;
-    width: 42px;
-    height: 42px;
-    padding: 0;
-    color: var(--forest);
-    background: rgba(255, 253, 248, 0.94);
-    border: 1px solid rgba(247, 198, 75, 0.32);
-    border-radius: 999px;
-    box-shadow: 0 14px 32px rgba(31, 61, 54, 0.18);
-    transform: translateY(-50%);
-    backdrop-filter: blur(10px);
-  }
-
-  .mirleft-gallery-arrow svg {
-    width: 22px;
-    height: 22px;
-    stroke-width: 2.2;
-  }
-
-  .mirleft-gallery-arrow i {
-    font-style: normal;
-    line-height: 1;
-  }
-
-  .mirleft-gallery-arrow-left i::before {
-    content: "‹";
-    font-size: 1.7rem;
-  }
-
-  .mirleft-gallery-arrow-right i::before {
-    content: "›";
-    font-size: 1.7rem;
-  }
-
-  .mirleft-gallery-arrow-left {
-    left: 12px;
-  }
-
-  .mirleft-gallery-arrow-right {
-    right: 12px;
-  }
-
-  .mirleft-gallery-arrow:active {
-    transform: translateY(-50%) scale(0.96);
+  .location-image img {
+    height: clamp(260px, 68vw, 400px);
   }
 }
 
@@ -3240,6 +3009,33 @@ button[disabled] {
 
 .activity-card:hover .activity-card-image {
   transform: scale(1.04);
+}
+
+.activity-card-image-placeholder {
+  width: 100%;
+  height: 230px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #F8F5F1;
+  border: 1px dashed rgba(111, 98, 88, 0.24);
+  border-radius: 24px 24px 0 0;
+  color: var(--muted);
+}
+
+.activity-card-image-placeholder i {
+  width: 28px;
+  height: 28px;
+  stroke-width: 1.8;
+}
+
+.activity-card-image-placeholder span {
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0;
 }
 
 .activity-card-content {
@@ -3456,15 +3252,6 @@ button[disabled] {
 
 /* New Sections Responsive */
 @media (max-width: 1120px) {
-  .location-container {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 40px;
-  }
-
-  .location-divider {
-    display: none;
-  }
-
   .activities-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -3473,35 +3260,6 @@ button[disabled] {
 @media (max-width: 480px) {
   .activities-grid {
     grid-template-columns: minmax(0, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .location {
-    padding-bottom: 40px;
-  }
-
-  .location-container {
-    gap: 32px;
-  }
-
-  .location-images,
-  .mirleft-gallery-scroll,
-  .mirleft-gallery-column,
-  .mirleft-gallery-track {
-    min-height: 0;
-    height: auto;
-    max-height: none;
-    padding-bottom: 0;
-    margin-bottom: 0;
-  }
-
-  .mirleft-gallery-scroll {
-    padding-bottom: 0;
-  }
-
-  .mirleft-gallery-arrow {
-    display: grid;
   }
 }
 
@@ -3683,7 +3441,6 @@ a:not(.btn):not(.brand):not(.social-link):focus-visible {
 
 .trust-band,
 .value-card,
-.expertise-card,
 .benefit-card,
 .testimonial-card,
 .map-card,
@@ -3698,7 +3455,6 @@ a:not(.btn):not(.brand):not(.social-link):focus-visible {
 }
 
 .value-card:hover,
-.expertise-card:hover,
 .benefit-card:hover,
 .testimonial-card:hover,
 .expert-card:hover,
@@ -3719,7 +3475,6 @@ a:not(.btn):not(.brand):not(.social-link):focus-visible {
 }
 
 .value-card h3,
-.expertise-card em,
 .benefit-card h3,
 .map-card p,
 .testimonial-card strong,
@@ -3734,7 +3489,6 @@ a:not(.btn):not(.brand):not(.social-link):focus-visible {
 }
 
 .value-card p,
-.expertise-card p,
 .benefit-card p,
 .testimonial-card p,
 .expert-card p,
@@ -3841,42 +3595,42 @@ textarea:focus {
 }
 
 .footer {
-  color: #FFFFFF;
-  background: #1F3D36;
+  color: #F8F5F0;
+  background: #5E5146;
 }
 
 .footer::before {
   background-image:
-    radial-gradient(circle at 20% 30%, rgba(43, 175, 217, 0.08) 0%, transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(50, 198, 198, 0.08) 0%, transparent 40%);
+    radial-gradient(circle at 20% 30%, rgba(248, 245, 240, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(63, 197, 196, 0.08) 0%, transparent 40%);
 }
 
 .footer-title,
 .footer-column a,
 .footer-column button {
-  color: #FFFFFF;
+  color: #F8F5F0;
 }
 
 .footer-description,
 .footer-location,
 .footer-bottom p {
-  color: rgba(255, 255, 255, 0.78);
+  color: #D9CCBE;
 }
 
 .footer-column a:hover,
 .footer-column button:hover,
 .social-link:hover {
-  color: #32C6C6;
+  color: #3FC5C4;
 }
 
 .social-link {
-  color: #FFFFFF;
-  border-color: rgba(255, 255, 255, 0.22);
+  color: #F8F5F0;
+  border-color: rgba(248, 245, 240, 0.22);
 }
 
 .social-link:hover {
-  background: rgba(50, 198, 198, 0.12);
-  border-color: rgba(50, 198, 198, 0.5);
+  background: rgba(63, 197, 196, 0.10);
+  border-color: rgba(63, 197, 196, 0.48);
 }
 
 .site-header .desktop-nav a:not(.btn):not(.brand):not(.social-link) {
@@ -3892,10 +3646,9 @@ textarea:focus {
 .site-header.scrolled .desktop-nav a:not(.btn):not(.brand):not(.social-link):focus-visible,
 .site-header.scrolled .desktop-nav a:not(.btn):not(.brand):not(.social-link)[aria-current="page"],
 .site-header.scrolled .desktop-nav a:not(.btn):not(.brand):not(.social-link).active {
-  color: #2BAFD9;
+  color: #3FC5C4;
 }
 
-.expertise-card:hover,
 .benefit-card:hover,
 .testimonial-card:hover,
 .expert-card:hover,
@@ -3916,7 +3669,6 @@ textarea:focus {
 }
 
 .value-card h3,
-.expertise-card em,
 .benefit-card h3,
 .map-card p,
 .testimonial-card strong,
@@ -3931,7 +3683,6 @@ textarea:focus {
 }
 
 .value-card p,
-.expertise-card p,
 .benefit-card p,
 .testimonial-card p,
 .expert-card p,
@@ -4038,42 +3789,42 @@ textarea:focus {
 }
 
 .footer {
-  color: #FFFFFF;
-  background: #1F3D36;
+  color: #F8F5F0;
+  background: #5E5146;
 }
 
 .footer::before {
   background-image:
-    radial-gradient(circle at 20% 30%, rgba(43, 175, 217, 0.08) 0%, transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(50, 198, 198, 0.08) 0%, transparent 40%);
+    radial-gradient(circle at 20% 30%, rgba(248, 245, 240, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(63, 197, 196, 0.08) 0%, transparent 40%);
 }
 
 .footer-title,
 .footer-column a,
 .footer-column button {
-  color: #FFFFFF;
+  color: #F8F5F0;
 }
 
 .footer-description,
 .footer-location,
 .footer-bottom p {
-  color: rgba(255, 255, 255, 0.78);
+  color: #D9CCBE;
 }
 
 .footer-column a:hover,
 .footer-column button:hover,
 .social-link:hover {
-  color: #32C6C6;
+  color: #3FC5C4;
 }
 
 .social-link {
-  color: #FFFFFF;
-  border-color: rgba(255, 255, 255, 0.22);
+  color: #F8F5F0;
+  border-color: rgba(248, 245, 240, 0.22);
 }
 
 .social-link:hover {
-  background: rgba(50, 198, 198, 0.12);
-  border-color: rgba(50, 198, 198, 0.5);
+  background: rgba(63, 197, 196, 0.10);
+  border-color: rgba(63, 197, 196, 0.48);
 }
 
 .site-header .desktop-nav a:not(.btn):not(.brand):not(.social-link) {
@@ -4089,17 +3840,17 @@ textarea:focus {
 .site-header.scrolled .desktop-nav a:not(.btn):not(.brand):not(.social-link):focus-visible,
 .site-header.scrolled .desktop-nav a:not(.btn):not(.brand):not(.social-link)[aria-current="page"],
 .site-header.scrolled .desktop-nav a:not(.btn):not(.brand):not(.social-link).active {
-  color: #2BAFD9;
+  color: #3FC5C4;
 }
 
 .footer .footer-column a:not(.btn):not(.brand):not(.social-link),
 .footer .footer-column button {
-  color: #FFFFFF;
+  color: #F8F5F0;
 }
 
 .footer .footer-column a:not(.btn):not(.brand):not(.social-link):hover,
 .footer .footer-column button:hover {
-  color: #32C6C6;
+  color: #3FC5C4;
 }
 
 .sticky-reserve:not(.btn):not(.brand):not(.social-link),
@@ -4160,4 +3911,2907 @@ textarea:focus {
     backdrop-filter: none !important;
     mix-blend-mode: normal !important;
   }
+}
+
+/* --- LUXURY FEMININE WELLNESS AESTHETIC OVERRIDES --- */
+
+/* 1. HERO TITLE */
+.hero h1 {
+  color: #6E4F6F !important;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.35) !important;
+}
+
+/* 2. EYEBROW */
+.hero .eyebrow,
+.hero .eyebrow p {
+  color: #D4A23A !important;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.35) !important;
+}
+
+/* 3. DATE */
+.hero-tagline,
+.hero-date {
+  color: #F8F5F1 !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* 4. PRIMARY CTA */
+.hero .btn-primary,
+.hero .hero-card-cta,
+.hero-card-cta {
+  background: #8B6F8E !important;
+  color: #FFFFFF !important;
+  border-color: #8B6F8E !important;
+  box-shadow: 0 12px 24px rgba(139, 111, 142, 0.15) !important;
+}
+
+.hero .btn-primary:hover,
+.hero .btn-primary:focus-visible,
+.hero .hero-card-cta:hover,
+.hero .hero-card-cta:focus-visible,
+.hero-card-cta:hover,
+.hero-card-cta:focus-visible {
+  background: #6E4F6F !important;
+  border-color: #6E4F6F !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 16px 32px rgba(110, 79, 111, 0.25) !important;
+}
+
+/* 5. FLOATING MOBILE CTA */
+.sticky-reserve {
+  background: #8B6F8E !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 8px 24px rgba(139, 111, 142, 0.2) !important;
+}
+
+.sticky-reserve:hover,
+.sticky-reserve:focus-visible {
+  background: #6E4F6F !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 12px 32px rgba(110, 79, 111, 0.3) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SECTION-LEVEL FIXES & ACTIVITÉS — VOTRE PROGRAMME
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Scroll-margin for sticky header ── */
+.section,
+.reservation,
+.hero {
+  scroll-margin-top: 90px;
+}
+
+/* ── Sticky reserve: transition + hide state ── */
+.sticky-reserve {
+  transition: opacity 0.3s ease, transform 0.3s ease !important;
+}
+.sticky-reserve.sticky-hidden {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateY(8px) !important;
+}
+
+/* ── Accordion: ensure max-height approach wins over grid approach ── */
+.accordion-content {
+  display: block !important;
+  grid-template-rows: unset !important;
+}
+.accordion-item.open .accordion-content {
+  max-height: 800px !important;
+  grid-template-rows: unset !important;
+}
+.accordion-content-inner {
+  overflow: visible !important;
+}
+
+/* ── Trust band: 3 equal columns at all sizes above 480px ── */
+@media (max-width: 760px) {
+  .trust-band {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 0;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ACTIVITÉS — VOTRE PROGRAMME
+   ═══════════════════════════════════════════════════════════════ */
+
+.activites {
+  background: var(--beige);
+}
+
+.activites-heading {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: clamp(56px, 7vw, 80px);
+  max-width: 860px;
+}
+
+.activites-heading h2 {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  color: var(--forest);
+  margin: 12px 0 20px;
+  line-height: 1.08;
+}
+
+.activites-subtitle {
+  font-size: clamp(1rem, 1.3vw, 1.1rem);
+  color: var(--muted);
+  line-height: 1.78;
+  margin: 0 auto 14px;
+  max-width: 740px;
+}
+
+/* Grid: 4 cols desktop → 2 cols tablet → 1 col mobile */
+.activites-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(14px, 2vw, 22px);
+  margin-bottom: clamp(48px, 6vw, 64px);
+}
+
+/* Card */
+.activite-card {
+  background: var(--warm-white);
+  border: 1px solid rgba(189, 169, 135, 0.22);
+  border-radius: var(--radius-lg);
+  padding: clamp(22px, 2.5vw, 30px) clamp(18px, 2vw, 26px);
+  box-shadow: 0 6px 22px rgba(31, 61, 54, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+              box-shadow 0.35s ease,
+              border-color 0.3s ease;
+}
+
+.activite-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 50px rgba(31, 61, 54, 0.09);
+  border-color: rgba(212, 175, 55, 0.34);
+}
+
+/* Icon container */
+.activite-icon {
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--forest);
+  background: rgba(31, 61, 54, 0.07);
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+.activite-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Card text */
+.activite-title {
+  font-family: var(--serif);
+  font-size: clamp(1.1rem, 1.3vw, 1.28rem);
+  color: var(--forest);
+  line-height: 1.22;
+  margin: 0;
+}
+
+.activite-desc {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.72;
+  margin: 0;
+  flex: 1;
+}
+
+/* Bottom CTA block */
+.activites-bottom {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+  padding: clamp(36px, 5vw, 52px) clamp(24px, 4vw, 44px);
+  background: var(--warm-white);
+  border: 1px solid rgba(189, 169, 135, 0.22);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 32px rgba(31, 61, 54, 0.05);
+}
+
+.activites-bottom h3 {
+  font-family: var(--serif);
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  color: var(--forest);
+  margin: 0 0 14px;
+  line-height: 1.15;
+}
+
+.activites-bottom > p {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.75;
+  margin: 0 0 26px;
+}
+
+/* ── Activités responsive ── */
+@media (max-width: 1024px) {
+  .activites-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .activites-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .activites-heading h2 {
+    font-size: clamp(2rem, 8vw, 2.6rem);
+  }
+
+  .activites-bottom {
+    padding: 28px 20px 32px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CE QUI EST INCLUS
+   ═══════════════════════════════════════════════════════════════ */
+
+.inclus {
+  background: var(--cream);
+}
+
+/* 4-col grid, rebalanced for 7 cards */
+.inclus-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 24px);
+  margin-bottom: clamp(48px, 6vw, 64px);
+}
+
+@media (min-width: 481px) {
+  .inclus-grid > .inclus-card:last-child {
+    grid-column: span 2;
+  }
+}
+
+/* Card base */
+.inclus-card {
+  background: var(--warm-white);
+  border: 1px solid rgba(189, 169, 135, 0.2);
+  border-radius: var(--radius-lg);
+  padding: clamp(28px, 3vw, 36px) clamp(22px, 2.5vw, 30px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 4px 18px rgba(31, 61, 54, 0.04);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+              box-shadow 0.35s ease,
+              border-color 0.3s ease;
+}
+
+/* Gold accent line on top, revealed on hover */
+.inclus-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.inclus-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 50px rgba(31, 61, 54, 0.09);
+  border-color: rgba(212, 175, 55, 0.28);
+}
+
+.inclus-card:hover::after {
+  transform: scaleX(1);
+}
+
+/* Icon */
+.inclus-icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--forest);
+  background: rgba(31, 61, 54, 0.06);
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+.inclus-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.inclus-title {
+  font-family: var(--serif);
+  font-size: clamp(1.12rem, 1.35vw, 1.28rem);
+  color: var(--forest);
+  line-height: 1.22;
+  margin: 0;
+}
+
+.inclus-desc {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.72;
+  margin: 0;
+  flex: 1;
+}
+
+@media (max-width: 1024px) {
+  .inclus-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .inclus-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .inclus-grid > .inclus-card:last-child {
+    grid-column: auto;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PERSONNALISEZ VOTRE EXPÉRIENCE
+   ═══════════════════════════════════════════════════════════════ */
+
+.options {
+  background: var(--beige);
+}
+
+.options-heading {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto clamp(48px, 6vw, 64px);
+}
+
+.options-subtitle {
+  font-size: clamp(1rem, 1.3vw, 1.1rem);
+  color: var(--muted);
+  line-height: 1.78;
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+/* 4 cards in one row */
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 24px);
+}
+
+.option-card {
+  background: var(--warm-white);
+  border: 1px solid rgba(212, 175, 55, 0.18);
+  border-top: 2px solid var(--gold);
+  border-radius: var(--radius-lg);
+  padding: clamp(28px, 3vw, 36px) clamp(22px, 2.5vw, 30px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 4px 18px rgba(31, 61, 54, 0.04);
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+              box-shadow 0.35s ease;
+}
+
+.option-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 50px rgba(31, 61, 54, 0.09);
+}
+
+.option-icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--forest);
+  background: rgba(212, 175, 55, 0.09);
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+.option-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.option-title {
+  font-family: var(--serif);
+  font-size: clamp(1.12rem, 1.35vw, 1.28rem);
+  color: var(--forest);
+  line-height: 1.22;
+  margin: 0;
+}
+
+.option-desc {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.72;
+  margin: 0;
+  flex: 1;
+}
+
+/* Options responsive */
+@media (max-width: 1024px) {
+  .options-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .options-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ╔═══════════════════════════════════════════════════════════════╗
+   ║  LUXURY COLOR SYSTEM — Deep Plum & Dusty Rose                ║
+   ║  Replaces generic blue (#2BAFD9) and temporary purple        ║
+   ║  (#8B6F8E) with a refined feminine wellness palette.         ║
+   ║  All rules use !important — this block is the final word.    ║
+   ╚═══════════════════════════════════════════════════════════════╝ */
+
+/* ── Design tokens ── */
+:root {
+  --plum:      #5E3B5D;
+  --rose:      #B88AA5;
+  --btn-cream: #F8F4EF;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   1. HEADINGS
+   Section h2 → Plum. Card h3 stays as-is.
+   ───────────────────────────────────────────────────────────────── */
+
+.hero h1,
+.section-heading h2,
+.activites-heading h2,
+.booking-heading h2,
+.options-heading h2 {
+  color: var(--plum) !important;
+}
+
+/* Feature highlight h3 on white card backgrounds */
+.activites-bottom h3 {
+  color: var(--plum) !important;
+}
+
+
+/* ─────────────────────────────────────────────────────────────────
+   2. BUTTONS — Elegant luxury style
+   Default: cream bg · plum text · rose border
+   Hover:   rose bg · white text · rose border
+   ───────────────────────────────────────────────────────────────── */
+
+.btn-primary,
+.hero .btn-primary,
+.hero .hero-card-cta,
+.hero-card-cta,
+.reservation .btn-primary,
+.reservation-form button[type="submit"],
+.exit-card .btn-primary,
+.header-cta,
+.site-header.scrolled .header-cta {
+  background:   var(--btn-cream) !important;
+  color:        var(--plum)      !important;
+  border:       1px solid var(--rose) !important;
+  box-shadow:   0 4px 18px rgba(94, 59, 93, 0.09) !important;
+  transition:   background 300ms ease,
+                color      300ms ease,
+                box-shadow 300ms ease,
+                border-color 300ms ease !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible,
+.hero .btn-primary:hover,
+.hero .btn-primary:focus-visible,
+.hero .hero-card-cta:hover,
+.hero .hero-card-cta:focus-visible,
+.hero-card-cta:hover,
+.hero-card-cta:focus-visible,
+.reservation .btn-primary:hover,
+.reservation .btn-primary:focus-visible,
+.reservation-form button[type="submit"]:hover,
+.reservation-form button[type="submit"]:focus-visible,
+.exit-card .btn-primary:hover,
+.exit-card .btn-primary:focus-visible,
+.header-cta:hover,
+.header-cta:focus-visible,
+.site-header.scrolled .header-cta:hover,
+.site-header.scrolled .header-cta:focus-visible {
+  background:   var(--rose)  !important;
+  color:        #FFFFFF      !important;
+  border-color: var(--rose)  !important;
+  box-shadow:   0 8px 28px rgba(184, 138, 165, 0.28) !important;
+}
+
+/* Sticky floating CTA matches button system */
+.sticky-reserve {
+  background:   var(--btn-cream) !important;
+  color:        var(--plum)      !important;
+  border:       1px solid var(--rose) !important;
+  box-shadow:   0 4px 18px rgba(94, 59, 93, 0.09) !important;
+  transition:   background 300ms ease,
+                color      300ms ease,
+                box-shadow 300ms ease,
+                border-color 300ms ease,
+                opacity    0.3s ease,
+                transform  0.3s ease !important;
+}
+
+.sticky-reserve:hover,
+.sticky-reserve:focus-visible {
+  background:   var(--rose) !important;
+  color:        #FFFFFF     !important;
+  border-color: var(--rose) !important;
+  box-shadow:   0 8px 28px rgba(184, 138, 165, 0.28) !important;
+}
+
+/* Hidden state (JS-controlled) */
+.sticky-reserve.sticky-hidden {
+  opacity:        0 !important;
+  pointer-events: none !important;
+  transform:      translateY(8px) !important;
+}
+
+/* WhatsApp button keeps brand green — no override */
+
+/* ─────────────────────────────────────────────────────────────────
+   3. LINKS & NAVIGATION ACCENTS
+   Replace all blue (#2BAFD9) with plum or forest.
+   ───────────────────────────────────────────────────────────────── */
+
+/* Body text links */
+a:not(.btn):not(.brand):not(.social-link):not(.header-cta):not(.sticky-reserve):not(.sticky-whatsapp):not(.scroll-cue):not(.skip-link):not([href^="tel"]):not([href^="mailto"]) {
+  color: var(--plum) !important;
+}
+
+/* Nav active / current page */
+.desktop-nav a[aria-current="page"],
+.desktop-nav a.active,
+.site-header.scrolled .desktop-nav a[aria-current="page"],
+.site-header.scrolled .desktop-nav a.active,
+.site-header.scrolled .desktop-nav a:not(.btn):not(.brand):not(.social-link)[aria-current="page"],
+.site-header.scrolled .desktop-nav a:not(.btn):not(.brand):not(.social-link).active {
+  color: var(--plum) !important;
+}
+
+/* Accordion open header accent */
+.accordion-item.open .accordion-header {
+  color: var(--plum) !important;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   4. SMALL ACCENTS & UI ELEMENTS
+   ───────────────────────────────────────────────────────────────── */
+
+/* Scroll-progress bar */
+.progress span {
+  background: linear-gradient(90deg, var(--plum), var(--rose)) !important;
+}
+
+/* Skip link */
+.skip-link {
+  background: var(--plum) !important;
+  color: #FFFFFF !important;
+}
+
+/* Hero offer card SVGs → gold (matches premium card aesthetic) */
+.hero-offer-card svg,
+.hero-trust svg {
+  color: var(--gold) !important;
+}
+
+/* Footer social + location icons → forest */
+.footer-column .footer-location svg,
+.social-link svg {
+  color: var(--forest) !important;
+}
+
+/* Modal / legal close buttons */
+.modal-close,
+.legal-close {
+  color: var(--plum) !important;
+  border-color: rgba(94, 59, 93, 0.22) !important;
+}
+
+.modal-close:hover,
+.legal-close:hover {
+  background: var(--plum) !important;
+  color:      var(--cream) !important;
+}
+
+/* Legal card top gradient */
+.legal-card::before {
+  background: linear-gradient(90deg, var(--plum), var(--rose), var(--gold)) !important;
+}
+
+/* Select dropdown arrow → plum */
+select {
+  background-image:
+    linear-gradient(45deg,  transparent 50%, var(--plum) 50%),
+    linear-gradient(135deg, var(--plum)  50%, transparent 50%) !important;
+}
+
+/* Focus rings → plum */
+*:focus-visible {
+  outline-color: var(--plum) !important;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   5. SAFEGUARDS
+   Preserve elements that must NOT be plum.
+   ───────────────────────────────────────────────────────────────── */
+
+
+/* btn-ghost preserves its frosted glass style */
+.btn-ghost,
+.btn-ghost:hover,
+.btn-ghost:focus-visible {
+  background:   rgba(255, 250, 242, 0.08) !important;
+  color:        var(--warm-white)          !important;
+  border-color: rgba(255, 250, 242, 0.42) !important;
+  box-shadow:   none !important;
+}
+
+/* WhatsApp sticky keeps green */
+.sticky-whatsapp {
+  background:   #25D366 !important;
+  color:        #FFFFFF  !important;
+  border-color: transparent !important;
+  box-shadow:   var(--shadow-base) !important;
+}
+
+.sticky-whatsapp:hover {
+  background: #1ebe57 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PRICING — VOTRE INVESTISSEMENT BIEN-ÊTRE
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Card container ── */
+.pricing-card {
+  max-width: 580px;
+  margin: 0 auto;
+  background: var(--warm-white);
+  border: 1px solid rgba(189, 169, 135, 0.22);
+  border-radius: var(--radius-lg);
+  padding: clamp(44px, 5.5vw, 64px) clamp(32px, 5vw, 64px);
+  box-shadow: 0 16px 56px rgba(31, 61, 54, 0.08),
+              0 4px 16px rgba(31, 61, 54, 0.04);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* Gold accent line at top */
+.pricing-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gold);
+}
+
+/* ── Eyebrow inside card ── */
+.pricing-card-eyebrow {
+  font-family: var(--sans);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 28px;
+}
+
+/* ── Price display ── */
+.pricing-price-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 36px;
+}
+
+.pricing-amount {
+  display: block;
+  font-family: var(--serif);
+  font-size: clamp(3.8rem, 10vw, 5.8rem);
+  font-weight: 600;
+  color: var(--forest);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.pricing-currency {
+  font-size: 0.52em;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  vertical-align: 0.12em;
+}
+
+.pricing-per-person {
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ── CTA ── */
+.pricing-cta {
+  display: flex;
+  justify-content: center;
+}
+
+.pricing-cta .btn {
+  padding-inline: clamp(32px, 4vw, 48px);
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .pricing-card {
+    padding: 40px 24px 44px;
+  }
+}
+
+@media (max-width: 390px) {
+  .pricing-card {
+    padding: 36px 20px 40px;
+  }
+
+  .pricing-amount {
+    font-size: clamp(3.2rem, 12vw, 3.8rem);
+  }
+}
+
+/* ╔═══════════════════════════════════════════════════════════════╗
+   ║  FINAL LUXURY DESIGN SYSTEM                                   ║
+   ║  One premium palette — luxury wellness, not tech/SaaS         ║
+   ╠═══════════════════════════════════════════════════════════════╣
+   ║  Cream      #F8F4EF  Primary background                       ║
+   ║  Warm Sand  #EFE7DC  Secondary background                     ║
+   ║  Deep Olive #2F463D  Headings + primary text                  ║
+   ║  Champagne  #C8A35A  Gold accents (eyebrows, lines, icons)    ║
+   ║  Deep Teal  #2DB7B0  CTAs + links + interactive               ║
+   ║  Teal Dark  #259A94  CTA hover                                ║
+   ║  Soft Mint  #72DDB5  Wellness accent (sparingly)              ║
+   ╚═══════════════════════════════════════════════════════════════╝ */
+
+/* ── 1. DESIGN TOKENS
+   Remapping all legacy tokens so every var() reference
+   that exists throughout the 5000+ line stylesheet
+   automatically resolves to the correct new value.
+   ──────────────────────────────────────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --cream:      #F8F4EF;
+  --beige:      #EFE7DC;
+  --warm-white: #FFFFFF;
+  --sand:       #E8DED0;
+  --glass:      rgba(248, 244, 239, 0.74);
+
+  /* Typography */
+  --forest:     #2F463D;   /* was #1F3D36 — primary text + headings */
+  --olive:      #2F463D;
+  --ink:        #2F463D;
+  --muted:      #6D6358;
+
+  /* Gold — Champagne */
+  --gold:          #C8A35A;
+  --summer-yellow: #C8A35A;
+  --summer-orange: #C8A35A;
+  --summer-coral:  #2F463D;
+  --summer-mint:   #72DDB5;
+  --summer-turquoise: #2F463D;
+  --summer-sky:    #2DB7B0;
+
+  /* Interactive */
+  --ocean:      #2DB7B0;
+  --teal:       #2DB7B0;
+  --teal-hover: #259A94;
+  --mint:       #72DDB5;
+
+  /* Neutralise legacy plum/rose/btn-cream tokens
+     so previous var() references cascade correctly */
+  --plum:       #2F463D;
+  --rose:       #2DB7B0;
+  --btn-cream:  #2DB7B0;
+
+  /* Shadows — olive-tinted */
+  --shadow-base:  0 8px 32px rgba(47, 70, 61, 0.06);
+  --shadow-hover: 0 20px 48px rgba(47, 70, 61, 0.10);
+  --shadow:       0 8px 32px rgba(47, 70, 61, 0.06);
+}
+
+/* ── 2. BUTTONS — ONE unified style across every CTA
+   Deep Teal background · White text · Teal hover
+   ──────────────────────────────────────────────────────────────── */
+
+.btn-primary,
+.hero .btn-primary,
+.hero .hero-card-cta,
+.hero-card-cta,
+.reservation .btn-primary,
+.reservation-form button[type="submit"],
+.exit-card .btn-primary,
+.header-cta,
+.site-header.scrolled .header-cta {
+  background:   #2DB7B0 !important;
+  color:        #FFFFFF !important;
+  border:       1px solid #2DB7B0 !important;
+  box-shadow:   0 4px 20px rgba(45, 183, 176, 0.16) !important;
+  transition:   background 300ms ease,
+                box-shadow 300ms ease !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible,
+.hero .btn-primary:hover,
+.hero .btn-primary:focus-visible,
+.hero .hero-card-cta:hover,
+.hero .hero-card-cta:focus-visible,
+.hero-card-cta:hover,
+.hero-card-cta:focus-visible,
+.reservation .btn-primary:hover,
+.reservation .btn-primary:focus-visible,
+.reservation-form button[type="submit"]:hover,
+.reservation-form button[type="submit"]:focus-visible,
+.exit-card .btn-primary:hover,
+.exit-card .btn-primary:focus-visible,
+.header-cta:hover,
+.header-cta:focus-visible,
+.site-header.scrolled .header-cta:hover,
+.site-header.scrolled .header-cta:focus-visible {
+  background:   #259A94 !important;
+  border-color: #259A94 !important;
+  color:        #FFFFFF !important;
+  box-shadow:   0 8px 28px rgba(45, 183, 176, 0.28) !important;
+}
+
+/* Floating CTA */
+.sticky-reserve {
+  background:   #2DB7B0 !important;
+  color:        #FFFFFF !important;
+  border:       none !important;
+  box-shadow:   0 4px 20px rgba(45, 183, 176, 0.22) !important;
+  transition:   background 300ms ease,
+                box-shadow 300ms ease,
+                opacity    0.3s ease,
+                transform  0.3s ease !important;
+}
+.sticky-reserve:hover,
+.sticky-reserve:focus-visible {
+  background:   #259A94 !important;
+  box-shadow:   0 8px 28px rgba(45, 183, 176, 0.3) !important;
+  color:        #FFFFFF !important;
+}
+.sticky-reserve.sticky-hidden {
+  opacity:        0 !important;
+  pointer-events: none !important;
+  transform:      translateY(8px) !important;
+}
+
+/* btn-ghost (used on hero dark overlay) — unchanged */
+.btn-ghost,
+.btn-ghost:hover,
+.btn-ghost:focus-visible {
+  background:   rgba(255, 250, 242, 0.08) !important;
+  color:        #FFFFFF !important;
+  border-color: rgba(255, 250, 242, 0.42) !important;
+  box-shadow:   none !important;
+}
+
+/* WhatsApp brand green — never change */
+.sticky-whatsapp {
+  background:   #25D366 !important;
+  color:        #FFFFFF !important;
+  border-color: transparent !important;
+}
+.sticky-whatsapp:hover { background: #1ebe57 !important; }
+
+/* ── 3. HEADINGS — Deep Olive everywhere
+   (Most cascade from --forest token update above,
+    but explicit rules below win for any edge cases.)
+   ──────────────────────────────────────────────────────────────── */
+
+.hero h1,
+.section-heading h2,
+.activites-heading h2,
+.booking-heading h2,
+.options-heading h2,
+.activites-bottom h3 {
+  color: #2F463D !important;
+}
+
+
+/* ── 4. EYEBROWS — Champagne Gold only ── */
+.eyebrow,
+.hero .eyebrow,
+.reservation .eyebrow,
+.pricing-card-eyebrow {
+  color: #C8A35A !important;
+}
+
+/* ── 5. LINKS — Deep Teal ── */
+a:not(.btn):not(.brand):not(.social-link):not(.header-cta)
+ :not(.sticky-reserve):not(.sticky-whatsapp):not(.scroll-cue)
+ :not(.skip-link):not([href^="tel"]):not([href^="mailto"]) {
+  color: #2DB7B0 !important;
+}
+
+/* Nav active / current-page */
+.desktop-nav a[aria-current="page"],
+.desktop-nav a.active,
+.site-header.scrolled .desktop-nav a[aria-current="page"],
+.site-header.scrolled .desktop-nav a.active {
+  color: #2DB7B0 !important;
+}
+
+/* ── 6. CARDS — White bg · #E8DED0 border ── */
+.activite-card,
+.inclus-card,
+.option-card,
+.expert-card,
+.value-card,
+.exit-card,
+.activites-bottom,
+.pricing-card {
+  background:   #FFFFFF !important;
+  border-color: #E8DED0 !important;
+}
+
+/* Option card keeps its gold top accent */
+.option-card {
+  border-top-color: #C8A35A !important;
+  border-top-width: 2px !important;
+}
+
+/* Card hover shadows — olive-tinted */
+.activite-card:hover,
+.inclus-card:hover,
+.option-card:hover {
+  box-shadow:   0 20px 48px rgba(47, 70, 61, 0.10) !important;
+  border-color: #D4C9B8 !important;
+}
+
+.pricing-card::before    { background: #C8A35A !important; }
+
+/* ── 7. ICONS
+   Activity cards → Deep Olive (lifestyle)
+   Inclus/Option cards → Deep Teal (services)
+   Hero offer card → Champagne Gold
+   Footer/social → Deep Olive
+   ──────────────────────────────────────────────────────────────── */
+.activite-icon {
+  color:      #2F463D !important;
+  background: rgba(47, 70, 61, 0.06) !important;
+}
+.inclus-icon {
+  color:      #2DB7B0 !important;
+  background: rgba(45, 183, 176, 0.08) !important;
+}
+.option-icon {
+  color:      #2DB7B0 !important;
+  background: rgba(45, 183, 176, 0.08) !important;
+}
+.hero-offer-card svg,
+.hero-trust svg           { color: #C8A35A !important; }
+.footer-column .footer-location svg,
+.social-link svg          { color: #3FC5C4 !important; }
+
+/* ── 8. ACCORDION
+   Closed → white background, olive text
+   Open   → soft cream bg, teal heading + icon
+   ──────────────────────────────────────────────────────────────── */
+.accordion-item           { border-color: rgba(232, 222, 208, 0.7) !important; }
+.accordion-header         { color: #2F463D !important; }
+.accordion-header:hover   { color: #2DB7B0 !important; }
+
+.accordion-item.open .accordion-header { color: #2DB7B0 !important; }
+.accordion-item.open { background: #F8F4EF !important; }
+
+.accordion-item.open .accordion-icon {
+  background:   #2DB7B0 !important;
+  border-color: #2DB7B0 !important;
+  color:        #FFFFFF !important;
+}
+.accordion-icon { border-color: rgba(200, 163, 90, 0.4) !important; }
+
+/* ── 9. FORMS — White bg · warm border · Teal focus ── */
+input:focus,
+input:focus-visible,
+select:focus,
+select:focus-visible,
+textarea:focus,
+textarea:focus-visible {
+  border-color: #2DB7B0 !important;
+  outline:      3px solid rgba(45, 183, 176, 0.15) !important;
+  box-shadow:   0 0 0 3px rgba(45, 183, 176, 0.1) !important;
+}
+
+select {
+  background-image:
+    linear-gradient(45deg,  transparent 50%, #2DB7B0 50%),
+    linear-gradient(135deg, #2DB7B0     50%, transparent 50%) !important;
+}
+
+/* ── 10. PROGRESS BAR & SMALL UI ── */
+.progress span { background: #2DB7B0 !important; }
+
+.skip-link { background: #2F463D !important; color: #FFFFFF !important; }
+
+*:focus-visible { outline-color: #2DB7B0 !important; }
+
+/* Modal / legal */
+.modal-close,
+.legal-close {
+  color:        #2DB7B0 !important;
+  border-color: rgba(45, 183, 176, 0.28) !important;
+}
+.modal-close:hover,
+.legal-close:hover {
+  background: #2DB7B0 !important;
+  color:      #FFFFFF !important;
+}
+.legal-card::before {
+  background: linear-gradient(90deg, #2F463D, #2DB7B0, #C8A35A) !important;
+}
+
+
+/* Accordion whatsapp link */
+.value-cta .whatsapp-link { color: #2DB7B0 !important; }
+
+/* ╔═══════════════════════════════════════════════════════════════╗
+   ║  HERO COLOR HIERARCHY                                         ║
+   ║  Aman · Six Senses · One&Only — image first, text recedes    ║
+   ║                                                               ║
+   ║  Title      #FAF8F5   Warm White                             ║
+   ║  Paragraph  90% white                                        ║
+   ║  Date/loc   80% white                                        ║
+   ║  Eyebrow    #C8A35A   Champagne Gold                         ║
+   ║  CTA        White bg · Deep Olive text                       ║
+   ║  CTA hover  Champagne Gold bg · Deep Olive text              ║
+   ╚═══════════════════════════════════════════════════════════════╝ */
+
+/* ── Eyebrow: champagne gold, refined ── */
+.hero .eyebrow {
+  color:          #C8A35A !important;
+  text-shadow:    0 1px 10px rgba(0, 0, 0, 0.28) !important;
+}
+
+/* ── H1: warm white — image stays as the dominant element ── */
+.hero h1 {
+  color:          #FAF8F5 !important;
+  text-shadow:
+    0 2px 24px rgba(0, 0, 0, 0.22),
+    0 8px 48px rgba(0, 0, 0, 0.10) !important;
+}
+
+/* ── Date / location tagline: white 80% ── */
+.hero-tagline,
+.hero-date {
+  color:          rgba(255, 255, 255, 0.80) !important;
+  text-shadow:    0 1px 14px rgba(0, 0, 0, 0.32) !important;
+}
+
+/* ── Body copy: white 90% ── */
+.hero-copy {
+  color:          rgba(255, 255, 255, 0.90) !important;
+  text-shadow:    0 1px 14px rgba(0, 0, 0, 0.36) !important;
+}
+
+.hero-copy strong {
+  color:          #FAF8F5 !important;
+}
+
+.hero-copy span {
+  color:          rgba(255, 255, 255, 0.88) !important;
+}
+
+/* ── Trust pills: warm cream glass — no teal/mint tint ── */
+.hero-trust li {
+  color:          rgba(255, 255, 255, 0.88) !important;
+  background:     rgba(250, 248, 245, 0.10) !important;
+  border-color:   rgba(250, 248, 245, 0.28) !important;
+  text-shadow:    0 1px 8px rgba(0, 0, 0, 0.32) !important;
+  box-shadow:     inset 0 1px 0 rgba(255, 255, 255, 0.12),
+                  0 4px 16px rgba(0, 0, 0, 0.14) !important;
+}
+
+/* ── Reassurance line: white 68% ── */
+.hero-reassurance {
+  color:          rgba(255, 255, 255, 0.68) !important;
+  text-shadow:    0 1px 8px rgba(0, 0, 0, 0.32) !important;
+}
+
+/* ── Primary CTA inside hero: White · Deep Olive ── */
+.hero .btn-primary,
+.hero .hero-card-cta,
+.hero-card-cta {
+  background:     #FFFFFF !important;
+  color:          #2F463D !important;
+  border:         1.5px solid rgba(255, 255, 255, 0.65) !important;
+  box-shadow:     0 4px 24px rgba(0, 0, 0, 0.18),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+  transition:     background 280ms ease,
+                  color      280ms ease,
+                  box-shadow 280ms ease,
+                  border-color 280ms ease !important;
+}
+
+/* ── CTA hover: Champagne Gold · Deep Olive ── */
+.hero .btn-primary:hover,
+.hero .btn-primary:focus-visible,
+.hero .hero-card-cta:hover,
+.hero .hero-card-cta:focus-visible,
+.hero-card-cta:hover,
+.hero-card-cta:focus-visible {
+  background:     #C8A35A !important;
+  color:          #2F463D !important;
+  border-color:   #C8A35A !important;
+  box-shadow:     0 8px 32px rgba(200, 163, 90, 0.35) !important;
+}
+
+/* ── btn-ghost (WhatsApp): keep frosted, unchanged ── */
+.hero .btn-ghost,
+.hero .btn-ghost:hover,
+.hero .btn-ghost:focus-visible {
+  background:     rgba(255, 250, 242, 0.1) !important;
+  color:          #FFFFFF !important;
+  border-color:   rgba(255, 250, 242, 0.38) !important;
+  box-shadow:     none !important;
+}
+
+/* ── Hero offer card: warm glass panel ── */
+.hero-offer-card {
+  background:     rgba(250, 248, 245, 0.09) !important;
+  border:         1px solid rgba(250, 248, 245, 0.18) !important;
+  backdrop-filter: blur(20px) -webkit-blur(20px) !important;
+}
+
+/* Venue name: champagne gold */
+.hero-offer-card > span {
+  color: #C8A35A !important;
+}
+
+/* Detail labels: soft white */
+.hero-offer-card dt {
+  color: rgba(255, 255, 255, 0.55) !important;
+}
+
+/* Detail values: warm white */
+.hero-offer-card dd,
+.hero-offer-card > strong {
+  color: rgba(250, 248, 245, 0.92) !important;
+}
+
+/* Divider lines inside card */
+.hero-offer-card dl div {
+  border-top-color: rgba(250, 248, 245, 0.13) !important;
+}
+
+/* ── Outside hero: CTAs remain Deep Teal ── */
+/* (This rule intentionally left empty —
+   the previous block handles non-hero buttons.) */
+
+/* ╔═══════════════════════════════════════════════════════════════╗
+   ║  HERO H1 — WARM WHITE                                         ║
+   ║  #FAF8F5 · Subtle dark shadow only · No gradient              ║
+   ║                                                               ║
+   ║  Gold is reserved for eyebrow, icons and decorative accents.  ║
+   ║  Large titles use warm white — calm, premium, resort-grade.   ║
+   ║                                                               ║
+   ║  Desktop:  margin-top pushes h1 off the bright sky           ║
+   ║            and into the darker pool / ocean zone.             ║
+   ║  Mobile:   smaller clamp keeps the title to exactly 2 lines,  ║
+   ║            leaving the ocean and participants fully visible.   ║
+   ╚═══════════════════════════════════════════════════════════════╝ */
+
+/* ── Warm white — all viewports ── */
+.hero h1 {
+  color:                   #FAF8F5 !important;
+  background:              none !important;      /* cancel any prior gradient */
+  -webkit-background-clip: unset !important;
+  background-clip:         unset !important;
+  -webkit-text-fill-color: unset !important;     /* restore normal text rendering */
+  text-shadow:             0 3px 14px rgba(0, 0, 0, 0.35) !important;
+  filter:                  none !important;
+}
+
+/* ── Desktop: reposition h1 into the darker pool / ocean zone ──
+   The bright sky sits in the top ~35% of the hero image.
+   A margin-top on the h1 only (not hero-content) moves the
+   title down while leaving eyebrow + tagline in place.          */
+@media (min-width: 1024px) {
+  .hero h1 {
+    margin-top: 90px !important;
+  }
+}
+
+@media (min-width: 1440px) {
+  .hero h1 {
+    margin-top: 115px !important;
+  }
+}
+
+/* ── Mobile: two balanced lines, no third-line wrap ──
+   Current clamp(2.875rem, 13.5vw, 3.125rem) produces 3+ lines
+   at 320–390px. Reduced clamp keeps "Retraite Holistique Féminine"
+   on line 1 and "au Bord de l'Océan" on line 2 across all targets.
+   line-height 1.20 gives the airy, editorial luxury feel.        */
+@media (max-width: 760px) {
+  .hero h1 {
+    font-size:   clamp(1.875rem, 9vw, 2.5rem) !important;
+    line-height: 1.20 !important;
+  }
+}
+
+/* ╔═══════════════════════════════════════════════════════════════╗
+   ║  HERO CTA — WARM WHITE · DEEP TEAL                            ║
+   ║  Default:  #FAF8F5 bg · #234F52 text (warm, calm, legible)   ║
+   ║  Hover:    #234F52 bg · #FFFFFF text (deep teal, confident)   ║
+   ╚═══════════════════════════════════════════════════════════════╝ */
+
+.hero .btn-primary,
+.hero .hero-card-cta,
+.hero-card-cta {
+  background:  #FAF8F5 !important;
+  color:       #234F52 !important;
+  border:      1.5px solid rgba(250, 248, 245, 0.70) !important;
+  box-shadow:  0 4px 24px rgba(0, 0, 0, 0.16),
+               inset 0 1px 0 rgba(255, 255, 255, 0.85) !important;
+  transition:  background 280ms ease,
+               color      280ms ease,
+               box-shadow 280ms ease,
+               border-color 280ms ease !important;
+}
+
+.hero .btn-primary:hover,
+.hero .btn-primary:focus-visible,
+.hero .hero-card-cta:hover,
+.hero .hero-card-cta:focus-visible,
+.hero-card-cta:hover,
+.hero-card-cta:focus-visible {
+  background:  #234F52 !important;
+  color:       #FFFFFF !important;
+  border-color: #234F52 !important;
+  box-shadow:  0 8px 32px rgba(35, 79, 82, 0.28) !important;
+}
+
+/* ╔════════════════════════════════════════════════════════════════╗
+   ║  HERO — LUXURY RESORT REDESIGN                                  ║
+   ║  Aman · Four Seasons · Six Senses · SHA Wellness Clinic         ║
+   ║  Calm · Premium · Minimal · Editorial · Image-first             ║
+   ║                                                                  ║
+   ║  Layout:  Logo → H1 (3 lines, 45% width) → Date/Loc → Copy    ║
+   ║           → CTA (white pill + lagoon secondary)                ║
+   ║  Color:   H1 = #234F52  Copy = rgba(35,79,82,.88)              ║
+   ║  Overlay: Soft cream gradient left-only — never dark            ║
+   ╚════════════════════════════════════════════════════════════════╝ */
+
+/* ── 1. OVERLAY: ultra-soft cream gradient, text-side only ──────── */
+@media (min-width: 1024px) {
+  .hero-overlay {
+    opacity:    1 !important;
+    background: linear-gradient(
+      108deg,
+      rgba(248, 244, 239, 0.32) 0%,
+      rgba(248, 244, 239, 0.14) 44%,
+      transparent 64%
+    ) !important;
+  }
+}
+
+/* ── 2. HERO GRID: single column, top-aligned, room for image ───── */
+@media (min-width: 1024px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr) !important;
+    align-items:           flex-start !important;
+    padding-top:           88px !important;
+  }
+
+  /* Offer card hidden — its info lives in the tagline below the h1 */
+  .hero-offer-card {
+    display: none !important;
+  }
+}
+
+/* ── 3. HERO LOGO ───────────────────────────────────────────────── */
+.hero-logo {
+  display:       block;
+  height:        clamp(48px, 5vw, 72px);
+  width:         auto;
+  margin:        0 0 40px;
+  /* Soft halo for legibility over the hero image */
+  filter:        drop-shadow(0 2px 14px rgba(255, 255, 255, 0.50));
+}
+
+@media (max-width: 1023px) {
+  /* Nav already shows the logo — no duplication on mobile */
+  .hero-logo { display: none !important; }
+}
+
+/* ── 4. EYEBROW: removed — visual noise ────────────────────────── */
+.hero .eyebrow {
+  display: none !important;
+}
+
+/* ── 5. H1: dark ocean green — calm, readable, premium ─────────── */
+.hero h1 {
+  color:                   #234F52 !important;
+  background:              none !important;
+  -webkit-background-clip: unset !important;
+  background-clip:         unset !important;
+  -webkit-text-fill-color: unset !important;
+  /* Soft white halo lifts dark text on any image tone */
+  text-shadow:             0 2px 20px rgba(255, 255, 255, 0.58) !important;
+  filter:                  none !important;
+  margin-top:              0 !important;
+  margin-bottom:           24px !important;
+}
+
+@media (min-width: 1024px) {
+  .hero h1 {
+    /* 45% viewport width — editorial, image breathes on the right */
+    max-width: min(46vw, 660px) !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  .hero h1 {
+    max-width: 100% !important;
+  }
+}
+
+/* ── 6. TAGLINE: date + location, two rows below h1 ─────────────── */
+.hero-tagline {
+  display:        flex !important;
+  flex-direction: column !important;
+  gap:            8px !important;
+  color:          #234F52 !important;
+  font-size:      clamp(0.88rem, 1.0vw, 0.98rem) !important;
+  font-weight:    500 !important;
+  letter-spacing: 0.04em !important;
+  line-height:    1.5 !important;
+  text-shadow:    0 1px 10px rgba(255, 255, 255, 0.52) !important;
+}
+
+@media (min-width: 1024px) {
+  .hero-tagline {
+    margin: 0 0 40px !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  .hero-tagline {
+    margin: 0 0 24px !important;
+    font-size: 0.88rem !important;
+  }
+}
+
+/* ── 7. HERO COPY: deep teal, constrained width ─────────────────── */
+.hero-copy {
+  color:       rgba(35, 79, 82, 0.88) !important;
+  text-shadow: 0 1px 10px rgba(255, 255, 255, 0.44) !important;
+  margin-bottom: 40px !important;
+}
+
+.hero-copy strong {
+  color:       #234F52 !important;
+  text-shadow: 0 1px 10px rgba(255, 255, 255, 0.50) !important;
+}
+
+.hero-copy span {
+  color: rgba(35, 79, 82, 0.80) !important;
+}
+
+@media (min-width: 1024px) {
+  .hero-copy {
+    max-width: min(44vw, 580px) !important;
+  }
+}
+
+/* ── 8. TRUST PILLS: hidden ─────────────────────────────────────── */
+.hero-trust {
+  display: none !important;
+}
+
+/* ── 9. REASSURANCE LINE ────────────────────────────────────────── */
+.hero-reassurance {
+  display:     block !important;
+  color:       rgba(35, 79, 82, 0.60) !important;
+  text-shadow: 0 1px 6px rgba(255, 255, 255, 0.40) !important;
+}
+
+/* ── 10. PRIMARY CTA: warm white pill · deep teal text ──────────── */
+.hero .btn-primary,
+.hero .hero-card-cta,
+.hero-card-cta {
+  background:    #FAF8F5 !important;
+  color:         #234F52 !important;
+  border:        1.5px solid rgba(250, 248, 245, 0.70) !important;
+  border-radius: 999px !important;
+  padding:       18px 40px !important;
+  font-size:     1rem !important;
+  letter-spacing: 0.02em !important;
+  box-shadow:    0 4px 24px rgba(0, 0, 0, 0.14),
+                 inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+}
+
+.hero .btn-primary:hover,
+.hero .btn-primary:focus-visible,
+.hero .hero-card-cta:hover,
+.hero .hero-card-cta:focus-visible,
+.hero-card-cta:hover,
+.hero-card-cta:focus-visible {
+  background:   #234F52 !important;
+  color:        #FFFFFF !important;
+  border-color: #234F52 !important;
+  box-shadow:   0 8px 32px rgba(35, 79, 82, 0.26) !important;
+}
+
+/* ── 11. SECONDARY CTA: lagoon · white text ─────────────────────── */
+.hero .btn-ghost {
+  background:    #38BFC0 !important;
+  color:         #FFFFFF !important;
+  border:        1.5px solid #38BFC0 !important;
+  border-radius: 999px !important;
+  padding:       18px 40px !important;
+  box-shadow:    0 4px 20px rgba(56, 191, 192, 0.22) !important;
+}
+
+.hero .btn-ghost:hover,
+.hero .btn-ghost:focus-visible {
+  background:    #2EA9AA !important;
+  border-color:  #2EA9AA !important;
+  color:         #FFFFFF !important;
+  box-shadow:    0 6px 24px rgba(56, 191, 192, 0.30) !important;
+}
+
+/* ╔════════════════════════════════════════════════════════════════╗
+   ║  HERO — COMPACT PREMIUM COMPOSITION                             ║
+   ║  Reference-matched hierarchy · Mobile-first                     ║
+   ║                                                                  ║
+   ║  H1:      clamp(2.4rem, 11.5vw, 3.2rem) · line-height 0.92    ║
+   ║  Spacing: title → date (16px) → CTA (20px) — tight editorial   ║
+   ║  CTA 1:   #FFFFFF bg · #234F52 text · 999px radius             ║
+   ║  CTA 2:   #25D366 WhatsApp green · white text · same radius     ║
+   ╚════════════════════════════════════════════════════════════════╝ */
+
+/* ── H1: significantly larger, editorial tight stack ── */
+@media (max-width: 1023px) {
+  .hero h1 {
+    font-size:     clamp(2.4rem, 11.5vw, 3.2rem) !important;
+    line-height:   0.92 !important;
+    margin-top:    0 !important;
+    margin-bottom: 16px !important;
+    max-width:     100% !important;
+  }
+}
+
+/* ── Tagline: 16px below title, zero extra gap ── */
+@media (max-width: 1023px) {
+  .hero-tagline {
+    margin:      0 0 20px !important;
+    font-size:   0.88rem !important;
+    line-height: 1.55 !important;
+  }
+}
+
+/* ── Mobile hero: remove the large auto-margin gap before CTA ──
+   Original: margin-top: auto + padding-top: clamp(60px, 14vh, 100px)
+   This pushes the CTA far down. Replace with a compact fixed gap.  */
+@media (max-width: 760px) {
+  .hero-actions {
+    margin-top:  0 !important;
+    padding-top: 20px !important;
+    gap:         12px !important;
+  }
+}
+
+/* ── Primary CTA: pure white pill — larger than before ── */
+.hero .btn-primary,
+.hero .hero-card-cta,
+.hero-card-cta {
+  background:     #FFFFFF !important;
+  color:          #234F52 !important;
+  border:         1.5px solid rgba(255, 255, 255, 0.85) !important;
+  border-radius:  999px !important;
+  padding:        17px 40px !important;
+  font-size:      1rem !important;
+  letter-spacing: 0.02em !important;
+  box-shadow:     0 4px 20px rgba(0, 0, 0, 0.12),
+                  inset 0 1px 0 rgba(255, 255, 255, 1.0) !important;
+  transition:     background 260ms ease,
+                  color      260ms ease,
+                  box-shadow 260ms ease !important;
+}
+
+.hero .btn-primary:hover,
+.hero .btn-primary:focus-visible,
+.hero .hero-card-cta:hover,
+.hero .hero-card-cta:focus-visible,
+.hero-card-cta:hover,
+.hero-card-cta:focus-visible {
+  background:   #234F52 !important;
+  color:        #FFFFFF !important;
+  border-color: #234F52 !important;
+  box-shadow:   0 8px 28px rgba(35, 79, 82, 0.26) !important;
+}
+
+/* ── WhatsApp CTA: official green only — never turquoise ── */
+.hero .btn-ghost {
+  background:     #25D366 !important;
+  color:          #FFFFFF !important;
+  border:         1.5px solid #25D366 !important;
+  border-radius:  999px !important;
+  padding:        17px 40px !important;
+  box-shadow:     0 4px 16px rgba(37, 211, 102, 0.20) !important;
+  transition:     background 260ms ease,
+                  box-shadow  260ms ease !important;
+}
+
+.hero .btn-ghost:hover,
+.hero .btn-ghost:focus-visible {
+  background:   #20BA5A !important;
+  border-color: #20BA5A !important;
+  color:        #FFFFFF !important;
+  box-shadow:   0 6px 22px rgba(37, 211, 102, 0.26) !important;
+}
+
+/* ╔════════════════════════════════════════════════════════════════╗
+   ║  ACTIVITÉS — PHOTO CARDS                                        ║
+   ║  16:9 activity photos replace icon circles                      ║
+   ║  border-radius: 16px · object-fit: cover · no filters          ║
+   ║  Hover: subtle image zoom matches existing card lift            ║
+   ╚════════════════════════════════════════════════════════════════╝ */
+
+/* Remove legacy SVG icon circle entirely */
+.activite-icon {
+  display: none !important;
+}
+
+/* ── Photo wrapper: 16:9, rounded, clips image cleanly ── */
+.activite-img-wrapper {
+  width:         100%;
+  aspect-ratio:  16 / 9;
+  border-radius: 16px;
+  overflow:      hidden;
+  flex-shrink:   0;
+}
+
+/* ── Photo: natural, no distortion, no filters ── */
+.activite-img-wrapper img {
+  width:           100%;
+  height:          100%;
+  object-fit:      cover;
+  object-position: center center;
+  display:         block;
+  filter:          none;
+  transition:      transform 0.55s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* ── Image zooms subtly when card is hovered ── */
+.activite-card:hover .activite-img-wrapper img {
+  transform: scale(1.05);
+}
+
+/* ╔════════════════════════════════════════════════════════════════╗
+   ║  DR. LAILA — NEW PORTRAIT PHOTO                                 ║
+   ║  WhatsApp Image 2026-07-01 at 23.00.23.jpeg                    ║
+   ║  Container ~12% larger on all viewports                        ║
+   ║  object-position: face centered, upper body fully visible      ║
+   ╚════════════════════════════════════════════════════════════════╝ */
+
+/* Desktop: widen image column by ~12%
+   Old ratio: 0.88fr / 1.12fr (image = 44% of available)
+   New ratio: 1.0fr  / 1.1fr  (image = 47.6% of available → +8.2%)
+   Combined with the fr redistribution: net pixel gain ≈ 12%      */
+.expert-container {
+  grid-template-columns: minmax(0, 1.0fr) minmax(0, 1.1fr) !important;
+}
+
+/* Face + upper body: center the face in the upper portion of frame */
+.expert-image-wrapper img {
+  object-fit:      cover !important;
+  object-position: center 22% !important;
+  filter:          none !important;
+}
+
+/* Tablet: 12.5% larger container */
+@media (max-width: 1023px) and (min-width: 761px) {
+  .expert-image-col {
+    max-width: 540px !important;  /* was 480px → +12.5% */
+  }
+
+  .expert-image-wrapper {
+    max-height: 585px !important; /* was 520px → +12.5% */
+  }
+}
+
+/* Mobile: 12–13% larger portrait */
+@media (max-width: 760px) {
+  .expert-image-col {
+    max-width: 338px !important;  /* was 300px → +12.7% */
+  }
+
+  .expert-image-wrapper {
+    max-width:  316px !important; /* was 280px → +12.8% */
+  }
+
+  .expert-image-wrapper img {
+    object-position: center 22% !important;
+  }
+}
+
+/* ╔════════════════════════════════════════════════════════════════╗
+   ║  MOBILE HERO — REFERENCE MATCH                                  ║
+   ║  H1: 2 lines (Retraite Holistique / Féminine)                  ║
+   ║  Gold italic subtitle · single-line tagline · sky-zone text    ║
+   ╚════════════════════════════════════════════════════════════════╝ */
+
+/* hero-subtitle: hidden on desktop */
+.hero-subtitle {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  /* Content block: fills hero height so CTAs push to bottom naturally */
+  .hero-content {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  /* ── H1: 2 lines — largest size that keeps "Retraite Holistique" on one line ── */
+  .hero h1 {
+    font-size:      clamp(2.4rem, 11.5vw, 3.2rem) !important;
+    line-height:    0.88 !important;
+    letter-spacing: -0.03em !important;
+    margin-top:     0 !important;
+    margin-bottom:  16px !important;
+    max-width:      100% !important;
+  }
+
+  /* ── "au Bord de l'Océan" — gold italic, flush below h1 ── */
+  .hero-subtitle {
+    display: block !important;
+    font-family: var(--serif) !important;
+    font-style: italic !important;
+    font-size: clamp(1.8rem, 8vw, 2.4rem) !important;
+    font-weight: 400 !important;
+    color: #C8A35A !important;
+    letter-spacing: -0.01em !important;
+    line-height: 1.1 !important;
+    margin: 0 !important;
+    text-shadow: none !important;
+    background: none !important;
+    -webkit-text-fill-color: unset !important;
+  }
+
+  /* ── Date + location: single line 20px below subtitle ── */
+  .hero-tagline {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 0 !important;
+    margin: 20px 0 0 !important;
+    font-size: 18px !important;
+    font-weight: 400 !important;
+    line-height: 1.4 !important;
+    color: rgba(60, 60, 60, 0.85) !important;
+    text-shadow: none !important;
+    letter-spacing: 0 !important;
+  }
+
+  .hero-tagline span {
+    display: inline !important;
+    font-size: inherit !important;
+    color: inherit !important;
+    font-weight: inherit !important;
+    letter-spacing: inherit !important;
+    text-shadow: none !important;
+  }
+
+  /* bullet separator between the two spans */
+  .hero-tagline span + span::before {
+    content: "\00a0\2022\00a0" !important;
+  }
+
+  /* ── CTAs: pushed to bottom of viewport by flex auto-margin ── */
+  .hero-actions {
+    margin-top:  auto !important;
+    padding-top: 0 !important;
+    gap:         12px !important;
+  }
+
+  /* ── Reassurance: hidden on mobile ── */
+  .hero-reassurance {
+    display: none !important;
+  }
+}
+
+/* ╔════════════════════════════════════════════════════════════════╗
+   ║  DESKTOP HERO — HIERARCHY FIX  @media (min-width: 1024px)     ║
+   ║  – No duplicate logo (header logo is sufficient)               ║
+   ║  – 3-line title: H1 (2 lines) + gold italic subtitle          ║
+   ║  – Content constrained to sky/left area, never over people     ║
+   ╚════════════════════════════════════════════════════════════════╝ */
+
+@media (min-width: 1024px) {
+
+  /* 1. Remove duplicate logo — header already has it */
+  .hero-logo {
+    display: none !important;
+  }
+
+  /* 2. Content: pinned to left sky area
+        right edge = padding(~110px) + 600px = ~710px = 44% of 1600px
+        People are to the right of that — no overlap                */
+  .hero-content {
+    width:     min(44vw, 600px) !important;
+    max-width: min(44vw, 600px) !important;
+  }
+
+  /* 3. H1: reduced from base 7.2vw to fit in constrained column
+        At 1440px: 3.8vw = 54.7px  → "Retraite Holistique" ≈ 413px ✓
+        At 1920px: 3.8vw = 73px    → "Retraite Holistique" ≈ 551px ✓ */
+  .hero h1 {
+    font-size:      clamp(3rem, 3.8vw, 5rem) !important;
+    line-height:    0.95 !important;
+    letter-spacing: -0.02em !important;
+    max-width:      100% !important;
+    margin-bottom:  8px !important;
+  }
+
+  /* 4. "au Bord de l'Océan" — gold italic, immediately below h1 */
+  .hero-subtitle {
+    display:                 block !important;
+    font-family:             var(--serif) !important;
+    font-style:              italic !important;
+    font-size:               clamp(1.8rem, 2.4vw, 3rem) !important;
+    font-weight:             400 !important;
+    color:                   #C8A35A !important;
+    letter-spacing:          -0.01em !important;
+    line-height:             1.1 !important;
+    margin:                  0 0 28px !important;
+    text-shadow:             none !important;
+    background:              none !important;
+    -webkit-text-fill-color: unset !important;
+  }
+
+  /* 5. Tagline: two rows below subtitle, clean spacing */
+  .hero-tagline {
+    display:        flex !important;
+    flex-direction: column !important;
+    gap:            6px !important;
+    margin:         0 0 36px !important;
+    font-size:      clamp(0.88rem, 1vw, 1rem) !important;
+    color:          #234F52 !important;
+    font-weight:    500 !important;
+    letter-spacing: 0.04em !important;
+    line-height:    1.5 !important;
+    text-shadow:    0 1px 8px rgba(255, 255, 255, 0.50) !important;
+  }
+
+  /* Undo mobile row + bullet — desktop spans are block rows */
+  .hero-tagline span {
+    display: block !important;
+    font-size:   inherit !important;
+    color:       inherit !important;
+    font-weight: inherit !important;
+  }
+
+  .hero-tagline span + span::before {
+    content: none !important;
+  }
+
+  /* 6. CTA row: side-by-side on desktop */
+  .hero-actions {
+    display:        flex !important;
+    flex-direction: row !important;
+    flex-wrap:      wrap !important;
+    gap:            16px !important;
+    margin-top:     0 !important;
+    padding-top:    0 !important;
+  }
+
+  /* 7. Stronger left overlay so text reads cleanly against the photo */
+  .hero-overlay {
+    background: linear-gradient(
+      106deg,
+      rgba(248, 244, 240, 0.52) 0%,
+      rgba(248, 244, 240, 0.28) 40%,
+      transparent 62%
+    ) !important;
+    opacity: 1 !important;
+  }
+}
+
+/* ╔════════════════════════════════════════════════════════════════╗
+   ║  MOBILE HERO — CLEAN-UP  @media (max-width: 760px)            ║
+   ║  – 16px side padding for text room                             ║
+   ║  – Stacked full-width equal CTAs                               ║
+   ║  – Sticky buttons hidden (hero is the one CTA group)           ║
+   ╚════════════════════════════════════════════════════════════════╝ */
+
+@media (max-width: 760px) {
+  /* Wider text column — helps "Retraite Holistique" stay on one line */
+  .hero {
+    padding-left:  16px !important;
+    padding-right: 16px !important;
+  }
+
+  /* CTA group: stacked column, full-width equal buttons */
+  .hero-actions {
+    flex-direction: column !important;
+    align-items:    stretch !important;
+    width:          100% !important;
+  }
+
+  .hero .btn {
+    width:          100% !important;
+    min-height:     52px !important;
+    display:        flex !important;
+    align-items:    center !important;
+    justify-content: center !important;
+  }
+
+  /* Hide sticky floating buttons — hero CTAs are the only group on mobile */
+  .sticky-reserve,
+  .sticky-whatsapp {
+    display: none !important;
+  }
+
+  /* Hero offer card: strictly hidden on mobile */
+  .hero-offer-card {
+    display: none !important;
+  }
+}
+
+/* ── 320px safety: prevent wrap on the smallest modern phones ── */
+@media (max-width: 329px) {
+  .hero {
+    padding-left:  14px !important;
+    padding-right: 14px !important;
+  }
+
+  .hero h1 {
+    font-size:      2.1rem !important;
+    letter-spacing: -0.04em !important;
+  }
+}
+
+/* ╔════════════════════════════════════════════════════════════════╗
+   ║  MOBILE HERO — REFINEMENT  @media (max-width: 760px)           ║
+   ║  – H1: +9% / weight 600 / line-height 0.84 / closer subtitle  ║
+   ║  – Tagline: 30px below subtitle, icon+text aligned, no bullet  ║
+   ║  – Lucide calendar + plane icons replace emojis                ║
+   ║  – "✓ All Inclusive" cream pill badge below tagline            ║
+   ╚════════════════════════════════════════════════════════════════╝ */
+
+/* Badge: hidden on desktop */
+.hero-all-inclusive {
+  display: none;
+}
+
+@media (max-width: 760px) {
+
+  /* H1: ~9% larger, SemiBold, tighter line-height, closer to subtitle */
+  .hero h1 {
+    font-size:      clamp(2.6rem, 12.5vw, 3.5rem) !important;
+    font-weight:    600 !important;
+    line-height:    0.84 !important;
+    letter-spacing: -0.04em !important;
+    margin-bottom:  6px !important;
+  }
+
+  /* Tagline: 30px below subtitle; 6px gap between the two spans */
+  .hero-tagline {
+    margin-top: 30px !important;
+    gap:        6px !important;
+  }
+
+  /* Each span: icon + text vertically centred in a row */
+  .hero-tagline span {
+    display:     inline-flex !important;
+    align-items: center !important;
+    gap:         5px !important;
+  }
+
+  /* Remove bullet separator — gap handles spacing */
+  .hero-tagline span + span::before {
+    content: none !important;
+  }
+
+  /* Lucide SVG icons in tagline: 16×16, premium 1.5 stroke */
+  .hero-tagline span svg {
+    width:        16px !important;
+    height:       16px !important;
+    flex-shrink:  0 !important;
+    stroke-width: 1.5px !important;
+  }
+
+  /* "✓ All Inclusive" pill badge */
+  .hero-all-inclusive {
+    display:        inline-block !important;
+    margin-top:     10px !important;
+    padding:        5px 14px !important;
+    border-radius:  999px !important;
+    background:     rgba(250, 248, 245, 0.88) !important;
+    border:         1px solid rgba(200, 163, 90, 0.35) !important;
+    font-family:    var(--sans) !important;
+    font-size:      12px !important;
+    font-weight:    500 !important;
+    letter-spacing: 0.05em !important;
+    color:          #234F52 !important;
+    text-shadow:    none !important;
+    line-height:    1 !important;
+  }
+}
+
+/* Desktop: align icon+text in tagline spans after Lucide renders SVGs */
+@media (min-width: 1024px) {
+  .hero-tagline span {
+    display:     flex !important;
+    align-items: center !important;
+    gap:         6px !important;
+  }
+
+  .hero-tagline span svg {
+    width:        14px !important;
+    height:       14px !important;
+    flex-shrink:  0 !important;
+    stroke-width: 1.5px !important;
+  }
+}
+
+/* 320px override: tighter sizing for tiny phones */
+@media (max-width: 329px) {
+  .hero h1 {
+    font-size:      2.1rem !important;
+    letter-spacing: -0.05em !important;
+  }
+}
+
+/* ╔════════════════════════════════════════════════════════════════╗
+   ║  BOOKING SECTION — PREMIUM RESORT REDESIGN                      ║
+   ║  – Background: dark overlay 62% over the existing photo        ║
+   ║  – Heading: cream/white text on dark                           ║
+   ║  – Pricing card: 500px, dominant shadow, generous gap          ║
+   ║  – Form: solid #FFFFFF premium card, 900px, 24px radius        ║
+   ║  – CTA button and WhatsApp note: centered inside form           ║
+   ╚════════════════════════════════════════════════════════════════╝ */
+
+/* 1 — Dark overlay: tames the background image, makes UI the focus */
+.reservation::before {
+  content:        '' !important;
+  position:       absolute !important;
+  inset:          0 !important;
+  background:     rgba(10, 22, 18, 0.62) !important;
+  z-index:        1 !important;
+  pointer-events: none !important;
+}
+
+/* Ensure all content sits above the overlay */
+.reservation .reservation-content {
+  position: relative !important;
+  z-index:  2 !important;
+}
+
+/* 2 — Heading: readable on dark background */
+.booking-heading h2 {
+  color: #FFFDF8 !important;
+}
+
+.booking-heading .eyebrow {
+  color:          #C8A35A !important;
+  text-shadow:    none !important;
+}
+
+.booking-subtitle {
+  color: rgba(255, 250, 242, 0.78) !important;
+}
+
+/* 3 — Pricing card: dominant, slightly narrower, premium shadow */
+.booking-pricing.pricing-card {
+  max-width:     500px !important;
+  margin:        0 auto !important;
+  margin-bottom: clamp(16px, 3vw, 28px) !important;
+  box-shadow:    0 24px 72px rgba(0, 0, 0, 0.28),
+                 0 6px 20px  rgba(0, 0, 0, 0.12) !important;
+}
+
+/* 4 — Reservation form: solid white premium card */
+.reservation-form.booking-form {
+  background:      #FFFFFF !important;
+  border-radius:   24px !important;
+  border:          1px solid rgba(232, 222, 208, 0.50) !important;
+  box-shadow:      0 32px 88px rgba(0, 0, 0, 0.20),
+                   0 8px 28px  rgba(0, 0, 0, 0.10) !important;
+  max-width:       900px !important;
+  width:           100% !important;
+  margin:          0 auto !important;
+  padding:         clamp(36px, 4.5vw, 56px) clamp(28px, 4vw, 56px) !important;
+  backdrop-filter: none !important;
+}
+
+/* 4a — Field label text: warm dark on white card */
+.reservation-form.booking-form span {
+  color: #6B5B4F !important;
+}
+
+/* 4b — Input / select / textarea: faint warm off-white */
+.reservation-form.booking-form input,
+.reservation-form.booking-form select,
+.reservation-form.booking-form textarea {
+  background:   #FAFAF8 !important;
+  border-color: rgba(200, 163, 90, 0.22) !important;
+  color:        #1F3D36 !important;
+}
+
+/* 4c — Form note below CTA: muted on white card */
+.booking-form-note {
+  color: #8A9C8E !important;
+}
+
+/* 4d — Form feedback status text */
+.form-feedback {
+  color: #8A9C8E !important;
+}
+.form-feedback.is-error   { color: #b8664b !important; }
+.form-feedback.is-success { color: #3D8C6A !important; }
+
+/* 5 — Mobile: tighter card on small screens */
+@media (max-width: 640px) {
+  .reservation-form.booking-form {
+    border-radius: 20px !important;
+    padding:       28px 20px 36px !important;
+  }
+
+  .booking-pricing.pricing-card {
+    margin-bottom: 0 !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .reservation-form.booking-form {
+    border-radius: 16px !important;
+    padding:       24px 16px 30px !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BOOKING SECTION — FINAL CLEAN LAYOUT
+   Single top image, beige section background, white premium cards.
+   ═══════════════════════════════════════════════════════════════ */
+
+.reservation {
+  background: #EFE7DC !important;
+  background-image: none !important;
+}
+
+.reservation::before,
+.reservation::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+}
+
+.reservation .reservation-content {
+  display: grid !important;
+  gap: clamp(28px, 3.5vw, 44px) !important;
+}
+
+.booking-hero {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+}
+
+.booking-hero-image {
+  display: block;
+  width: 100%;
+  height: clamp(240px, 26vw, 340px);
+  object-fit: cover;
+  object-position: center 60%;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 18px 48px rgba(31, 61, 54, 0.12);
+}
+
+.booking-heading {
+  margin-bottom: clamp(10px, 1.8vw, 18px) !important;
+}
+
+.booking-heading h2 {
+  color: #2F463D !important;
+}
+
+.booking-heading .eyebrow {
+  color: #C8A35A !important;
+}
+
+.booking-subtitle {
+  color: #6D6358 !important;
+}
+
+.inclus-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  margin-bottom: 0 !important;
+}
+
+.inclus-grid > .inclus-card:last-child {
+  grid-column: auto !important;
+}
+
+.inclus-card,
+.pricing-card,
+.reservation-form.booking-form {
+  background: #FFFFFF !important;
+  border-color: rgba(189, 169, 135, 0.22) !important;
+  box-shadow: 0 16px 56px rgba(31, 61, 54, 0.08),
+              0 4px 16px rgba(31, 61, 54, 0.04) !important;
+}
+
+.pricing-card {
+  overflow: hidden;
+}
+
+.booking-pricing.pricing-card {
+  max-width: 580px !important;
+  margin-top: clamp(2px, 0.8vw, 10px) !important;
+  margin-bottom: 0 !important;
+}
+
+.pricing-payment,
+.pricing-note,
+.booking-form-note,
+.form-feedback {
+  color: #6D6358 !important;
+}
+
+.reservation-form.booking-form {
+  backdrop-filter: none !important;
+}
+
+.reservation-form.booking-form input,
+.reservation-form.booking-form select,
+.reservation-form.booking-form textarea {
+  background: #FAFAF8 !important;
+  border-color: rgba(189, 169, 135, 0.38) !important;
+  color: #2F463D !important;
+}
+
+.reservation-form.booking-form .form-feedback {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 1023px) {
+  .booking-hero-image {
+    height: clamp(220px, 42vw, 300px);
+  }
+}
+
+@media (max-width: 640px) {
+  .reservation {
+    padding-top: clamp(72px, 10vw, 96px);
+    padding-bottom: clamp(72px, 10vw, 96px);
+  }
+
+  .reservation .reservation-content {
+    gap: 24px !important;
+  }
+
+  .booking-hero-image {
+    height: 220px;
+    border-radius: 20px;
+  }
+
+  .inclus-grid {
+    gap: 14px;
+  }
+}
+
+/* ── Defensive hide — panoramic image removed from HTML ── */
+.booking-hero { display: none !important; }
+
+/* ╔════════════════════════════════════════════════════════════════╗
+   ║  FORM — FINAL POLISH                                            ║
+   ║  – Label contrast: near-black, semibold                        ║
+   ║  – Inputs/selects: fixed equal height 50px                     ║
+   ║  – Textarea → CTA gap: tighter row spacing                     ║
+   ║  – WhatsApp note: dark forest, clearly readable                ║
+   ╚════════════════════════════════════════════════════════════════╝ */
+
+/* 1 — Label text: high contrast on the white card */
+.reservation-form.booking-form span {
+  color:          #1E1A16 !important;
+  font-size:      0.76rem !important;
+  font-weight:    600 !important;
+  letter-spacing: 0.025em !important;
+}
+
+/* 2 — All inputs and selects: fixed 50px height for perfect alignment */
+.reservation-form.booking-form input,
+.reservation-form.booking-form select {
+  height:     50px !important;
+  min-height: 50px !important;
+  box-sizing: border-box !important;
+}
+
+/* 3 — Slightly tighter row gap + pull CTA closer to textarea */
+.reservation-form.booking-form {
+  row-gap: 10px !important;
+}
+
+.reservation-form.booking-form .form-message {
+  margin-bottom: 0 !important;
+}
+
+.reservation-form.booking-form button[type="submit"] {
+  margin-top: 6px !important;
+}
+
+/* 4 — WhatsApp confirmation note: dark, clearly readable */
+.booking-form-note {
+  color:       #2F463D !important;
+  font-size:   0.88rem !important;
+  font-weight: 500 !important;
+  margin-top:  6px !important;
+}
+
+/* ╔════════════════════════════════════════════════════════════════╗
+   ║  DESKTOP HERO — REFINED POLISH  @media (min-width: 1024px)    ║
+   ║  1. More vertical distance from navbar (padding-top ↑)        ║
+   ║  2. Stronger cream gradient overlay for text legibility       ║
+   ║  3. H1 max-width for clean wrapping of long titles            ║
+   ║  4. CTA group: breathing room below the text block            ║
+   ║  5. Generous bottom padding so next section stays below fold  ║
+   ╚════════════════════════════════════════════════════════════════╝ */
+
+@media (min-width: 1024px) {
+
+  /* 1 & 5 — Push content lower from navbar; hero ends cleanly */
+  .hero {
+    padding-top:    clamp(150px, 14vh, 200px) !important;
+    padding-bottom: clamp(140px, 13vh, 200px) !important;
+  }
+
+  /* 2 — Stronger cream-left overlay for text contrast */
+  .hero-overlay {
+    background: linear-gradient(
+      105deg,
+      rgba(250, 248, 244, 0.86) 0%,
+      rgba(250, 248, 244, 0.68) 26%,
+      rgba(250, 248, 244, 0.26) 50%,
+      transparent 68%
+    ) !important;
+    opacity: 1 !important;
+  }
+
+  /* 3 — H1: controlled max-width for clean multi-line wrapping */
+  .hero h1 {
+    max-width: min(100%, 500px) !important;
+  }
+
+  /* 4 — CTAs: breathing room below the copy block */
+  .hero-actions {
+    margin-top: clamp(20px, 2.5vh, 32px) !important;
+  }
+}
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ALBUM DU VOYAGE — GALLERY CAROUSEL                          ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+.album-voyage {
+  background: var(--cream);
+}
+
+.album-heading {
+  text-align: center;
+  margin: 0 auto clamp(36px, 4vw, 52px);
+}
+
+.album-heading .eyebrow {
+  color: #C8A35A;
+}
+
+.album-heading h2 {
+  text-align: center;
+}
+
+.album-subtitle {
+  max-width: 580px;
+  margin: 14px auto 0;
+  color: var(--muted);
+  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+  line-height: 1.75;
+  text-align: center;
+}
+
+/* ── Carousel shell ── */
+.album-carousel {
+  position: relative;
+  max-width: 1040px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+/* ── Image track ── */
+.album-track-wrapper {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 24px;
+  box-shadow:
+    0 28px 80px rgba(31, 61, 54, 0.13),
+    0 8px 24px rgba(31, 61, 54, 0.07);
+  aspect-ratio: 4 / 3;
+  background: #D8CEBC;
+}
+
+.album-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.album-slide {
+  min-width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+}
+
+.album-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* ── Circular arrow buttons ── */
+.album-arrow {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 1.5px solid rgba(189, 169, 135, 0.32);
+  box-shadow: 0 4px 18px rgba(31, 61, 54, 0.10), 0 1px 4px rgba(31, 61, 54, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  color: #2F463D;
+  padding: 0;
+  transition: background 0.22s, color 0.22s, border-color 0.22s, box-shadow 0.22s, transform 0.18s;
+}
+
+.album-arrow:hover {
+  background: #2F463D;
+  color: #FFFFFF;
+  border-color: #2F463D;
+  box-shadow: 0 8px 28px rgba(31, 61, 54, 0.22);
+  transform: scale(1.06);
+}
+
+.album-arrow:active {
+  transform: scale(0.95);
+}
+
+.album-arrow svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+/* ── Pagination dots ── */
+.album-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 26px;
+}
+
+.album-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(47, 70, 61, 0.20);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  transition: background 0.25s, transform 0.25s;
+}
+
+.album-dot.active {
+  background: #C8A35A;
+  transform: scale(1.45);
+}
+
+.album-dot:hover:not(.active) {
+  background: rgba(47, 70, 61, 0.40);
+  transform: scale(1.15);
+}
+
+/* ── CTA below dots ── */
+.album-cta {
+  text-align: center;
+  margin-top: 44px;
+}
+
+/* ── Responsive — Tablet ── */
+@media (max-width: 1023px) {
+  .album-carousel {
+    max-width: 100%;
+    gap: 16px;
+  }
+}
+
+/* ── Responsive — Mobile ── */
+@media (max-width: 640px) {
+  .album-carousel {
+    gap: 10px;
+  }
+
+  .album-arrow {
+    width: 38px;
+    height: 38px;
+    box-shadow: 0 2px 10px rgba(31, 61, 54, 0.12);
+  }
+
+  .album-arrow svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .album-track-wrapper {
+    border-radius: 16px;
+    aspect-ratio: 4 / 3;
+  }
+
+  .album-dots {
+    gap: 6px;
+  }
+
+  .album-dot {
+    width: 7px;
+    height: 7px;
+  }
+
+  .album-cta {
+    margin-top: 32px;
+  }
+}
+
+/* ── Respect reduced-motion preference ── */
+@media (prefers-reduced-motion: reduce) {
+  .album-track {
+    transition: none;
+  }
+
+  .album-arrow,
+  .album-dot {
+    transition: none;
+  }
+}
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  FOOTER — GOLD ACCENT OVERRIDE                               ║
+   ║  Replaces turquoise (#2BAFD9 / #3FC5C4) with warm gold       ║
+   ║  inside the footer only. All other sections untouched.       ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+/* SVG icons: footer nav links, location pin, social buttons */
+.footer .footer-column a svg,
+.footer .footer-column .footer-location svg,
+.footer .social-link svg {
+  color: #D8B26E !important;
+}
+
+/* Navigation links and legal buttons — resting state */
+.footer .footer-column a,
+.footer .footer-column button {
+  color: #EDE3D6 !important;
+}
+
+/* Hover / focus — gold highlight */
+.footer .footer-column a:hover,
+.footer .footer-column a:focus-visible,
+.footer .footer-column button:hover,
+.footer .footer-column button:focus-visible {
+  color: #D8B26E !important;
+}
+
+/* Social icon buttons — resting border */
+.footer .social-link {
+  color: #EDE3D6 !important;
+  border-color: rgba(216, 178, 110, 0.28) !important;
+}
+
+/* Social icon buttons — hover: soft gold glow */
+.footer .social-link:hover {
+  color: #D8B26E !important;
+  background: rgba(216, 178, 110, 0.10) !important;
+  border-color: rgba(216, 178, 110, 0.50) !important;
+}
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  MOBILE — POST-HERO SECTIONS  @media (max-width: 760px)      ║
+   ║  Root fixes:                                                  ║
+   ║  · expert-container redefined as 2-col outside media query   ║
+   ║  · inclus-grid forced 3-col with !important                  ║
+   ║  · expert h2 &nbsp; causing single-line overflow             ║
+   ║  Hero section NOT touched — protected by later !important.   ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+@media (max-width: 760px) {
+
+  /* ── 0. Prevent horizontal scroll on all post-hero sections ── */
+  .section {
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  /* ── 1. inclus-grid: 3 columns → 1 column
+     Counter the !important in BOOKING SECTION FINAL block ── */
+  .inclus-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  .inclus-grid > .inclus-card:last-child {
+    grid-column: auto !important;
+  }
+
+  /* ── 2. activites-grid: extend 1-column from ≤480px to ≤760px ── */
+  .activites-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  /* ── 3. value-grid: reinforce 1 column ── */
+  .value-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  /* ── 4. expert-container: overridden at line ~2722 as 38%/1fr
+     outside any media query — that later rule defeats the 900px
+     single-column breakpoint. Force single column here. ── */
+  .expert-container {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 28px !important;
+  }
+
+  /* ── 5. Expert image column: stacked first, centered portrait ── */
+  .expert-image-col {
+    position: static !important;
+    max-width: 200px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    align-self: auto !important;
+  }
+
+  /* Decorative background bleeds into padding on narrow screens */
+  .expert-image-col::before {
+    display: none !important;
+  }
+
+  .expert-image-wrapper {
+    aspect-ratio: 3 / 4 !important;
+    max-height: 280px !important;
+  }
+
+  /* ── 6. Expert title: allow natural line-breaks
+     word-break: keep-all + regular spaces now allows wrapping ── */
+  .expert-title {
+    font-size: clamp(1.7rem, 7.5vw, 2.2rem) !important;
+    max-width: 100% !important;
+    text-align: center !important;
+    overflow-wrap: anywhere !important;
+    word-break: normal !important;
+    hyphens: none !important;
+    white-space: normal !important;
+  }
+
+  /* ── 7. Expert features: reinforce 1 column
+     .expert-features redefined as 1fr 1fr (line ~2788) without
+     a media query — that also defeats the 760px breakpoint.
+     The existing 760px rule already fires correctly here,
+     but add !important to be sure. ── */
+  .expert-features {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  /* ── 8. Expert heading: stay centered on mobile ── */
+  .expert-content-col .section-heading {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* ── 9. Booking pricing card: full width on mobile ── */
+  .booking-pricing.pricing-card {
+    max-width: 100% !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   FOOTER POLISH v2 — DEFINITIVE COLOR OVERRIDE
+   The global plum rule (line ~4709) has specificity 0-10-1 with
+   !important. Mirror its :not() chain (+ .footer context) to reach
+   0-12-1 so we can finally override it inside the footer.
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Nav + info + contact link text at rest: off-white ── */
+.footer .footer-column a:not(.btn):not(.brand):not(.social-link):not(.header-cta):not(.sticky-reserve):not(.sticky-whatsapp):not(.scroll-cue):not(.skip-link):not([href^="tel"]):not([href^="mailto"]),
+.footer .footer-column button {
+  color: #F8F5F0 !important;
+}
+
+/* ── Hover / focus: warm gold ── */
+.footer .footer-column a:not(.btn):not(.brand):not(.social-link):not(.header-cta):not(.sticky-reserve):not(.sticky-whatsapp):not(.scroll-cue):not(.skip-link):not([href^="tel"]):not([href^="mailto"]):hover,
+.footer .footer-column a:not(.btn):not(.brand):not(.social-link):not(.header-cta):not(.sticky-reserve):not(.sticky-whatsapp):not(.scroll-cue):not(.skip-link):not([href^="tel"]):not([href^="mailto"]):focus-visible,
+.footer .footer-column button:hover,
+.footer .footer-column button:focus-visible {
+  color: #D8B26E !important;
+}
+
+/* ── mailto / tel links (excluded from plum rule — set separately) ── */
+.footer .footer-column a[href^="mailto"],
+.footer .footer-column a[href^="tel"] {
+  color: #F8F5F0 !important;
+}
+.footer .footer-column a[href^="mailto"]:hover,
+.footer .footer-column a[href^="mailto"]:focus-visible,
+.footer .footer-column a[href^="tel"]:hover,
+.footer .footer-column a[href^="tel"]:focus-visible {
+  color: #D8B26E !important;
+}
+
+/* ── All footer SVG icons: gold (nav, contact, location, social) ── */
+.footer .footer-column a svg,
+.footer .footer-column .footer-location svg,
+.footer .social-link svg {
+  color: #D8B26E !important;
+}
+
+/* ── Social icon buttons: border + hover glow ── */
+.footer .social-link {
+  color: #F8F5F0 !important;
+  border-color: rgba(216, 178, 110, 0.28) !important;
+}
+.footer .social-link:hover {
+  color: #D8B26E !important;
+  background: rgba(216, 178, 110, 0.10) !important;
+  border-color: rgba(216, 178, 110, 0.50) !important;
+}
+
+/* ── Prose + muted text ── */
+.footer .footer-description,
+.footer .footer-location,
+.footer .footer-bottom p {
+  color: #E8DED2 !important;
+}
+
+/* ── Column headings ── */
+.footer .footer-title {
+  color: #FFFFFF !important;
+}
+
+.sticky-reserve {
+  box-shadow: 0 10px 26px rgba(31, 61, 54, 0.18), 0 2px 6px rgba(31, 61, 54, 0.08) !important;
+}
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  MOBILE STICKY CTA BAR — @media (max-width: 767px) only     ║
+   ║  Hidden on desktop. Slides up from bottom after scroll.     ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+/* Desktop: invisible, no space, no pointer events */
+.mobile-cta-bar {
+  display: none;
+}
+
+@media (max-width: 767px) {
+
+  /* ── Bar shell ── */
+  .mobile-cta-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: fixed;
+    left: 16px;
+    right: 16px;
+    /* Safe-area for iPhone home bar */
+    bottom: max(16px, env(safe-area-inset-bottom, 16px));
+    z-index: 1200;
+    background: #1F3D36;
+    border-radius: 999px;
+    padding: 7px 7px 7px 6px;
+    box-shadow:
+      0 8px 32px rgba(10, 28, 22, 0.32),
+      0 2px 8px  rgba(10, 28, 22, 0.20);
+    /* Start translated below viewport */
+    transform: translateY(calc(100% + 36px));
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      transform 0.40s cubic-bezier(0.34, 1.08, 0.64, 1),
+      opacity   0.32s ease;
+    will-change: transform, opacity;
+  }
+
+  /* Visible state — toggled by JS */
+  .mobile-cta-bar.is-visible {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Restore tabindex to focusable elements when visible */
+  .mobile-cta-bar.is-visible .mcb-reserve,
+  .mobile-cta-bar.is-visible .mcb-whatsapp {
+    tabindex: 0;   /* handled in JS via removeAttribute */
+  }
+
+  /* ── Primary reserve button ── */
+  .mcb-reserve {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    padding: 0 18px;
+    border-radius: 999px;
+    background: #C8A35A;
+    color: #1A3430;
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.015em;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s ease, transform 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mcb-reserve:active {
+    background: #B8922E;
+    transform: scale(0.97);
+  }
+
+  /* ── WhatsApp icon button ── */
+  .mcb-whatsapp {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mcb-whatsapp:active {
+    background: rgba(255, 255, 255, 0.20);
+    transform: scale(0.94);
+  }
+
+  .mcb-whatsapp svg {
+    width: 22px;
+    height: 22px;
+    display: block;
+  }
+
+  /* ── Bottom padding so the bar never covers page content ──
+     Footer already has 110px on mobile; sections get extra
+     clearance so the bar doesn't overlap the last visible line. ── */
+  .footer {
+    padding-bottom: calc(
+      clamp(110px, 14vw, 130px) + env(safe-area-inset-bottom, 0px)
+    ) !important;
+  }
+}
+
+/* Reduced-motion: skip the slide animation, keep opacity */
+@media (max-width: 767px) and (prefers-reduced-motion: reduce) {
+  .mobile-cta-bar {
+    transform: none;
+    transition: opacity 0.25s ease;
+  }
+
+  .mobile-cta-bar.is-visible {
+    transform: none;
+  }
+}
+
+/* ── Airplane image icon: zoomed to fill container, white bg dissolved ── */
+.inclus-icon img {
+  display: block;
+  width: 65px;   /* oversized vs 50px container so airplane fills ~32px */
+  height: 65px;
+  object-fit: contain;
+  mix-blend-mode: multiply; /* white pixels → transparent over container bg */
+}
+
+/* Clip the overflow without touching other icon cards */
+.inclus-icon:has(img) {
+  overflow: hidden;
+}
+
+/* ── Footer contact column icons: direct fill/stroke override ───
+   Setting `color` on <svg> and relying on currentColor is not
+   reliable when competing !important rules fight over the cascade.
+   Instead we target the actual painted elements directly — CSS
+   fill/stroke declarations always beat SVG presentation attributes.
+   ─────────────────────────────────────────────────────────────── */
+
+/* WhatsApp: logo path uses fill="currentColor" */
+.footer .footer-column.footer-contact a[href*="wa.me"] svg path {
+  fill: #B79A6B !important;
+}
+.footer .footer-column.footer-contact a[href*="wa.me"]:hover svg path,
+.footer .footer-column.footer-contact a[href*="wa.me"]:focus-visible svg path {
+  fill: #9C7F4F !important;
+}
+
+/* Email: envelope rect + chevron use stroke="currentColor" */
+.footer .footer-column.footer-contact a[href^="mailto"] svg path,
+.footer .footer-column.footer-contact a[href^="mailto"] svg polyline {
+  stroke: #B79A6B !important;
+}
+.footer .footer-column.footer-contact a[href^="mailto"]:hover svg path,
+.footer .footer-column.footer-contact a[href^="mailto"]:hover svg polyline,
+.footer .footer-column.footer-contact a[href^="mailto"]:focus-visible svg path,
+.footer .footer-column.footer-contact a[href^="mailto"]:focus-visible svg polyline {
+  stroke: #9C7F4F !important;
+}
+
+/* Location pin: outline + dot use stroke="currentColor" */
+.footer .footer-column.footer-contact .footer-location svg path,
+.footer .footer-column.footer-contact .footer-location svg circle {
+  stroke: #B79A6B !important;
 }
