@@ -1631,7 +1631,7 @@ button[disabled] {
     position: absolute;
     inset: 0;
     z-index: -2;
-    background-image: url("images/hero image mobile.png");
+    background-image: url("images/mobile image hero.jpeg");
     background-size: cover;
     background-position: center 68%;
     opacity: 1 !important;
@@ -1935,7 +1935,7 @@ button[disabled] {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 65%;
+    object-position: center center;
     z-index: 0;
     opacity: 1 !important;
     filter: none !important;
@@ -3879,7 +3879,7 @@ textarea:focus {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
-    object-position: center 65% !important;
+    object-position: center center !important;
     opacity: 1 !important;
     filter: none !important;
     mix-blend-mode: normal !important;
@@ -3910,6 +3910,21 @@ textarea:focus {
     filter: none !important;
     backdrop-filter: none !important;
     mix-blend-mode: normal !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  .hero::after {
+    content: "" !important;
+    display: block !important;
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
+    opacity: 1 !important;
+    background:
+      linear-gradient(180deg, rgba(255, 250, 242, 0.18) 0%, rgba(255, 250, 242, 0.08) 24%, rgba(255, 250, 242, 0) 48%),
+      linear-gradient(180deg, rgba(15, 28, 24, 0) 42%, rgba(15, 28, 24, 0.18) 100%) !important;
   }
 }
 
@@ -4140,6 +4155,26 @@ textarea:focus {
 @media (max-width: 1024px) {
   .activites-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ── Orphan last card: 9 cards leaves 1 alone in the final row on
+   4-col desktop and 2-col tablet grids — centre it instead of
+   leaving empty trailing cells. Single-column mobile is unaffected
+   since every card already fills the row there. ── */
+@media (min-width: 1025px) {
+  .activite-card:last-child {
+    grid-column: 1 / -1;
+    justify-self: center;
+    max-width: 25%;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 1024px) {
+  .activite-card:last-child {
+    grid-column: 1 / -1;
+    justify-self: center;
+    max-width: 50%;
   }
 }
 
@@ -5619,18 +5654,18 @@ select {
     max-width:      100% !important;
   }
 
-  /* ── "au Bord de l'Océan" — gold italic, flush below h1 ── */
+  /* ── "au Bord de l'Océan" — dark ocean green italic, flush below h1 ── */
   .hero-subtitle {
     display: block !important;
     font-family: var(--serif) !important;
     font-style: italic !important;
     font-size: clamp(1.8rem, 8vw, 2.4rem) !important;
-    font-weight: 400 !important;
-    color: #C8A35A !important;
+    font-weight: 500 !important;
+    color: #234F52 !important;
     letter-spacing: -0.01em !important;
     line-height: 1.1 !important;
     margin: 0 !important;
-    text-shadow: none !important;
+    text-shadow: 0 2px 16px rgba(255, 255, 255, 0.55) !important;
     background: none !important;
     -webkit-text-fill-color: unset !important;
   }
@@ -5824,8 +5859,8 @@ select {
   }
 
   .hero h1 {
-    font-size:      2.1rem !important;
-    letter-spacing: -0.04em !important;
+    font-size:      1.94rem !important;
+    letter-spacing: -0.02em !important;
   }
 }
 
@@ -5927,6 +5962,14 @@ select {
   }
 }
 
+@media (max-width: 329px) {
+  .hero h1 {
+    font-size: 2rem !important;
+    letter-spacing: -0.025em !important;
+    line-height: 0.88 !important;
+  }
+}
+
 /* Desktop: align icon+text in tagline spans after Lucide renders SVGs */
 @media (min-width: 1024px) {
   .hero-tagline span {
@@ -5946,8 +5989,8 @@ select {
 /* 320px override: tighter sizing for tiny phones */
 @media (max-width: 329px) {
   .hero h1 {
-    font-size:      2.1rem !important;
-    letter-spacing: -0.05em !important;
+    font-size:      1.72rem !important;
+    letter-spacing: -0.01em !important;
   }
 }
 
@@ -6948,4 +6991,24 @@ select {
 .footer .footer-column.footer-contact .footer-location svg path,
 .footer .footer-column.footer-contact .footer-location svg circle {
   stroke: #B79A6B !important;
+}
+
+@media (max-width: 390px) {
+  .hero h1 {
+    font-size: clamp(1.9rem, 8.8vw, 2.15rem) !important;
+    line-height: 0.9 !important;
+    letter-spacing: -0.015em !important;
+    max-width: 10.5ch !important;
+    white-space: normal !important;
+  }
+}
+
+@media (max-width: 329px) {
+  .hero h1 {
+    font-size: 1.72rem !important;
+    line-height: 0.92 !important;
+    letter-spacing: 0 !important;
+    max-width: 10.5ch !important;
+    white-space: normal !important;
+  }
 }
