@@ -1,5 +1,5 @@
 ﻿const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyDKkpHSq5SnDfMMQQfVof6SAJkr6KEhaqQkxgKBaPnC_9R-GHyoYvAL1VtFaCPunkz/exec";
-const META_PIXEL_ID = "PASTE_META_PIXEL_ID_HERE";
+const META_PIXEL_ID = "936528165885461";
 const WHATSAPP_URL =
   "https://wa.me/31625375673?text=Bonjour%20je%20souhaite%20obtenir%20plus%20d'informations%20concernant%20le%20Voyage%20Holistique%20du%2010%20au%2017%20ao%C3%BBt%202026%20%C3%A0%20Mirleft.";
 
@@ -34,27 +34,6 @@ function isConfigured(value, placeholder) {
   return Boolean(value && value !== placeholder);
 }
 
-function initMetaPixel() {
-  if (!isConfigured(META_PIXEL_ID, "PASTE_META_PIXEL_ID_HERE") || window.fbq) return;
-
-  window.fbq = function fbqShim() {
-    window.fbq.callMethod
-      ? window.fbq.callMethod.apply(window.fbq, arguments)
-      : window.fbq.queue.push(arguments);
-  };
-  window.fbq.push = window.fbq;
-  window.fbq.loaded = true;
-  window.fbq.version = "2.0";
-  window.fbq.queue = [];
-
-  const script = document.createElement("script");
-  script.async = true;
-  script.src = "https://connect.facebook.net/en_US/fbevents.js";
-  document.head.appendChild(script);
-
-  window.fbq("init", META_PIXEL_ID);
-}
-
 function trackEvent(eventName, parameters = {}, options = {}) {
   const payload = {
     event: eventName,
@@ -75,9 +54,6 @@ function trackEvent(eventName, parameters = {}, options = {}) {
     window.fbq(method, eventName, parameters);
   }
 }
-
-initMetaPixel();
-trackEvent("PageView", { page_url: window.location.href }, { once: true });
 
 if (window.lucide) {
   window.lucide.createIcons();

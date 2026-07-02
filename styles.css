@@ -4637,6 +4637,25 @@ select {
   margin-bottom: 36px;
 }
 
+.pricing-main-line {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(10px, 1.4vw, 14px);
+}
+
+.pricing-only {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: clamp(0.875rem, 1.2vw, 1rem);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--gold);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
 .pricing-amount {
   display: block;
   font-family: var(--serif);
@@ -5616,20 +5635,20 @@ select {
     -webkit-text-fill-color: unset !important;
   }
 
-  /* ── Date + location: single line 20px below subtitle ── */
+  /* ── Date + location: two independent pills, stacked vertically ── */
   .hero-tagline {
     display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-    align-items: center !important;
-    gap: 0 !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    align-items: flex-start !important;
+    gap: 9px !important;
     margin: 20px 0 0 !important;
-    font-size: 18px !important;
-    font-weight: 400 !important;
-    line-height: 1.4 !important;
-    color: rgba(60, 60, 60, 0.85) !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    line-height: 1 !important;
+    color: #1B3A3D !important;
     text-shadow: none !important;
-    letter-spacing: 0 !important;
+    letter-spacing: 0.01em !important;
   }
 
   .hero-tagline span {
@@ -5641,9 +5660,9 @@ select {
     text-shadow: none !important;
   }
 
-  /* bullet separator between the two spans */
+  /* pills are visually independent — no separator needed */
   .hero-tagline span + span::before {
-    content: "\00a0\2022\00a0" !important;
+    content: none !important;
   }
 
   /* ── CTAs: pushed to bottom of viewport by flex auto-margin ── */
@@ -5834,20 +5853,42 @@ select {
     margin-bottom:  6px !important;
   }
 
-  /* Tagline: 30px below subtitle; 6px gap between the two spans */
+  /* Tagline wrapper: transparent — each child span is its own pill now */
   .hero-tagline {
-    margin-top: 30px !important;
-    gap:        6px !important;
+    display:        flex !important;
+    flex-direction: column !important;
+    align-items:    flex-start !important;
+    margin-top:     30px !important;
+    gap:            9px !important;
+    padding:        0 !important;
+    width:          auto !important;
+    max-width:      100% !important;
+    background:     none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border:         none !important;
+    box-shadow:     none !important;
   }
 
-  /* Each span: icon + text vertically centred in a row */
+  /* Each span: its own premium glass pill — icon + text centred in a row */
   .hero-tagline span {
-    display:     inline-flex !important;
-    align-items: center !important;
-    gap:         5px !important;
+    display:                  inline-flex !important;
+    align-items:              center !important;
+    justify-content:          center !important;
+    gap:                      6px !important;
+    width:                    fit-content !important;
+    height:                   38px !important;
+    padding:                  0 16px !important;
+    box-sizing:               border-box !important;
+    background:               rgba(255, 255, 255, 0.62) !important;
+    -webkit-backdrop-filter:  blur(8px) !important;
+    backdrop-filter:          blur(8px) !important;
+    border:                   1px solid rgba(255, 255, 255, 0.70) !important;
+    border-radius:            999px !important;
+    box-shadow:               0 4px 16px rgba(31, 61, 54, 0.12) !important;
   }
 
-  /* Remove bullet separator — gap handles spacing */
+  /* Remove bullet separator — each item is now its own pill */
   .hero-tagline span + span::before {
     content: none !important;
   }
@@ -5860,21 +5901,29 @@ select {
     stroke-width: 1.5px !important;
   }
 
-  /* "✓ All Inclusive" pill badge */
+  /* "✓ All Inclusive" — same glass-pill style, subtle turquoise accent */
   .hero-all-inclusive {
-    display:        inline-block !important;
-    margin-top:     10px !important;
-    padding:        5px 14px !important;
-    border-radius:  999px !important;
-    background:     rgba(250, 248, 245, 0.88) !important;
-    border:         1px solid rgba(200, 163, 90, 0.35) !important;
-    font-family:    var(--sans) !important;
-    font-size:      12px !important;
-    font-weight:    500 !important;
-    letter-spacing: 0.05em !important;
-    color:          #234F52 !important;
-    text-shadow:    none !important;
-    line-height:    1 !important;
+    display:                  inline-flex !important;
+    align-items:              center !important;
+    justify-content:          center !important;
+    margin-top:               9px !important;
+    height:                   38px !important;
+    padding:                  0 16px !important;
+    box-sizing:               border-box !important;
+    width:                    fit-content !important;
+    border-radius:            999px !important;
+    background:               rgba(223, 241, 235, 0.65) !important;
+    -webkit-backdrop-filter:  blur(8px) !important;
+    backdrop-filter:          blur(8px) !important;
+    border:                   1px solid rgba(63, 94, 82, 0.40) !important;
+    box-shadow:               0 4px 16px rgba(31, 61, 54, 0.12) !important;
+    font-family:              var(--sans) !important;
+    font-size:                15px !important;
+    font-weight:              600 !important;
+    letter-spacing:           0.01em !important;
+    color:                    #234F52 !important;
+    text-shadow:              none !important;
+    line-height:              1 !important;
   }
 }
 
@@ -6465,30 +6514,39 @@ select {
     top: 50%;
     transform: translateY(-50%);
     z-index: 4;
-    width: 36px;
-    height: 36px;
-    background: rgba(255, 255, 255, 0.88);
+    width: 42px;
+    height: 42px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1.5px solid rgba(31, 61, 54, 0.14);
+    color: #1F3D36;
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
-    box-shadow: 0 2px 12px rgba(31, 61, 54, 0.16);
+    box-shadow: 0 4px 16px rgba(31, 61, 54, 0.28);
   }
 
   .album-arrow svg {
-    width: 16px;
-    height: 16px;
+    width: 19px;
+    height: 19px;
+    stroke-width: 2.25px;
   }
 
   .album-prev { left: 10px; }
   .album-next { right: 10px; }
 
   .album-dots {
-    gap: 6px;
+    gap: 8px;
     margin-top: 20px;
   }
 
   .album-dot {
-    width: 7px;
-    height: 7px;
+    width: 9px;
+    height: 9px;
+    background: rgba(47, 70, 61, 0.32);
+  }
+
+  .album-dot.active {
+    background: #C8A35A;
+    box-shadow: 0 0 0 4px rgba(200, 163, 90, 0.22);
   }
 
   .album-cta {

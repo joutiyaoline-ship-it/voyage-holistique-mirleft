@@ -3,6 +3,24 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Meta Pixel Code -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '936528165885461');
+      fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=936528165885461&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
     <title>VOYAGE HOLISTIQUE - ETE 2026 | Mirleft, Maroc</title>
     <meta
       name="description"
@@ -34,7 +52,7 @@
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20260702-album-mobile6" />
+    <link rel="stylesheet" href="styles.css?v=20260702-hero-pills1" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -300,7 +318,6 @@
               <div class="album-slide"><img src="images/3.jpeg"  alt="Retraite bien-être au bord de l'océan" loading="lazy" decoding="async"></div>
               <div class="album-slide"><img src="images/4.jpeg"  alt="Espace de détente et méditation"       loading="lazy" decoding="async"></div>
               <div class="album-slide"><img src="images/5.jpeg"  alt="Séance de yoga face à l'Atlantique"    loading="lazy" decoding="async"></div>
-              <div class="album-slide"><img src="images/6.jpeg"  alt="Cuisine saine et équilibrée"           loading="lazy" decoding="async"></div>
               <div class="album-slide"><img src="images/7.jpeg"  alt="Instants de sérénité à Mirleft"        loading="lazy" decoding="async"></div>
               <div class="album-slide"><img src="images/8.jpeg"  alt="Soirée conviviale en groupe"           loading="lazy" decoding="async"></div>
               <div class="album-slide"><img src="images/9.jpeg"  alt="Paysage de Mirleft"                    loading="lazy" decoding="async"></div>
@@ -536,7 +553,10 @@
           <div class="pricing-card booking-pricing reveal">
             <p class="pricing-card-eyebrow">TARIF TOUT INCLUS</p>
             <div class="pricing-price-block">
-              <span class="pricing-amount">12&nbsp;510<span class="pricing-currency">&nbsp;DH</span></span>
+              <span class="pricing-main-line">
+                <span class="pricing-only">SEULEMENT</span>
+                <span class="pricing-amount">12&nbsp;510<span class="pricing-currency">&nbsp;DH</span></span>
+              </span>
               <span class="pricing-per-person">par personne</span>
             </div>
             <p class="pricing-payment">Paiement en plusieurs fois disponible.</p>
@@ -956,6 +976,6 @@
     </footer>
 
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-    <script src="script.js?v=20260702c"></script>
+    <script src="script.js?v=20260702d"></script>
   </body>
 </html>
