@@ -468,19 +468,37 @@ reservationForm?.addEventListener("submit", async (event) => {
   var isDragging   = false;
   var isTouching   = false;
 
-  var TRANSITION = 'transform 0.52s cubic-bezier(0.4, 0, 0.2, 1)';
+  /* Two transitions: desktop keeps its original curve, mobile uses ease */
+  var TR_DESKTOP = 'transform 0.52s cubic-bezier(0.4, 0, 0.2, 1)';
+  var TR_MOBILE  = 'transform 0.45s ease';
 
+  function mob()   { return window.innerWidth < 768; }
   function sw()    { return wrapper.offsetWidth || wrapper.getBoundingClientRect().width || 600; }
-  function px(i)   { return i * sw(); }
   function wrap(i) { return ((i % total) + total) % total; }
 
-  function enableTransition()  { track.style.transition = TRANSITION; }
+  function enableTransition()  { track.style.transition = mob() ? TR_MOBILE : TR_DESKTOP; }
   function disableTransition() { track.style.transition = 'none'; }
 
+  /*
+   * setPos — the only place transform is written.
+   *
+   * Mobile:  translateX(-n * 100%)
+   *   100% = track's own width = wrapper width. This is invariant:
+   *   it doesn't depend on offsetWidth, layout timing, or image size.
+   *
+   * Desktop: translateX(-n * wrapper.offsetWidth + px)
+   *   Pixel mode works fine on desktop where aspect-ratio locks the wrapper.
+   */
+  function setPos(n, animate) {
+    if (animate === false) disableTransition(); else enableTransition();
+    track.style.transform = mob()
+      ? 'translateX(-' + (n * 100) + '%)'
+      : 'translateX(-' + (n * sw()) + 'px)';
+  }
+
   function snapTo(idx) {
-    disableTransition();
     current = wrap(idx);
-    track.style.transform = 'translateX(-' + px(current) + 'px)';
+    setPos(current, false);
     requestAnimationFrame(function () { requestAnimationFrame(enableTransition); });
   }
 
@@ -488,8 +506,7 @@ reservationForm?.addEventListener("submit", async (event) => {
     var n = wrap(idx);
     syncDots(n);
     current = n;
-    enableTransition();
-    track.style.transform = 'translateX(-' + px(n) + 'px)';
+    setPos(n, true);
   }
 
   /* ── Dots ── */
@@ -513,26 +530,22 @@ reservationForm?.addEventListener("submit", async (event) => {
     dots[n].setAttribute('aria-selected', 'true');
   }
 
-  /* ── Autoplay — always starts; prefers-reduced-motion only removes the CSS transition ── */
+  /* ── Autoplay ── */
   function startAuto() {
     clearInterval(autoTimer);
     autoTimer = setInterval(function () {
       if (!isDragging && !isTouching) goTo(current + 1);
     }, INTERVAL);
   }
-  function stopAuto() { clearInterval(autoTimer); autoTimer = null; }
+  function stopAuto()      { clearInterval(autoTimer); autoTimer = null; }
   function scheduleResume() {
     clearTimeout(resumeTimer);
     resumeTimer = setTimeout(startAuto, RESUME_DELAY);
   }
 
   /* ── Arrows ── */
-  if (prevBtn) {
-    prevBtn.addEventListener('click', function () { goTo(current - 1); stopAuto(); scheduleResume(); });
-  }
-  if (nextBtn) {
-    nextBtn.addEventListener('click', function () { goTo(current + 1); stopAuto(); scheduleResume(); });
-  }
+  if (prevBtn) prevBtn.addEventListener('click', function () { goTo(current - 1); stopAuto(); scheduleResume(); });
+  if (nextBtn) nextBtn.addEventListener('click', function () { goTo(current + 1); stopAuto(); scheduleResume(); });
 
   /* ── Keyboard ── */
   if (carousel) {
@@ -543,23 +556,28 @@ reservationForm?.addEventListener("submit", async (event) => {
     });
   }
 
-  /* ── Hover pause / resume ── */
+  /* ── Hover pause / resume (desktop) ── */
   if (carousel) {
     carousel.addEventListener('mouseenter', function () { if (!isDragging) { clearTimeout(resumeTimer); stopAuto(); } });
     carousel.addEventListener('mouseleave', function () { if (!isDragging) startAuto(); });
   }
 
-  /* ── Mouse drag ── */
-  var dragStartX = 0;
-  var dragBaseX  = 0;
+  /* ── Mouse drag ──
+   * Mobile:  base stored as % index; live feedback via calc(-base% + deltaPx).
+   * Desktop: base stored as pixels; live feedback via pixels.
+   */
+  var dragStartX  = 0;
+  var dragBasePct = 0;   /* mobile */
+  var dragBasePx  = 0;   /* desktop */
   track.style.cursor     = 'grab';
   track.style.userSelect = 'none';
 
   track.addEventListener('mousedown', function (e) {
     if (e.button !== 0) return;
-    isDragging = true;
-    dragStartX = e.clientX;
-    dragBaseX  = px(current);
+    isDragging  = true;
+    dragStartX  = e.clientX;
+    dragBasePct = current * 100;
+    dragBasePx  = current * sw();
     disableTransition();
     track.style.cursor = 'grabbing';
     clearTimeout(resumeTimer);
@@ -569,7 +587,10 @@ reservationForm?.addEventListener("submit", async (event) => {
 
   document.addEventListener('mousemove', function (e) {
     if (!isDragging) return;
-    track.style.transform = 'translateX(-' + (dragBaseX - (e.clientX - dragStartX)) + 'px)';
+    var delta = e.clientX - dragStartX;
+    track.style.transform = mob()
+      ? 'translateX(calc(-' + dragBasePct + '% + ' + delta + 'px))'
+      : 'translateX(-' + (dragBasePx - delta) + 'px)';
   });
 
   document.addEventListener('mouseup', function (e) {
@@ -586,18 +607,20 @@ reservationForm?.addEventListener("submit", async (event) => {
 
   track.addEventListener('dragstart', function (e) { e.preventDefault(); });
 
-  /* ── Touch swipe ── */
-  var touchStartX = 0;
-  var touchStartY = 0;
-  var touchBaseX  = 0;
-  var touchIsH    = null;
+  /* ── Touch swipe ── (same dual-mode pattern as mouse drag) */
+  var touchStartX  = 0;
+  var touchStartY  = 0;
+  var touchBasePct = 0;
+  var touchBasePx  = 0;
+  var touchIsH     = null;
 
   track.addEventListener('touchstart', function (e) {
-    isTouching  = true;
-    touchStartX = e.touches[0].clientX;
-    touchStartY = e.touches[0].clientY;
-    touchBaseX  = px(current);
-    touchIsH    = null;
+    isTouching   = true;
+    touchStartX  = e.touches[0].clientX;
+    touchStartY  = e.touches[0].clientY;
+    touchBasePct = current * 100;
+    touchBasePx  = current * sw();
+    touchIsH     = null;
     disableTransition();
     clearTimeout(resumeTimer);
     stopAuto();
@@ -608,7 +631,10 @@ reservationForm?.addEventListener("submit", async (event) => {
     var dx = e.touches[0].clientX - touchStartX;
     var dy = e.touches[0].clientY - touchStartY;
     if (touchIsH === null) touchIsH = Math.abs(dx) > Math.abs(dy);
-    if (touchIsH) track.style.transform = 'translateX(-' + (touchBaseX - dx) + 'px)';
+    if (!touchIsH) return;
+    track.style.transform = mob()
+      ? 'translateX(calc(-' + touchBasePct + '% + ' + dx + 'px))'
+      : 'translateX(-' + (touchBasePx - dx) + 'px)';
   }, { passive: true });
 
   track.addEventListener('touchend', function (e) {
@@ -626,21 +652,21 @@ reservationForm?.addEventListener("submit", async (event) => {
     scheduleResume();
   }, { passive: true });
 
-  /* ── Resize: re-snap without animation ── */
+  /* ── Resize: re-snap to current slide ── */
   var resizeTimer;
   window.addEventListener('resize', function () {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(function () { snapTo(current); }, 100);
   });
 
-  /* ── prefers-reduced-motion: keep movement, remove CSS animation ── */
+  /* ── prefers-reduced-motion ── */
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     disableTransition();
   } else {
     enableTransition();
   }
 
-  /* ── Init: defer one frame so flex/aspect-ratio layout is painted ── */
+  /* ── Init ── */
   requestAnimationFrame(function () {
     track.style.transform = 'translateX(0)';
     startAuto();

@@ -6384,18 +6384,15 @@ select {
   }
 }
 
-/* ── Responsive — Mobile ── */
+/* ── Responsive — Mobile (<768px) — rebuilt slider architecture ── */
 @media (max-width: 767px) {
-  /*
-   * 5 vw each side → carousel = exactly 90 vw on every screen.
-   * 390 px: 5 vw = 19.5 px → carousel = 351 px = 90 vw.
-   */
+  /* 5 vw each side → carousel = 90 vw on any screen width */
   .album-voyage.section {
     padding-left: 5vw;
     padding-right: 5vw;
   }
 
-  /* Arrows are absolute overlays — no gap needed in the flex row */
+  /* Carousel shell: arrows are absolute so no gap is needed */
   .album-carousel {
     gap: 0;
     overflow: visible;
@@ -6403,11 +6400,9 @@ select {
     margin-bottom: 0;
   }
 
-  /*
-   * Fixed 300 px frame — every image (portrait or landscape) fills
-   * this card cleanly via object-fit: cover.
-   * overflow: hidden clips both the sliding track and image edges.
-   */
+  /* ── THE VIEWPORT ──
+     overflow:hidden is the single clip boundary.
+     border-radius clips image corners cleanly. */
   .album-track-wrapper {
     flex: 1;
     min-width: 0;
@@ -6421,22 +6416,50 @@ select {
     background: #D8CEBC;
   }
 
-  /* Slides fill the wrapper width exactly — zero padding, zero drift */
-  .album-slide {
-    padding: 0;
-    box-sizing: content-box;
-    background: transparent;
+  /* ── THE TRACK ──
+     flex-wrap:nowrap keeps all slides in a single horizontal row. */
+  .album-track {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100%;
+    will-change: transform;
+    /* transition injected by JS */
   }
 
-  /* cover + center: fills the fixed frame on every aspect ratio, no white space */
+  /* ── EACH SLIDE ──
+     flex:0 0 100% locks every slide to exactly 100% of the track width.
+     100% here = wrapper width. The JS translateX(-n*100%) moves by
+     exactly one slide per step, always pixel-perfect regardless of
+     viewport size or image aspect ratio. */
+  .album-slide {
+    flex: 0 0 100%;
+    width: 100%;
+    min-width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    box-sizing: border-box;
+    background: transparent;
+    flex-shrink: 0;
+  }
+
+  /* ── THE IMAGE ──
+     The slide controls size. The image fills it.
+     cover + center handles every aspect ratio without white gaps. */
   .album-slide img {
+    width: 100%;
+    height: 300px;
     object-fit: cover;
     object-position: center;
+    display: block;
     border-radius: 0;
     box-shadow: none;
+    flex-shrink: 0;
   }
 
-  /* Frosted-glass arrows overlaid on the card */
+  /* Arrows: frosted-glass overlays centred on the card */
   .album-arrow {
     position: absolute;
     top: 50%;
