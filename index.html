@@ -4,18 +4,32 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Meta Pixel Code -->
+    <!-- Meta Pixel Code (deferred until after first paint so it never blocks rendering) -->
     <script>
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '936528165885461');
-      fbq('track', 'PageView');
+      function __loadMetaPixel() {
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '936528165885461');
+        fbq('track', 'PageView');
+      }
+      function __scheduleMetaPixel() {
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(__loadMetaPixel, { timeout: 4000 });
+        } else {
+          setTimeout(__loadMetaPixel, 1000);
+        }
+      }
+      if (document.readyState === 'complete') {
+        __scheduleMetaPixel();
+      } else {
+        window.addEventListener('load', __scheduleMetaPixel);
+      }
     </script>
     <noscript><img height="1" width="1" style="display:none"
       src="https://www.facebook.com/tr?id=936528165885461&ev=PageView&noscript=1"
@@ -37,22 +51,22 @@
       content="Retraite holistique féminine du 10 au 17 août 2026 à Ocean Dunes House, Mirleft. Maximum 20 participantes."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://voyageholistique.com/images/2.jpeg" />
+    <meta property="og:image" content="https://voyageholistique.com/images/og-image.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="VOYAGE HOLISTIQUE - ETE 2026" />
     <meta name="twitter:description" content="Retraite holistique féminine du 10 au 17 août 2026 à Mirleft, Maroc. Maximum 20 participantes." />
-    <meta name="twitter:image" content="https://voyageholistique.com/images/2.jpeg" />
+    <meta name="twitter:image" content="https://voyageholistique.com/images/og-image.jpg" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='50' fill='%2320382e'/%3E%3Ctext x='50' y='58' font-size='34' text-anchor='middle' fill='%23fffaf2' font-family='Georgia'%3EVH%3C/text%3E%3C/svg%3E" />
     <link rel="preconnect" href="https://unpkg.com" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="image" href="images/hero image disktop.jpeg" media="(min-width: 1024px)" fetchpriority="high" />
-    <link rel="preload" as="image" href="images/mobile image hero.jpeg" media="(max-width: 1023px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="images/hero-desktop.webp" media="(min-width: 1024px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="images/hero-mobile.webp" media="(max-width: 1023px)" fetchpriority="high" />
     <link
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20260702-mobile-hero2" />
+    <link rel="stylesheet" href="styles.css?v=20260703-perf1" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -62,7 +76,7 @@
             "@id": "https://voyageholistique.com/#organization",
             "name": "Voyage Holistique",
             "url": "https://voyageholistique.com/",
-            "logo": "https://voyageholistique.com/images/logo.png",
+            "logo": "https://voyageholistique.com/images/logo.webp",
             "contactPoint": {
               "@type": "ContactPoint",
               "telephone": "+31625375673",
@@ -86,7 +100,7 @@
             "endDate": "2026-08-17",
             "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
             "eventStatus": "https://schema.org/EventScheduled",
-            "image": ["https://voyageholistique.com/images/2.jpeg"],
+            "image": ["https://voyageholistique.com/images/og-image.jpg"],
             "location": {
               "@type": "Place",
               "name": "Ocean Dunes House",
@@ -134,226 +148,233 @@
     </script>
   </head>
   <body>
-    <a class="skip-link" href="#main">Aller au contenu</a>
+    <a class="skip-link" href="#main" data-i18n="skip.link">Aller au contenu</a>
     <div class="progress" aria-hidden="true"><span id="scrollProgress"></span></div>
 
-    <header class="site-header" aria-label="Navigation principale">
+    <header class="site-header" aria-label="Navigation principale" data-i18n-aria="header.ariaMain">
       <a class="brand" href="#top" aria-label="Voyage Holistique">
-        <img src="images/logo.png" alt="Voyage Holistique Logo" class="brand-logo" />
+        <img src="images/logo.webp" alt="Voyage Holistique Logo" class="brand-logo" width="500" height="164" decoding="async" />
       </a>
-      <nav class="desktop-nav" aria-label="Sections">
-        <a href="#difference">Pour qui</a>
-        <a href="#expert">Dr. Laila</a>
-        <a href="#activites">Programme</a>
-        <a href="#accommodation">Lieu</a>
-        <a href="#faq">FAQ</a>
+      <nav class="desktop-nav" aria-label="Sections" data-i18n-aria="header.ariaSections">
+        <a href="#difference" data-i18n="header.navPourQui">Pour qui</a>
+        <a href="#expert" data-i18n="header.navDrLaila">Dr. Laila</a>
+        <a href="#activites" data-i18n="header.navProgramme">Programme</a>
+        <a href="#accommodation" data-i18n="header.navLieu">Lieu</a>
+        <a href="#faq" data-i18n="header.navFaq">FAQ</a>
       </nav>
-      <a class="header-cta" href="#reservation" data-cta="navbar">Réserver ma place</a>
+      <div class="header-actions">
+        <div class="lang-switch" role="group" data-i18n-aria="header.langAria" aria-label="Choisir la langue">
+          <button type="button" class="lang-btn" data-lang="fr" aria-pressed="true">FR</button>
+          <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+          <button type="button" class="lang-btn" data-lang="nl" aria-pressed="false">NL</button>
+        </div>
+        <a class="header-cta" href="#reservation" data-cta="navbar" data-i18n="common.reserve">Réserver ma place</a>
+      </div>
     </header>
 
     <main id="main">
 
       <!-- ── HERO ──────────────────────────────────────────── -->
-      <section class="hero" id="top" aria-label="Voyage holistique été 2026">
-        <img class="hero-mobile-img" src="images/mobile image hero.jpeg" alt="Femmes participant à une retraite holistique au bord de l'océan à Mirleft">
+      <section class="hero" id="top" aria-label="Voyage holistique été 2026" data-i18n-aria="hero.ariaLabel">
+        <img class="hero-mobile-img" src="images/hero-mobile.webp" alt="Femmes participant à une retraite holistique au bord de l'océan à Mirleft" width="979" height="1606" fetchpriority="high" decoding="async" data-i18n-alt="hero.mobileImgAlt">
 
         <div class="hero-overlay"></div>
         <div class="hero-content">
-          <img class="hero-logo" src="images/logo.png" alt="Voyage Holistique" />
-          <p class="eyebrow" aria-hidden="true">VOYAGE HOLISTIQUE • ÉTÉ 2026</p>
-          <h1>Retraite Holistique<br>Féminine</h1>
-          <p class="hero-subtitle">au Bord de l'Océan</p>
-          <p class="hero-tagline"><span><i data-lucide="calendar" aria-hidden="true"></i>10–17 août 2026</span><span><i data-lucide="plane" aria-hidden="true"></i>Mirleft, Maroc</span></p>
+          <img class="hero-logo" src="images/logo.webp" alt="Voyage Holistique" width="500" height="164" fetchpriority="high" decoding="async" />
+          <p class="eyebrow" aria-hidden="true" data-i18n="hero.eyebrow">VOYAGE HOLISTIQUE • ÉTÉ 2026</p>
+          <h1 data-i18n-html="hero.h1">Retraite Holistique<br>Féminine</h1>
+          <p class="hero-subtitle" data-i18n="hero.subtitle">au Bord de l'Océan</p>
+          <p class="hero-tagline"><span><i data-lucide="calendar" aria-hidden="true"></i><span data-i18n="hero.dates">10–17 août 2026</span></span><span><i data-lucide="plane" aria-hidden="true"></i><span data-i18n="hero.location">Mirleft, Maroc</span></span></p>
           <p class="hero-all-inclusive">✓ All Inclusive</p>
           <div class="hero-copy">
-            <strong>8 jours pour retrouver votre équilibre et votre énergie.</strong>
-            <span>Yoga, méditation, soins holistiques et nature atlantique — en petit groupe intimiste.</span>
+            <strong data-i18n="hero.copyStrong">8 jours pour retrouver votre équilibre et votre énergie.</strong>
+            <span data-i18n="hero.copySpan">Yoga, méditation, soins holistiques et nature atlantique — en petit groupe intimiste.</span>
           </div>
-          <ul class="hero-trust" aria-label="Points clés">
-            <li>8 jours · 7 nuits</li>
-            <li>20 places maximum</li>
-            <li>10–17 août 2026</li>
-            <li>Ocean Dunes House</li>
+          <ul class="hero-trust" aria-label="Points clés" data-i18n-aria="hero.trustAria">
+            <li data-i18n="hero.trust1">8 jours · 7 nuits</li>
+            <li data-i18n="hero.trust2">20 places maximum</li>
+            <li data-i18n="hero.trust3">10–17 août 2026</li>
+            <li data-i18n="hero.trust4">Ocean Dunes House</li>
           </ul>
-          <div class="hero-actions" aria-label="Actions principales">
-            <a class="btn btn-primary" href="#reservation" data-cta="hero">Réserver ma place</a>
-            <a class="btn btn-ghost" href="https://wa.me/31625375673?text=Bonjour%20je%20souhaite%20obtenir%20plus%20d'informations%20concernant%20le%20Voyage%20Holistique%20du%2010%20au%2017%20ao%C3%BBt%20%C3%A0%20Mirleft." target="_blank" rel="noreferrer" data-cta="hero">
+          <div class="hero-actions" aria-label="Actions principales" data-i18n-aria="hero.actionsAria">
+            <a class="btn btn-primary" href="#reservation" data-cta="hero" data-i18n="common.reserve">Réserver ma place</a>
+            <a class="btn btn-ghost" href="https://wa.me/31625375673?text=Bonjour%20je%20souhaite%20obtenir%20plus%20d'informations%20concernant%20le%20Voyage%20Holistique%20du%2010%20au%2017%20ao%C3%BBt%20%C3%A0%20Mirleft." target="_blank" rel="noreferrer" data-cta="hero" data-i18n-wa="true">
               <i data-lucide="message-circle" aria-hidden="true"></i>
               WhatsApp
             </a>
           </div>
-          <p class="hero-reassurance">Places limitées à 20 participantes · Confirmation par WhatsApp</p>
+          <p class="hero-reassurance" data-i18n="hero.reassurance">Places limitées à 20 participantes · Confirmation par WhatsApp</p>
         </div>
-        <aside class="hero-offer-card" aria-label="Détails de l'offre">
-          <span>Ocean Dunes House</span>
+        <aside class="hero-offer-card" aria-label="Détails de l'offre" data-i18n-aria="hero.offerAria">
+          <span data-i18n="hero.offerLabel">Ocean Dunes House</span>
           <dl>
-            <div><dt>📍</dt><dd>Mirleft, Maroc</dd></div>
-            <div><dt>📅</dt><dd>10–17 août 2026</dd></div>
-            <div><dt>👥</dt><dd>20 participantes max</dd></div>
-            <div><dt>💬</dt><dd>Confirmation sur WhatsApp</dd></div>
+            <div><dt>📍</dt><dd data-i18n="hero.offerLoc">Mirleft, Maroc</dd></div>
+            <div><dt>📅</dt><dd data-i18n="hero.offerDates">10–17 août 2026</dd></div>
+            <div><dt>👥</dt><dd data-i18n="hero.offerGuests">20 participantes max</dd></div>
+            <div><dt>💬</dt><dd data-i18n="hero.offerConfirm">Confirmation sur WhatsApp</dd></div>
           </dl>
-          <a class="btn hero-card-cta" href="#reservation" data-cta="hero-card">Réserver ma place</a>
+          <a class="btn hero-card-cta" href="#reservation" data-cta="hero-card" data-i18n="common.reserve">Réserver ma place</a>
         </aside>
-        <a class="scroll-cue" href="#difference" aria-label="Faire défiler">
+        <a class="scroll-cue" href="#difference" aria-label="Faire défiler" data-i18n-aria="hero.scrollAria">
           <span>↓</span>
         </a>
       </section>
 
       <!-- ── TRUST BAND ─────────────────────────────────────── -->
-      <section class="trust-band" aria-label="Elements de confiance">
-        <div><strong>8</strong><span>jours · 7 nuits</span></div>
-        <div><strong>10–17</strong><span>août 2026</span></div>
-        <div><strong>20 max</strong><span>participantes</span></div>
+      <section class="trust-band" aria-label="Elements de confiance" data-i18n-aria="trust.ariaLabel">
+        <div><strong>8</strong><span data-i18n="trust.n1label">jours · 7 nuits</span></div>
+        <div><strong>10–17</strong><span data-i18n="trust.n2label">août 2026</span></div>
+        <div><strong>20 max</strong><span data-i18n="trust.n3label">participantes</span></div>
       </section>
 
       <!-- ── VOTRE PROGRAMME ───────────────────────────────── -->
       <section class="section activites" id="activites">
         <div class="section-heading activites-heading reveal">
-          <p class="eyebrow">VOTRE PROGRAMME</p>
-          <h2>Ce qui est inclus dans votre voyage</h2>
-          <p class="activites-subtitle">Chaque journée est pensée pour vous aider à relâcher la pression, retrouver votre énergie et repartir plus alignée. Entre nature, mouvement et détente, ce voyage crée un vrai retour à vous-même dans un cadre élégant et apaisant.</p>
+          <p class="eyebrow" data-i18n="activites.eyebrow">VOTRE PROGRAMME</p>
+          <h2 data-i18n="activites.h2">Ce qui est inclus dans votre voyage</h2>
+          <p class="activites-subtitle" data-i18n="activites.subtitle">Chaque journée est pensée pour vous aider à relâcher la pression, retrouver votre énergie et repartir plus alignée. Entre nature, mouvement et détente, ce voyage crée un vrai retour à vous-même dans un cadre élégant et apaisant.</p>
         </div>
         <div class="activites-grid">
           <div class="activite-card reveal">
             <div class="activite-img-wrapper">
-              <img src="images/yoga.webp" alt="Yoga au lever du soleil" loading="lazy" decoding="async" />
+              <img src="images/yoga.webp" alt="Yoga au lever du soleil" width="1100" height="619" loading="lazy" decoding="async" data-i18n-alt="activites.card1.title" />
             </div>
-            <h3 class="activite-title">Yoga au lever du soleil</h3>
-            <p class="activite-desc">Commencez chaque journée par une pratique douce face à l'océan pour réveiller le corps et apaiser l'esprit.</p>
+            <h3 class="activite-title" data-i18n="activites.card1.title">Yoga au lever du soleil</h3>
+            <p class="activite-desc" data-i18n="activites.card1.desc">Commencez chaque journée par une pratique douce face à l'océan pour réveiller le corps et apaiser l'esprit.</p>
           </div>
           <div class="activite-card reveal">
             <div class="activite-img-wrapper">
-              <img src="images/aquagym.jpeg" alt="Aqua-gym quotidien" loading="lazy" decoding="async" />
+              <img src="images/aquagym.webp" alt="Aqua-gym quotidien" width="1100" height="825" loading="lazy" decoding="async" data-i18n-alt="activites.card2.title" />
             </div>
-            <h3 class="activite-title">Aqua-gym quotidien</h3>
-            <p class="activite-desc">Des séances dynamiques adaptées à tous les niveaux pour retrouver mobilité et vitalité.</p>
+            <h3 class="activite-title" data-i18n="activites.card2.title">Aqua-gym quotidien</h3>
+            <p class="activite-desc" data-i18n="activites.card2.desc">Des séances dynamiques adaptées à tous les niveaux pour retrouver mobilité et vitalité.</p>
           </div>
           <div class="activite-card reveal">
             <div class="activite-img-wrapper">
-              <img src="images/respiration.jpeg" alt="Respiration consciente" loading="lazy" decoding="async" />
+              <img src="images/respiration.webp" alt="Respiration consciente" width="1100" height="825" loading="lazy" decoding="async" data-i18n-alt="activites.card3.title" />
             </div>
-            <h3 class="activite-title">Respiration consciente</h3>
-            <p class="activite-desc">Des exercices simples pour réduire le stress et retrouver un calme profond.</p>
+            <h3 class="activite-title" data-i18n="activites.card3.title">Respiration consciente</h3>
+            <p class="activite-desc" data-i18n="activites.card3.desc">Des exercices simples pour réduire le stress et retrouver un calme profond.</p>
           </div>
           <div class="activite-card reveal">
             <div class="activite-img-wrapper">
-              <img src="images/randonnees-en-pleine-nature.jpeg" alt="Randonnées en pleine nature" loading="lazy" decoding="async" />
+              <img src="images/randonnees-en-pleine-nature.webp" alt="Randonnées en pleine nature" width="1100" height="734" loading="lazy" decoding="async" data-i18n-alt="activites.card4.title" />
             </div>
-            <h3 class="activite-title">Randonnées en pleine nature</h3>
-            <p class="activite-desc">Explorez les paysages de Mirleft tout en profitant des bienfaits du mouvement.</p>
+            <h3 class="activite-title" data-i18n="activites.card4.title">Randonnées en pleine nature</h3>
+            <p class="activite-desc" data-i18n="activites.card4.desc">Explorez les paysages de Mirleft tout en profitant des bienfaits du mouvement.</p>
           </div>
           <div class="activite-card reveal">
             <div class="activite-img-wrapper">
-              <img src="images/march-dans-la-plage.png" alt="Marches sur la plage" loading="lazy" decoding="async" />
+              <img src="images/marche-plage.webp" alt="Marches sur la plage" width="1100" height="825" loading="lazy" decoding="async" data-i18n-alt="activites.card5.title" />
             </div>
-            <h3 class="activite-title">Marches sur la plage</h3>
-            <p class="activite-desc">Des promenades ressourçantes au rythme de l'océan Atlantique.</p>
+            <h3 class="activite-title" data-i18n="activites.card5.title">Marches sur la plage</h3>
+            <p class="activite-desc" data-i18n="activites.card5.desc">Des promenades ressourçantes au rythme de l'océan Atlantique.</p>
           </div>
           <div class="activite-card reveal">
             <div class="activite-img-wrapper">
-              <img src="images/ateliers-developpement-personnel.jpeg" alt="Ateliers de développement personnel" loading="lazy" decoding="async" />
+              <img src="images/ateliers-developpement-personnel.webp" alt="Ateliers de développement personnel" width="1100" height="619" loading="lazy" decoding="async" data-i18n-alt="activites.card6.title" />
             </div>
-            <h3 class="activite-title">Ateliers de développement personnel</h3>
-            <p class="activite-desc">Des ateliers pratiques pour repartir avec de nouveaux outils pour votre quotidien.</p>
+            <h3 class="activite-title" data-i18n="activites.card6.title">Ateliers de développement personnel</h3>
+            <p class="activite-desc" data-i18n="activites.card6.desc">Des ateliers pratiques pour repartir avec de nouveaux outils pour votre quotidien.</p>
           </div>
           <div class="activite-card reveal">
             <div class="activite-img-wrapper">
-              <img src="images/alimentation-saine-gourmande.jpeg" alt="Alimentation saine et gourmande" loading="lazy" decoding="async" />
+              <img src="images/alimentation-saine-gourmande.webp" alt="Alimentation saine et gourmande" width="825" height="1100" loading="lazy" decoding="async" />
             </div>
-            <h3 class="activite-title">Alimentation saine &amp; gourmande</h3>
-            <p class="activite-desc">Une cuisine équilibrée préparée avec des produits frais pour nourrir votre énergie.</p>
+            <h3 class="activite-title" data-i18n-html="activites.card7.title">Alimentation saine &amp; gourmande</h3>
+            <p class="activite-desc" data-i18n="activites.card7.desc">Une cuisine équilibrée préparée avec des produits frais pour nourrir votre énergie.</p>
           </div>
           <div class="activite-card reveal">
             <div class="activite-img-wrapper">
-              <img src="images/temps-libre.png" alt="Temps libre et relaxation" loading="lazy" decoding="async" />
+              <img src="images/temps-libre.webp" alt="Temps libre et relaxation" width="1100" height="619" loading="lazy" decoding="async" />
             </div>
-            <h3 class="activite-title">Temps libre</h3>
-            <p class="activite-desc">Profitez pleinement de la plage, de la piscine ou simplement du calme du lieu.</p>
+            <h3 class="activite-title" data-i18n="activites.card8.title">Temps libre</h3>
+            <p class="activite-desc" data-i18n="activites.card8.desc">Profitez pleinement de la plage, de la piscine ou simplement du calme du lieu.</p>
           </div>
           <div class="activite-card reveal">
             <div class="activite-img-wrapper">
-              <img src="images/soirees-conviviales.jpeg" alt="Soirées conviviales" loading="lazy" decoding="async" />
+              <img src="images/soirees-conviviales.webp" alt="Soirées conviviales" width="1100" height="733" loading="lazy" decoding="async" data-i18n-alt="activites.card9.title" />
             </div>
-            <h3 class="activite-title">Soirées conviviales</h3>
-            <p class="activite-desc">Des moments chaleureux pour partager, échanger et créer des souvenirs inoubliables.</p>
+            <h3 class="activite-title" data-i18n="activites.card9.title">Soirées conviviales</h3>
+            <p class="activite-desc" data-i18n="activites.card9.desc">Des moments chaleureux pour partager, échanger et créer des souvenirs inoubliables.</p>
           </div>
           <div class="activite-card reveal">
             <div class="activite-img-wrapper">
-              <img src="images/massage Holistic.jpeg" alt="Massage Holistic" loading="lazy" decoding="async" />
+              <img src="images/massage-holistic.webp" alt="Massage Holistic" width="1057" height="789" loading="lazy" decoding="async" />
             </div>
-            <h3 class="activite-title">Massage Holistic</h3>
-            <p class="activite-desc">Un soin relaxant pour libérer les tensions et favoriser un profond bien-être.</p>
+            <h3 class="activite-title" data-i18n="activites.card10.title">Massage Holistic</h3>
+            <p class="activite-desc" data-i18n="activites.card10.desc">Un soin relaxant pour libérer les tensions et favoriser un profond bien-être.</p>
           </div>
           <div class="activite-card reveal">
             <div class="activite-img-wrapper">
-              <img src="images/ostéopathe.jpeg" alt="Ostéopathe" loading="lazy" decoding="async" />
+              <img src="images/osteopathe.webp" alt="Ostéopathe" width="1057" height="794" loading="lazy" decoding="async" data-i18n-alt="activites.card11.title" />
             </div>
-            <h3 class="activite-title">Ostéopathe</h3>
-            <p class="activite-desc">Une séance personnalisée pour améliorer votre mobilité et rééquilibrer le corps.</p>
+            <h3 class="activite-title" data-i18n="activites.card11.title">Ostéopathe</h3>
+            <p class="activite-desc" data-i18n="activites.card11.desc">Une séance personnalisée pour améliorer votre mobilité et rééquilibrer le corps.</p>
           </div>
           <div class="activite-card reveal">
             <div class="activite-img-wrapper">
-              <img src="images/Balade à cheval sur la plage.jpeg" alt="Balade à cheval sur la plage" loading="lazy" decoding="async" />
+              <img src="images/balade-cheval-plage.webp" alt="Balade à cheval sur la plage" width="1100" height="825" loading="lazy" decoding="async" data-i18n-alt="activites.card12.title" />
             </div>
-            <h3 class="activite-title">Balade à cheval sur la plage</h3>
-            <p class="activite-desc">Une expérience apaisante au bord de l'océan pour se reconnecter à la nature.</p>
+            <h3 class="activite-title" data-i18n="activites.card12.title">Balade à cheval sur la plage</h3>
+            <p class="activite-desc" data-i18n="activites.card12.desc">Une expérience apaisante au bord de l'océan pour se reconnecter à la nature.</p>
           </div>
         </div>
         <div class="activites-bottom reveal">
-          <h3>Un séjour pensé pour votre équilibre.</h3>
-          <p>Bien plus qu'un simple voyage, cette expérience vous offre l'opportunité de prendre soin de votre corps, de votre esprit et de votre énergie dans un cadre exceptionnel.</p>
-          <a class="btn btn-primary" href="#reservation" data-cta="activites">Réserver ma place</a>
+          <h3 data-i18n="activites.bottomTitle">Un séjour pensé pour votre équilibre.</h3>
+          <p data-i18n="activites.bottomDesc">Bien plus qu'un simple voyage, cette expérience vous offre l'opportunité de prendre soin de votre corps, de votre esprit et de votre énergie dans un cadre exceptionnel.</p>
+          <a class="btn btn-primary" href="#reservation" data-cta="activites" data-i18n="common.reserve">Réserver ma place</a>
         </div>
       </section>
 
       <!-- ── ALBUM DU VOYAGE ───────────────────────────────── -->
       <section class="section album-voyage" id="album">
         <div class="section-heading album-heading reveal">
-          <p class="eyebrow">MOMENTS DU SÉJOUR</p>
-          <h2>Album du voyage</h2>
-          <p class="album-subtitle">Découvrez l'ambiance, les lieux et les moments forts de cette retraite à Mirleft.</p>
+          <p class="eyebrow" data-i18n="album.eyebrow">MOMENTS DU SÉJOUR</p>
+          <h2 data-i18n="album.h2">Album du voyage</h2>
+          <p class="album-subtitle" data-i18n="album.subtitle">Découvrez l'ambiance, les lieux et les moments forts de cette retraite à Mirleft.</p>
         </div>
 
         <div class="album-carousel reveal">
-          <button class="album-arrow album-prev" type="button" aria-label="Image précédente">
+          <button class="album-arrow album-prev" type="button" aria-label="Image précédente" data-i18n-aria="album.prevAria">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
           </button>
           <div class="album-track-wrapper">
             <div class="album-track" id="albumTrack">
-              <div class="album-slide"><img src="images/1.jpeg"  alt="Ocean Dunes House, Mirleft"             loading="eager" decoding="async"></div>
-              <div class="album-slide"><img src="images/2.jpeg"  alt="Vue de la côte atlantique"              loading="lazy" decoding="async"></div>
-              <div class="album-slide"><img src="images/3.jpeg"  alt="Retraite bien-être au bord de l'océan" loading="lazy" decoding="async"></div>
-              <div class="album-slide"><img src="images/4.jpeg"  alt="Espace de détente et méditation"       loading="lazy" decoding="async"></div>
-              <div class="album-slide"><img src="images/5.jpeg"  alt="Séance de yoga face à l'Atlantique"    loading="lazy" decoding="async"></div>
-              <div class="album-slide"><img src="images/8.jpeg"  alt="Soirée conviviale en groupe"           loading="lazy" decoding="async"></div>
-              <div class="album-slide"><img src="images/9.jpeg"  alt="Paysage de Mirleft"                    loading="lazy" decoding="async"></div>
-              <div class="album-slide"><img src="images/10.jpeg" alt="Moments de bien-être au séjour"        loading="lazy" decoding="async"></div>
-              <div class="album-slide"><img src="images/11.jpeg" alt="Activités en plein air à Mirleft"      loading="lazy" decoding="async"></div>
-              <div class="album-slide"><img src="images/12.jpeg" alt="Vue sur l'océan Atlantique"            loading="lazy" decoding="async"></div>
-              <div class="album-slide"><img src="images/13.jpeg" alt="Détente et sérénité au séjour"         loading="lazy" decoding="async"></div>
-              <div class="album-slide"><img src="images/14.jpeg" alt="Retraite holistique féminine"          loading="lazy" decoding="async"></div>
-              <div class="album-slide"><img src="images/15.jpeg" alt="Instants de connexion et partage"      loading="lazy" decoding="async"></div>
-              <div class="album-slide"><img src="images/16.jpeg" alt="Souvenirs inoubliables à Mirleft"      loading="lazy" decoding="async"></div>
+              <div class="album-slide"><img src="images/album-01.webp" alt="Ocean Dunes House, Mirleft"             width="1024" height="768" loading="lazy" decoding="async" data-i18n-alt="album.alt1"></div>
+              <div class="album-slide"><img src="images/album-02.webp" alt="Vue de la côte atlantique"              width="1024" height="768" loading="lazy" decoding="async" data-i18n-alt="album.alt2"></div>
+              <div class="album-slide"><img src="images/album-03.webp" alt="Retraite bien-être au bord de l'océan"  width="1024" height="768" loading="lazy" decoding="async" data-i18n-alt="album.alt3"></div>
+              <div class="album-slide"><img src="images/album-04.webp" alt="Espace de détente et méditation"       width="1024" height="768" loading="lazy" decoding="async" data-i18n-alt="album.alt4"></div>
+              <div class="album-slide"><img src="images/album-05.webp" alt="Séance de yoga face à l'Atlantique"    width="576"  height="768" loading="lazy" decoding="async" data-i18n-alt="album.alt5"></div>
+              <div class="album-slide"><img src="images/album-06.webp" alt="Soirée conviviale en groupe"           width="1024" height="768" loading="lazy" decoding="async" data-i18n-alt="album.alt6"></div>
+              <div class="album-slide"><img src="images/album-07.webp" alt="Paysage de Mirleft"                    width="576"  height="768" loading="lazy" decoding="async" data-i18n-alt="album.alt7"></div>
+              <div class="album-slide"><img src="images/album-08.webp" alt="Moments de bien-être au séjour"        width="825"  height="1100" loading="lazy" decoding="async" data-i18n-alt="album.alt8"></div>
+              <div class="album-slide"><img src="images/album-09.webp" alt="Activités en plein air à Mirleft"      width="1100" height="825" loading="lazy" decoding="async" data-i18n-alt="album.alt9"></div>
+              <div class="album-slide"><img src="images/album-10.webp" alt="Vue sur l'océan Atlantique"            width="822"  height="1100" loading="lazy" decoding="async" data-i18n-alt="album.alt10"></div>
+              <div class="album-slide"><img src="images/album-11.webp" alt="Détente et sérénité au séjour"         width="822"  height="1100" loading="lazy" decoding="async" data-i18n-alt="album.alt11"></div>
+              <div class="album-slide"><img src="images/album-12.webp" alt="Retraite holistique féminine"          width="822"  height="1100" loading="lazy" decoding="async" data-i18n-alt="album.alt12"></div>
+              <div class="album-slide"><img src="images/album-13.webp" alt="Instants de connexion et partage"      width="825"  height="1100" loading="lazy" decoding="async" data-i18n-alt="album.alt13"></div>
+              <div class="album-slide"><img src="images/album-14.webp" alt="Souvenirs inoubliables à Mirleft"      width="825"  height="1100" loading="lazy" decoding="async" data-i18n-alt="album.alt14"></div>
             </div>
           </div>
-          <button class="album-arrow album-next" type="button" aria-label="Image suivante">
+          <button class="album-arrow album-next" type="button" aria-label="Image suivante" data-i18n-aria="album.nextAria">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
           </button>
         </div>
 
-        <div class="album-dots" id="albumDots" role="tablist" aria-label="Navigation galerie"></div>
+        <div class="album-dots" id="albumDots" role="tablist" aria-label="Navigation galerie" data-i18n-aria="album.dotsAria"></div>
 
         <div class="album-cta reveal">
-          <a class="btn btn-primary" href="#reservation" data-cta="album">Voir les moments du voyage</a>
+          <a class="btn btn-primary" href="#reservation" data-cta="album" data-i18n="album.cta">Voir les moments du voyage</a>
         </div>
       </section>
 
       <!-- ── POUR QUI ───────────────────────────────────────── -->
       <section class="section value-prop" id="difference">
         <div class="section-heading reveal">
-          <p class="eyebrow">Pour qui est ce voyage ?</p>
-          <h2>Vous vous reconnaissez dans l'une de ces situations ?</h2>
-          <p class="section-desc">
+          <p class="eyebrow" data-i18n="valueprop.eyebrow">Pour qui est ce voyage ?</p>
+          <h2 data-i18n="valueprop.h2">Vous vous reconnaissez dans l'une de ces situations ?</h2>
+          <p class="section-desc" data-i18n="valueprop.desc">
             Cette retraite est pensée pour les femmes qui ressentent le besoin de ralentir, retrouver leur énergie et prendre enfin soin d'elles.
           </p>
         </div>
@@ -361,57 +382,57 @@
         <div class="value-grid">
           <div class="value-card reveal">
             <div class="value-card-icon-wrapper">
-              <img src="images/Stress et anxiété.png" alt="" loading="lazy" decoding="async" />
+              <img src="images/stress-anxiete.webp" alt="" width="160" height="160" loading="lazy" decoding="async" />
             </div>
-            <h3>Charge mentale</h3>
-            <p>Vous pensez constamment aux autres et avez du mal à réellement décrocher.</p>
+            <h3 data-i18n="valueprop.card1.title">Charge mentale</h3>
+            <p data-i18n="valueprop.card1.desc">Vous pensez constamment aux autres et avez du mal à réellement décrocher.</p>
           </div>
           <div class="value-card reveal">
             <div class="value-card-icon-wrapper">
-              <img src="images/Fatigue et troubles du sommeil.png" alt="" loading="lazy" decoding="async" />
+              <img src="images/fatigue-sommeil.webp" alt="" width="160" height="160" loading="lazy" decoding="async" />
             </div>
-            <h3>Fatigue persistante</h3>
-            <p>Vous manquez d'énergie et vos nuits ne suffisent plus à récupérer.</p>
+            <h3 data-i18n="valueprop.card2.title">Fatigue persistante</h3>
+            <p data-i18n="valueprop.card2.desc">Vous manquez d'énergie et vos nuits ne suffisent plus à récupérer.</p>
           </div>
           <div class="value-card reveal">
             <div class="value-card-icon-wrapper">
-              <img src="images/Gestion des émotions.png" alt="" loading="lazy" decoding="async" />
+              <img src="images/gestion-emotions.webp" alt="" width="160" height="160" loading="lazy" decoding="async" />
             </div>
-            <h3>Retrouver l'équilibre</h3>
-            <p>Vous souhaitez retrouver plus de sérénité et de calme au quotidien.</p>
+            <h3 data-i18n="valueprop.card3.title">Retrouver l'équilibre</h3>
+            <p data-i18n="valueprop.card3.desc">Vous souhaitez retrouver plus de sérénité et de calme au quotidien.</p>
           </div>
           <div class="value-card reveal">
             <div class="value-card-icon-wrapper">
-              <img src="images/Mental Clarity.png" alt="" loading="lazy" decoding="async" />
+              <img src="images/mental-clarity.webp" alt="" width="160" height="160" loading="lazy" decoding="async" />
             </div>
-            <h3>Clarté mentale</h3>
-            <p>Vous ressentez le besoin de ralentir pour retrouver un esprit plus léger.</p>
+            <h3 data-i18n="valueprop.card4.title">Clarté mentale</h3>
+            <p data-i18n="valueprop.card4.desc">Vous ressentez le besoin de ralentir pour retrouver un esprit plus léger.</p>
           </div>
           <div class="value-card reveal">
             <div class="value-card-icon-wrapper">
-              <img src="images/Meditation.png" alt="" loading="lazy" decoding="async" />
+              <img src="images/meditation-icon.webp" alt="" width="160" height="160" loading="lazy" decoding="async" />
             </div>
-            <h3>Reconnexion à soi</h3>
-            <p>Vous souhaitez enfin prendre du temps pour vous dans un cadre apaisant.</p>
+            <h3 data-i18n="valueprop.card5.title">Reconnexion à soi</h3>
+            <p data-i18n="valueprop.card5.desc">Vous souhaitez enfin prendre du temps pour vous dans un cadre apaisant.</p>
           </div>
           <div class="value-card reveal">
             <div class="value-card-icon-wrapper">
-              <img src="images/Self-Love & Emotional Healing.png" alt="" loading="lazy" decoding="async" />
+              <img src="images/self-love-healing.webp" alt="" width="160" height="160" loading="lazy" decoding="async" />
             </div>
-            <h3>Prendre soin de soi</h3>
-            <p>Vous cherchez une expérience humaine, douce et profondément ressourçante.</p>
+            <h3 data-i18n="valueprop.card6.title">Prendre soin de soi</h3>
+            <p data-i18n="valueprop.card6.desc">Vous cherchez une expérience humaine, douce et profondément ressourçante.</p>
           </div>
         </div>
 
         <div class="reassurance-block reveal">
-          <h3>Vous n'avez besoin d'aucune expérience.</h3>
-          <p>Toutes les activités sont accessibles à tous les niveaux et adaptées au rythme de chacune.</p>
+          <h3 data-i18n="valueprop.reassuranceTitle">Vous n'avez besoin d'aucune expérience.</h3>
+          <p data-i18n="valueprop.reassuranceDesc">Toutes les activités sont accessibles à tous les niveaux et adaptées au rythme de chacune.</p>
         </div>
 
         <div class="value-cta reveal">
-          <a class="btn btn-primary" href="#reservation" data-cta="story-value">Réserver ma place</a>
+          <a class="btn btn-primary" href="#reservation" data-cta="story-value" data-i18n="common.reserve">Réserver ma place</a>
           <p class="cta-secondary">
-            Ou <a href="https://wa.me/31625375673?text=Bonjour%20je%20souhaite%20obtenir%20plus%20d'informations%20concernant%20le%20Voyage%20Holistique%20du%2010%20au%2017%20ao%C3%BBt%20%C3%A0%20Mirleft." target="_blank" rel="noreferrer" class="whatsapp-link">échangez avec nous sur WhatsApp</a> pour recevoir tous les détails.
+            <span data-i18n="valueprop.ctaSecondaryPrefix">Ou </span><a href="https://wa.me/31625375673?text=Bonjour%20je%20souhaite%20obtenir%20plus%20d'informations%20concernant%20le%20Voyage%20Holistique%20du%2010%20au%2017%20ao%C3%BBt%20%C3%A0%20Mirleft." target="_blank" rel="noreferrer" class="whatsapp-link" data-i18n="valueprop.ctaSecondaryLink" data-i18n-wa="true">échangez avec nous sur WhatsApp</a><span data-i18n="valueprop.ctaSecondarySuffix"> pour recevoir tous les détails.</span>
           </p>
         </div>
       </section>
@@ -421,42 +442,42 @@
         <div class="expert-container">
           <div class="expert-image-col reveal">
             <div class="expert-image-wrapper">
-              <img src="images/WhatsApp%20Image%202026-07-01%20at%2023.00.23.jpeg" alt="Portrait de Dr. Laila Qottaya" loading="lazy" decoding="async" />
+              <img src="images/dr-laila-portrait.webp" alt="Portrait de Dr. Laila Qottaya" width="598" height="900" loading="lazy" decoding="async" data-i18n-alt="expert.imgAlt" />
             </div>
           </div>
           <div class="expert-content-col">
             <div class="section-heading reveal">
-              <p class="eyebrow">VOTRE ACCOMPAGNEMENT</p>
-              <h2 class="expert-title">Qui est Dr. Laila Qottaya ?</h2>
-              <p>Dr. Laila accompagne depuis plusieurs années des femmes qui souhaitent retrouver leur équilibre physique, émotionnel et énergétique grâce à une approche profondément humaine et holistique.</p>
+              <p class="eyebrow" data-i18n="expert.eyebrow">VOTRE ACCOMPAGNEMENT</p>
+              <h2 class="expert-title" data-i18n="expert.h2">Qui est Dr. Laila Qottaya ?</h2>
+              <p data-i18n="expert.intro">Dr. Laila accompagne depuis plusieurs années des femmes qui souhaitent retrouver leur équilibre physique, émotionnel et énergétique grâce à une approche profondément humaine et holistique.</p>
             </div>
             <div class="expert-features">
               <div class="expert-card reveal">
-                <h3>Approche holistique</h3>
-                <p>Une vision globale du corps, des émotions, de l'énergie et du mode de vie.</p>
+                <h3 data-i18n="expert.card1.title">Approche holistique</h3>
+                <p data-i18n="expert.card1.desc">Une vision globale du corps, des émotions, de l'énergie et du mode de vie.</p>
               </div>
               <div class="expert-card reveal">
-                <h3>Accompagnement doux</h3>
-                <p>Chaque participante est accueillie avec bienveillance, à son propre rythme.</p>
+                <h3 data-i18n="expert.card2.title">Accompagnement doux</h3>
+                <p data-i18n="expert.card2.desc">Chaque participante est accueillie avec bienveillance, à son propre rythme.</p>
               </div>
               <div class="expert-card reveal">
-                <h3>Expérience terrain</h3>
-                <p>Des années d'ateliers et de retraites dédiées au mieux-être féminin.</p>
+                <h3 data-i18n="expert.card3.title">Expérience terrain</h3>
+                <p data-i18n="expert.card3.desc">Des années d'ateliers et de retraites dédiées au mieux-être féminin.</p>
               </div>
               <div class="expert-card reveal">
-                <h3>Méthodes naturelles</h3>
-                <p>Nutrition, respiration, mouvement et pratiques holistiques au quotidien.</p>
+                <h3 data-i18n="expert.card4.title">Méthodes naturelles</h3>
+                <p data-i18n="expert.card4.desc">Nutrition, respiration, mouvement et pratiques holistiques au quotidien.</p>
               </div>
             </div>
             <div class="expert-card expert-team-card reveal">
-              <p>Accompagnée par une équipe professionnelle en médecine holistique, Dr. Laila Qottaya veille à offrir un encadrement bienveillant, sécurisé et adapté à chaque participante.</p>
+              <p data-i18n="expert.teamCard">Accompagnée par une équipe professionnelle en médecine holistique, Dr. Laila Qottaya veille à offrir un encadrement bienveillant, sécurisé et adapté à chaque participante.</p>
             </div>
             <blockquote class="expert-quote reveal">
-              <p>« Chaque femme possède déjà les ressources pour retrouver son équilibre. Mon rôle est de l'accompagner avec douceur sur ce chemin. »</p>
+              <p data-i18n="expert.quote">« Chaque femme possède déjà les ressources pour retrouver son équilibre. Mon rôle est de l'accompagner avec douceur sur ce chemin. »</p>
               <cite>— Dr. Laila Qottaya</cite>
             </blockquote>
             <div class="expert-cta reveal">
-              <a class="btn btn-primary" href="#reservation" data-cta="expert">Réserver ma place</a>
+              <a class="btn btn-primary" href="#reservation" data-cta="expert" data-i18n="common.reserve">Réserver ma place</a>
             </div>
           </div>
         </div>
@@ -467,31 +488,31 @@
       <!-- ── LIEU ──────────────────────────────────────────── -->
       <section class="section location" id="accommodation">
         <div class="section-heading reveal">
-          <p class="eyebrow">LE LIEU</p>
-          <h2>Pourquoi Mirleft&nbsp;?</h2>
-          <p class="section-desc">Un lieu calme entre océan, lumière et nature, pensé pour ralentir, respirer et se reconnecter à soi.</p>
+          <p class="eyebrow" data-i18n="location.eyebrow">LE LIEU</p>
+          <h2 data-i18n-html="location.h2">Pourquoi Mirleft&nbsp;?</h2>
+          <p class="section-desc" data-i18n="location.desc">Un lieu calme entre océan, lumière et nature, pensé pour ralentir, respirer et se reconnecter à soi.</p>
         </div>
         <div class="location-container">
           <div class="location-text reveal">
-            <p class="location-intro">Entre falaises, plages sauvages et lumière océanique, Mirleft offre une atmosphère rare&nbsp;: simple, apaisante et profondément ressourçante.</p>
+            <p class="location-intro" data-i18n-html="location.intro">Entre falaises, plages sauvages et lumière océanique, Mirleft offre une atmosphère rare&nbsp;: simple, apaisante et profondément ressourçante.</p>
             <div class="location-text-item">
-              <h3>Face à l'océan</h3>
-              <p>Mirleft offre un cadre naturel ouvert sur l'Atlantique, idéal pour déposer la charge mentale, respirer plus profondément et retrouver de l'espace intérieur.</p>
+              <h3 data-i18n="location.item1.title">Face à l'océan</h3>
+              <p data-i18n="location.item1.desc">Mirleft offre un cadre naturel ouvert sur l'Atlantique, idéal pour déposer la charge mentale, respirer plus profondément et retrouver de l'espace intérieur.</p>
             </div>
             <div class="location-text-item">
-              <h3>Une atmosphère paisible</h3>
-              <p>Loin du bruit et de la pression quotidienne, l'environnement invite au repos, au silence, à la marche et à la reconnexion.</p>
+              <h3 data-i18n="location.item2.title">Une atmosphère paisible</h3>
+              <p data-i18n="location.item2.desc">Loin du bruit et de la pression quotidienne, l'environnement invite au repos, au silence, à la marche et à la reconnexion.</p>
             </div>
             <div class="location-text-item">
-              <h3>Un séjour intime et confortable</h3>
-              <p>Ocean Dunes House propose un cadre chaleureux, lumineux et adapté à une retraite féminine en petit groupe, entre confort, simplicité et proximité avec l'océan.</p>
+              <h3 data-i18n="location.item3.title">Un séjour intime et confortable</h3>
+              <p data-i18n="location.item3.desc">Ocean Dunes House propose un cadre chaleureux, lumineux et adapté à une retraite féminine en petit groupe, entre confort, simplicité et proximité avec l'océan.</p>
             </div>
             <div class="location-cta reveal">
-              <a class="btn btn-primary" href="#reservation" data-cta="location">Réserver ma place</a>
+              <a class="btn btn-primary" href="#reservation" data-cta="location" data-i18n="common.reserve">Réserver ma place</a>
             </div>
           </div>
           <div class="location-image reveal">
-            <img src="images/Mirleft.jpeg" alt="Mirleft, Maroc — falaises et océan atlantique" loading="lazy" decoding="async">
+            <img src="images/mirleft.webp" alt="Mirleft, Maroc — falaises et océan atlantique" width="1200" height="723" loading="lazy" decoding="async" data-i18n-alt="location.imgAlt">
           </div>
         </div>
       </section>
@@ -500,108 +521,108 @@
       <section class="section reservation" id="reservation">
         <div class="reservation-content booking-content">
           <div class="section-heading booking-heading reveal">
-            <p class="eyebrow">VOTRE PLACE VOUS ATTEND</p>
-            <h2>Votre place vous attend</h2>
-            <p class="booking-subtitle">Profitez d'une expérience complète à Mirleft, avec tout l'essentiel inclus pour vivre votre retraite en toute sérénité.</p>
+            <p class="eyebrow" data-i18n="reservation.eyebrow">VOTRE PLACE VOUS ATTEND</p>
+            <h2 data-i18n="activites.h2">Ce qui est inclus dans votre voyage</h2>
+            <p class="booking-subtitle" data-i18n="reservation.subtitle">Profitez d'une expérience complète à Mirleft, avec tout l'essentiel inclus pour vivre votre retraite en toute sérénité.</p>
           </div>
           <div class="inclus-grid">
             <div class="inclus-card reveal">
               <div class="inclus-icon" aria-hidden="true">
-                <img src="images/airplane.png" alt="" aria-hidden="true" width="34" height="34">
+                <img src="images/airplane.webp" alt="" aria-hidden="true" width="34" height="34" loading="lazy" decoding="async">
               </div>
-              <h3 class="inclus-title">Billets d'avion aller-retour</h3>
-              <p class="inclus-desc">Vols aller-retour inclus depuis Rabat ou Casablanca vers Agadir.</p>
+              <h3 class="inclus-title" data-i18n="inclus.card1.title">Billets d'avion aller-retour</h3>
+              <p class="inclus-desc" data-i18n="inclus.card1.desc">Vols aller-retour inclus depuis Rabat ou Casablanca vers Agadir.</p>
             </div>
             <div class="inclus-card reveal">
               <div class="inclus-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v9h-2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
               </div>
-              <h3 class="inclus-title">Tous les transferts</h3>
-              <p class="inclus-desc">Tous vos déplacements sont organisés dès votre arrivée jusqu'à votre départ.</p>
+              <h3 class="inclus-title" data-i18n="inclus.card2.title">Tous les transferts</h3>
+              <p class="inclus-desc" data-i18n="inclus.card2.desc">Tous vos déplacements sont organisés dès votre arrivée jusqu'à votre départ.</p>
             </div>
             <div class="inclus-card reveal">
               <div class="inclus-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>
               </div>
-              <h3 class="inclus-title">Hébergement 8 jours · 7 nuits</h3>
-              <p class="inclus-desc">Séjour dans un lieu calme face à l'océan, pensé pour favoriser le repos et la reconnexion.</p>
+              <h3 class="inclus-title" data-i18n="inclus.card3.title">Hébergement 8 jours · 7 nuits</h3>
+              <p class="inclus-desc" data-i18n="inclus.card3.desc">Séjour dans un lieu calme face à l'océan, pensé pour favoriser le repos et la reconnexion.</p>
             </div>
             <div class="inclus-card reveal">
               <div class="inclus-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>
               </div>
-              <h3 class="inclus-title">Pension complète</h3>
-              <p class="inclus-desc">Des repas sains, gourmands et équilibrés préparés tout au long du séjour.</p>
+              <h3 class="inclus-title" data-i18n="inclus.card4.title">Pension complète</h3>
+              <p class="inclus-desc" data-i18n="inclus.card4.desc">Des repas sains, gourmands et équilibrés préparés tout au long du séjour.</p>
             </div>
             <div class="inclus-card reveal">
               <div class="inclus-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
               </div>
-              <h3 class="inclus-title">Coach sportif</h3>
-              <p class="inclus-desc">Un accompagnement quotidien adapté à tous les niveaux.</p>
+              <h3 class="inclus-title" data-i18n="inclus.card5.title">Coach sportif</h3>
+              <p class="inclus-desc" data-i18n="inclus.card5.desc">Un accompagnement quotidien adapté à tous les niveaux.</p>
             </div>
             <div class="inclus-card reveal">
               <div class="inclus-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/></svg>
               </div>
-              <h3 class="inclus-title">Yoga · Respiration · Méditation</h3>
-              <p class="inclus-desc">Des pratiques guidées pour retrouver calme, mobilité et énergie.</p>
+              <h3 class="inclus-title" data-i18n="inclus.card6.title">Yoga · Respiration · Méditation</h3>
+              <p class="inclus-desc" data-i18n="inclus.card6.desc">Des pratiques guidées pour retrouver calme, mobilité et énergie.</p>
             </div>
             <div class="inclus-card reveal">
               <div class="inclus-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
               </div>
-              <h3 class="inclus-title">Accompagnement quotidien</h3>
-              <p class="inclus-desc">Présence et accompagnement de Pr. Laila Qottaya durant toute l'expérience.</p>
+              <h3 class="inclus-title" data-i18n="inclus.card7.title">Accompagnement quotidien</h3>
+              <p class="inclus-desc" data-i18n="inclus.card7.desc">Présence et accompagnement de Pr. Laila Qottaya durant toute l'expérience.</p>
             </div>
           </div>
 
           <div class="pricing-card booking-pricing reveal">
-            <p class="pricing-card-eyebrow">TARIF TOUT INCLUS</p>
+            <p class="pricing-card-eyebrow" data-i18n="pricing.eyebrow">TARIF TOUT INCLUS</p>
             <div class="pricing-price-block">
               <span class="pricing-main-line">
-                <span class="pricing-only">SEULEMENT</span>
+                <span class="pricing-only" data-i18n="pricing.only">SEULEMENT</span>
                 <span class="pricing-amount">12&nbsp;510<span class="pricing-currency">&nbsp;DH</span></span>
               </span>
-              <span class="pricing-per-person">par personne</span>
+              <span class="pricing-per-person" data-i18n="pricing.perPerson">par personne</span>
             </div>
-            <p class="pricing-payment">Paiement en plusieurs fois disponible.</p>
-            <p class="pricing-note">Un acompte confirme votre place, le solde se règle avant le départ.</p>
+            <p class="pricing-payment" data-i18n="pricing.payment">Paiement en plusieurs fois disponible.</p>
+            <p class="pricing-note" data-i18n="pricing.note">Un acompte confirme votre place, le solde se règle avant le départ.</p>
           </div>
 
-          <form class="reservation-form booking-form reveal" id="reservationForm" aria-label="Formulaire de réservation" novalidate aria-describedby="formFeedback">
+          <form class="reservation-form booking-form reveal" id="reservationForm" aria-label="Formulaire de réservation" data-i18n-aria="form.ariaLabel" novalidate aria-describedby="formFeedback">
             <label>
-              <span>Nom complet</span>
+              <span data-i18n="form.name">Nom complet</span>
               <input type="text" name="name" autocomplete="name" required aria-required="true" />
             </label>
             <label>
-              <span>Téléphone</span>
+              <span data-i18n="form.phone">Téléphone</span>
               <input type="tel" name="phone" autocomplete="tel" required aria-required="true" inputmode="tel" />
             </label>
             <label>
-              <span>Email</span>
+              <span data-i18n="form.email">Email</span>
               <input type="email" name="email" autocomplete="email" required aria-required="true" inputmode="email" />
             </label>
             <label>
-              <span>Ville</span>
+              <span data-i18n="form.city">Ville</span>
               <input type="text" name="city" autocomplete="address-level2" required aria-required="true" />
             </label>
             <label>
-              <span>Participants</span>
+              <span data-i18n="form.guests">Participants</span>
               <select name="guests" required aria-required="true">
-                <option value="">Sélectionner</option>
-                <option value="1 personne">1 personne</option>
-                <option value="2 personnes">2 personnes</option>
-                <option value="3 personnes">3 personnes</option>
-                <option value="4+ personnes">4+ personnes</option>
+                <option value="" data-i18n="form.selectPlaceholder">Sélectionner</option>
+                <option value="1 personne" data-i18n="form.guests1">1 personne</option>
+                <option value="2 personnes" data-i18n="form.guests2">2 personnes</option>
+                <option value="3 personnes" data-i18n="form.guests3">3 personnes</option>
+                <option value="4+ personnes" data-i18n="form.guests4">4+ personnes</option>
               </select>
             </label>
             <label class="form-message">
-              <span>Message</span>
-              <textarea name="message" rows="4" placeholder="Votre question ou préférence"></textarea>
+              <span data-i18n="form.message">Message</span>
+              <textarea name="message" rows="4" placeholder="Votre question ou préférence" data-i18n-placeholder="form.messagePlaceholder"></textarea>
             </label>
-            <button class="btn btn-primary" type="submit" data-cta="reservation-form">Réserver ma place</button>
-            <p class="booking-form-note">Une confirmation WhatsApp s'ouvrira automatiquement après l'enregistrement de vos informations.</p>
+            <button class="btn btn-primary" type="submit" data-cta="reservation-form" data-i18n="common.reserve">Réserver ma place</button>
+            <p class="booking-form-note" data-i18n="form.note">Une confirmation WhatsApp s'ouvrira automatiquement après l'enregistrement de vos informations.</p>
             <p class="form-feedback" id="formFeedback" role="status" aria-live="polite"></p>
           </form>
         </div>
@@ -609,38 +630,38 @@
       <!-- ── PERSONNALISEZ VOTRE EXPÉRIENCE ─────────────────── -->
       <section class="section options" id="options">
         <div class="section-heading options-heading reveal">
-          <p class="eyebrow">EXPÉRIENCES INDIVIDUELLES</p>
-          <h2>Personnalisez votre expérience</h2>
-          <p class="options-subtitle">Pour celles qui souhaitent aller encore plus loin, plusieurs expériences individuelles peuvent être réservées pendant le séjour.</p>
+          <p class="eyebrow" data-i18n="options.eyebrow">EXPÉRIENCES INDIVIDUELLES</p>
+          <h2 data-i18n="options.h2">Personnalisez votre expérience</h2>
+          <p class="options-subtitle" data-i18n="options.subtitle">Pour celles qui souhaitent aller encore plus loin, plusieurs expériences individuelles peuvent être réservées pendant le séjour.</p>
         </div>
         <div class="options-grid">
           <div class="option-card reveal">
             <div class="option-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
             </div>
-            <h3 class="option-title">Consultation privée avec Pr. Laila Qottaya</h3>
-            <p class="option-desc">Un accompagnement individuel adapté à vos besoins.</p>
+            <h3 class="option-title" data-i18n="options.card1.title">Consultation privée avec Pr. Laila Qottaya</h3>
+            <p class="option-desc" data-i18n="options.card1.desc">Un accompagnement individuel adapté à vos besoins.</p>
           </div>
           <div class="option-card reveal">
             <div class="option-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/><path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/><path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/><path d="M18 11a2 2 0 1 1 4 0v3a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>
             </div>
-            <h3 class="option-title">Massage holistique</h3>
-            <p class="option-desc">Une parenthèse de détente profonde pour relâcher les tensions.</p>
+            <h3 class="option-title" data-i18n="options.card2.title">Massage holistique</h3>
+            <p class="option-desc" data-i18n="options.card2.desc">Une parenthèse de détente profonde pour relâcher les tensions.</p>
           </div>
           <div class="option-card reveal">
             <div class="option-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
             </div>
-            <h3 class="option-title">Ostéopathie holistique</h3>
-            <p class="option-desc">Un accompagnement personnalisé pour retrouver davantage de confort et d'équilibre.</p>
+            <h3 class="option-title" data-i18n="options.card3.title">Ostéopathie holistique</h3>
+            <p class="option-desc" data-i18n="options.card3.desc">Un accompagnement personnalisé pour retrouver davantage de confort et d'équilibre.</p>
           </div>
           <div class="option-card reveal">
             <div class="option-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5s2.5 2 5 2 2.5-2 5-2 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 1.9.5 2.5 1"/></svg>
             </div>
-            <h3 class="option-title">Balade à cheval sur la plage</h3>
-            <p class="option-desc">Une expérience privilégiée face à l'océan Atlantique.</p>
+            <h3 class="option-title" data-i18n="options.card4.title">Balade à cheval sur la plage</h3>
+            <p class="option-desc" data-i18n="options.card4.desc">Une expérience privilégiée face à l'océan Atlantique.</p>
           </div>
         </div>
       </section>
@@ -648,152 +669,152 @@
       <!-- ── FAQ ───────────────────────────────────────────── -->
       <section class="section faq" id="faq">
         <div class="section-heading reveal">
-          <p class="eyebrow">QUESTIONS FRÉQUENTES</p>
-          <h2>Tout ce que vous devez savoir.</h2>
+          <p class="eyebrow" data-i18n="faq.eyebrow">QUESTIONS FRÉQUENTES</p>
+          <h2 data-i18n="faq.h2">Tout ce que vous devez savoir.</h2>
         </div>
         <div class="accordion reveal">
           <div class="accordion-item">
             <button class="accordion-header" aria-controls="faq-1" aria-expanded="false">
-              Quelles sont les dates exactes ?
+              <span data-i18n="faq1.q">Quelles sont les dates exactes ?</span>
               <span class="accordion-icon" aria-hidden="true">+</span>
             </button>
             <div class="accordion-content" id="faq-1" aria-hidden="true">
-              <p>La retraite se déroule du <strong>10 au 17 août 2026</strong>, soit 8 jours et 7 nuits à Ocean Dunes House, Mirleft, Maroc.</p>
+              <p data-i18n-html="faq1.a">La retraite se déroule du <strong>10 au 17 août 2026</strong>, soit 8 jours et 7 nuits à Ocean Dunes House, Mirleft, Maroc.</p>
             </div>
           </div>
           <div class="accordion-item">
             <button class="accordion-header" aria-controls="faq-2" aria-expanded="false">
-              Où se trouve la retraite ?
+              <span data-i18n="faq2.q">Où se trouve la retraite ?</span>
               <span class="accordion-icon" aria-hidden="true">+</span>
             </button>
             <div class="accordion-content" id="faq-2" aria-hidden="true">
-              <p>Le séjour a lieu à <strong>Ocean Dunes House, Mirleft, Maroc</strong>, dans un cadre lumineux entre océan, dunes et piscine. Mirleft est accessible en voiture depuis Agadir (environ 1h30).</p>
+              <p data-i18n-html="faq2.a">Le séjour a lieu à <strong>Ocean Dunes House, Mirleft, Maroc</strong>, dans un cadre lumineux entre océan, dunes et piscine. Mirleft est accessible en voiture depuis Agadir (environ 1h30).</p>
             </div>
           </div>
           <div class="accordion-item">
             <button class="accordion-header" aria-controls="faq-3" aria-expanded="false">
-              Faut-il avoir de l'expérience ?
+              <span data-i18n="faq3.q">Faut-il avoir de l'expérience ?</span>
               <span class="accordion-icon" aria-hidden="true">+</span>
             </button>
             <div class="accordion-content" id="faq-3" aria-hidden="true">
-              <p>Aucune expérience n'est requise. Toutes les activités sont accessibles à tous les niveaux et adaptées au rythme de chacune. Cette retraite est pensée pour les débutantes comme pour les pratiquantes.</p>
+              <p data-i18n="faq3.a">Aucune expérience n'est requise. Toutes les activités sont accessibles à tous les niveaux et adaptées au rythme de chacune. Cette retraite est pensée pour les débutantes comme pour les pratiquantes.</p>
             </div>
           </div>
           <div class="accordion-item">
             <button class="accordion-header" aria-controls="faq-4" aria-expanded="false">
-              Combien de participantes seront présentes ?
+              <span data-i18n="faq4.q">Combien de participantes seront présentes ?</span>
               <span class="accordion-icon" aria-hidden="true">+</span>
             </button>
             <div class="accordion-content" id="faq-4" aria-hidden="true">
-              <p>Le groupe est limité à <strong>20 participantes maximum</strong> pour préserver un accompagnement attentif et une atmosphère intime et bienveillante.</p>
+              <p data-i18n-html="faq4.a">Le groupe est limité à <strong>20 participantes maximum</strong> pour préserver un accompagnement attentif et une atmosphère intime et bienveillante.</p>
             </div>
           </div>
           <div class="accordion-item">
             <button class="accordion-header" aria-controls="faq-5" aria-expanded="false">
-              Comment confirmer ma réservation ?
+              <span data-i18n="faq5.q">Comment confirmer ma réservation ?</span>
               <span class="accordion-icon" aria-hidden="true">+</span>
             </button>
             <div class="accordion-content" id="faq-5" aria-hidden="true">
-              <p>Remplissez le formulaire de réservation ci-dessous. Vous serez redirigée vers WhatsApp pour confirmer votre place et recevoir toutes les informations pratiques directement.</p>
+              <p data-i18n="faq5.a">Remplissez le formulaire de réservation ci-dessous. Vous serez redirigée vers WhatsApp pour confirmer votre place et recevoir toutes les informations pratiques directement.</p>
             </div>
           </div>
           <div class="accordion-item">
             <button class="accordion-header" aria-controls="faq-6" aria-expanded="false">
-              Comment venir à Mirleft ?
+              <span data-i18n="faq6.q">Comment venir à Mirleft ?</span>
               <span class="accordion-icon" aria-hidden="true">+</span>
             </button>
             <div class="accordion-content" id="faq-6" aria-hidden="true">
-              <p>Mirleft est accessible depuis <strong>Agadir en environ 1h30</strong> de route. L'aéroport Al Massira d'Agadir est le plus proche. Des taxis collectifs et navettes depuis Agadir ou Tiznit vous amèneront à Mirleft.</p>
+              <p data-i18n-html="faq6.a">Mirleft est accessible depuis <strong>Agadir en environ 1h30</strong> de route. L'aéroport Al Massira d'Agadir est le plus proche. Des taxis collectifs et navettes depuis Agadir ou Tiznit vous amèneront à Mirleft.</p>
             </div>
           </div>
           <div class="accordion-item">
             <button class="accordion-header" aria-controls="faq-7" aria-expanded="false">
-              Les repas sont-ils inclus ?
+              <span data-i18n="faq7.q">Les repas sont-ils inclus ?</span>
               <span class="accordion-icon" aria-hidden="true">+</span>
             </button>
             <div class="accordion-content" id="faq-7" aria-hidden="true">
-              <p>Oui, <strong>tous les repas sont inclus</strong> : petit-déjeuner, déjeuner et dîner chaque jour. La cuisine est saine, savoureuse et adaptée aux régimes alimentaires particuliers sur demande.</p>
+              <p data-i18n-html="faq7.a">Oui, <strong>tous les repas sont inclus</strong> : petit-déjeuner, déjeuner et dîner chaque jour. La cuisine est saine, savoureuse et adaptée aux régimes alimentaires particuliers sur demande.</p>
             </div>
           </div>
           <div class="accordion-item">
             <button class="accordion-header" aria-controls="faq-8" aria-expanded="false">
-              Comment fonctionne l'hébergement ?
+              <span data-i18n="faq8.q">Comment fonctionne l'hébergement ?</span>
               <span class="accordion-icon" aria-hidden="true">+</span>
             </button>
             <div class="accordion-content" id="faq-8" aria-hidden="true">
-              <p>L'hébergement se fait en <strong>chambre double à Ocean Dunes House</strong>. Les chambres sont confortables et lumineuses, dans un cadre face à l'océan. L'attribution des chambres se fait à la réservation.</p>
+              <p data-i18n-html="faq8.a">L'hébergement se fait en <strong>chambre double à Ocean Dunes House</strong>. Les chambres sont confortables et lumineuses, dans un cadre face à l'océan. L'attribution des chambres se fait à la réservation.</p>
             </div>
           </div>
           <div class="accordion-item">
             <button class="accordion-header" aria-controls="faq-9" aria-expanded="false">
-              Puis-je venir seule ?
+              <span data-i18n="faq9.q">Puis-je venir seule ?</span>
               <span class="accordion-icon" aria-hidden="true">+</span>
             </button>
             <div class="accordion-content" id="faq-9" aria-hidden="true">
-              <p>Absolument. La majorité des participantes viennent seules. <strong>L'esprit de groupe et la bienveillance</strong> de Dr. Laila créent rapidement une atmosphère chaleureuse où chacune se sent à l'aise.</p>
+              <p data-i18n-html="faq9.a">Absolument. La majorité des participantes viennent seules. <strong>L'esprit de groupe et la bienveillance</strong> de Dr. Laila créent rapidement une atmosphère chaleureuse où chacune se sent à l'aise.</p>
             </div>
           </div>
           <div class="accordion-item">
             <button class="accordion-header" aria-controls="faq-10" aria-expanded="false">
-              Y a-t-il des options de paiement en plusieurs fois ?
+              <span data-i18n="faq10.q">Y a-t-il des options de paiement en plusieurs fois ?</span>
               <span class="accordion-icon" aria-hidden="true">+</span>
             </button>
             <div class="accordion-content" id="faq-10" aria-hidden="true">
-              <p>Oui, des facilités de paiement sont possibles. Contactez-nous sur WhatsApp pour discuter des modalités adaptées à votre situation. <strong>Un acompte confirme votre place</strong>, le solde étant réglé avant le départ.</p>
+              <p data-i18n-html="faq10.a">Oui, des facilités de paiement sont possibles. Contactez-nous sur WhatsApp pour discuter des modalités adaptées à votre situation. <strong>Un acompte confirme votre place</strong>, le solde étant réglé avant le départ.</p>
             </div>
           </div>
           <div class="accordion-item">
             <button class="accordion-header" aria-controls="faq-11" aria-expanded="false">
-              Quelle est la politique d'annulation ?
+              <span data-i18n="faq11.q">Quelle est la politique d'annulation ?</span>
               <span class="accordion-icon" aria-hidden="true">+</span>
             </button>
             <div class="accordion-content" id="faq-11" aria-hidden="true">
-              <p>En cas d'annulation plus de 30 jours avant le séjour, l'acompte est remboursé à 80%. En deçà de 30 jours, l'acompte reste acquis mais votre place peut être transférée à une autre personne. Contactez-nous pour tout cas particulier.</p>
+              <p data-i18n="faq11.a">En cas d'annulation plus de 30 jours avant le séjour, l'acompte est remboursé à 80%. En deçà de 30 jours, l'acompte reste acquis mais votre place peut être transférée à une autre personne. Contactez-nous pour tout cas particulier.</p>
             </div>
           </div>
           <div class="accordion-item">
             <button class="accordion-header" aria-controls="faq-12" aria-expanded="false">
-              En quelle langue se déroulent les activités ?
+              <span data-i18n="faq12.q">En quelle langue se déroulent les activités ?</span>
               <span class="accordion-icon" aria-hidden="true">+</span>
             </button>
             <div class="accordion-content" id="faq-12" aria-hidden="true">
-              <p>Les séances sont animées principalement en <strong>français et en arabe darija</strong>. Dr. Laila s'adapte à la composition du groupe. L'anglais peut être utilisé si besoin.</p>
+              <p data-i18n-html="faq12.a">Les séances sont animées principalement en <strong>français et en arabe darija</strong>. Dr. Laila s'adapte à la composition du groupe. L'anglais peut être utilisé si besoin.</p>
             </div>
           </div>
           <div class="accordion-item">
             <button class="accordion-header" aria-controls="faq-13" aria-expanded="false">
-              Que dois-je apporter ?
+              <span data-i18n="faq13.q">Que dois-je apporter ?</span>
               <span class="accordion-icon" aria-hidden="true">+</span>
             </button>
             <div class="accordion-content" id="faq-13" aria-hidden="true">
-              <p>Prévoyez des <strong>vêtements confortables pour le yoga</strong>, une tenue de bain, une veste légère pour les soirées, de la crème solaire et vos médicaments personnels. Tapis de yoga, coussins et tout le matériel sont fournis sur place.</p>
+              <p data-i18n-html="faq13.a">Prévoyez des <strong>vêtements confortables pour le yoga</strong>, une tenue de bain, une veste légère pour les soirées, de la crème solaire et vos médicaments personnels. Tapis de yoga, coussins et tout le matériel sont fournis sur place.</p>
             </div>
           </div>
           <div class="accordion-item">
             <button class="accordion-header" aria-controls="faq-14" aria-expanded="false">
-              Y a-t-il des contre-indications médicales ?
+              <span data-i18n="faq14.q">Y a-t-il des contre-indications médicales ?</span>
               <span class="accordion-icon" aria-hidden="true">+</span>
             </button>
             <div class="accordion-content" id="faq-14" aria-hidden="true">
-              <p>Les activités sont douces et accessibles à toutes. Si vous avez une condition médicale particulière, nous vous conseillons d'en informer Dr. Laila à l'inscription afin qu'elle puisse adapter les séances à vos besoins.</p>
+              <p data-i18n="faq14.a">Les activités sont douces et accessibles à toutes. Si vous avez une condition médicale particulière, nous vous conseillons d'en informer Dr. Laila à l'inscription afin qu'elle puisse adapter les séances à vos besoins.</p>
             </div>
           </div>
           <div class="accordion-item">
             <button class="accordion-header" aria-controls="faq-15" aria-expanded="false">
-              À quelle heure est l'arrivée le premier jour ?
+              <span data-i18n="faq15.q">À quelle heure est l'arrivée le premier jour ?</span>
               <span class="accordion-icon" aria-hidden="true">+</span>
             </button>
             <div class="accordion-content" id="faq-15" aria-hidden="true">
-              <p>L'accueil commence à partir de <strong>14h00 le dimanche 10 août</strong>. Le premier repas est servi en soirée. Il est possible d'arriver plus tôt sous réserve de disponibilité des chambres.</p>
+              <p data-i18n-html="faq15.a">L'accueil commence à partir de <strong>14h00 le dimanche 10 août</strong>. Le premier repas est servi en soirée. Il est possible d'arriver plus tôt sous réserve de disponibilité des chambres.</p>
             </div>
           </div>
           <div class="accordion-item">
             <button class="accordion-header" aria-controls="faq-16" aria-expanded="false">
-              À quelle heure est le départ le dernier jour ?
+              <span data-i18n="faq16.q">À quelle heure est le départ le dernier jour ?</span>
               <span class="accordion-icon" aria-hidden="true">+</span>
             </button>
             <div class="accordion-content" id="faq-16" aria-hidden="true">
-              <p>Le <strong>dimanche 17 août</strong>, les départs se font à partir de 10h00 après le petit-déjeuner. Les chambres doivent être libérées avant midi. Il est possible d'organiser vos transferts avec l'équipe à l'avance.</p>
+              <p data-i18n-html="faq16.a">Le <strong>dimanche 17 août</strong>, les départs se font à partir de 10h00 après le petit-déjeuner. Les chambres doivent être libérées avant midi. Il est possible d'organiser vos transferts avec l'équipe à l'avance.</p>
             </div>
           </div>
         </div>
@@ -804,72 +825,72 @@
     </main>
 
     <!-- ── MOBILE STICKY CTA BAR ──────────────────────── -->
-    <div class="mobile-cta-bar" id="mobileCTABar" aria-hidden="true" role="complementary" aria-label="Accès rapide">
-      <a class="mcb-reserve" href="#reservation" data-cta="mobile-sticky" tabindex="-1">Réserver ma place</a>
-      <a class="mcb-whatsapp" href="https://wa.me/31625375673?text=Bonjour%20je%20souhaite%20obtenir%20plus%20d'informations%20concernant%20le%20Voyage%20Holistique%20du%2010%20au%2017%20ao%C3%BBt%20%C3%A0%20Mirleft." target="_blank" rel="noreferrer" aria-label="Contacter sur WhatsApp" data-cta="mobile-sticky-wa" tabindex="-1">
+    <div class="mobile-cta-bar" id="mobileCTABar" aria-hidden="true" role="complementary" aria-label="Accès rapide" data-i18n-aria="mobilecta.aria">
+      <a class="mcb-reserve" href="#reservation" data-cta="mobile-sticky" tabindex="-1" data-i18n="common.reserve">Réserver ma place</a>
+      <a class="mcb-whatsapp" href="https://wa.me/31625375673?text=Bonjour%20je%20souhaite%20obtenir%20plus%20d'informations%20concernant%20le%20Voyage%20Holistique%20du%2010%20au%2017%20ao%C3%BBt%20%C3%A0%20Mirleft." target="_blank" rel="noreferrer" aria-label="Contacter sur WhatsApp" data-i18n-aria="common.whatsappAria" data-i18n-wa="true" data-cta="mobile-sticky-wa" tabindex="-1">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true" fill="currentColor"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L32 503l137.9-36.1c32.6 17.8 69 27.2 106.4 27.2 122.4 0 222-99.6 222-222 0-59.3-23-115.1-65-157.1zM223.9 474c-33.1 0-65.7-8.9-94.1-25.7l-6.7-4-82.1 21.5 21.9-80-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.3-186.6 184.3zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
       </a>
     </div>
 
     <!-- ── STICKY BUTTONS ────────────────────────────────── -->
-    <a class="sticky-reserve" href="#reservation" data-cta="sticky">Réserver ma place</a>
-    <a class="sticky-whatsapp" href="https://wa.me/31625375673?text=Bonjour%20je%20souhaite%20obtenir%20plus%20d'informations%20concernant%20le%20Voyage%20Holistique%20du%2010%20au%2017%20ao%C3%BBt%20%C3%A0%20Mirleft." target="_blank" rel="noreferrer" aria-label="Contacter sur WhatsApp" data-cta="sticky">
+    <a class="sticky-reserve" href="#reservation" data-cta="sticky" data-i18n="common.reserve">Réserver ma place</a>
+    <a class="sticky-whatsapp" href="https://wa.me/31625375673?text=Bonjour%20je%20souhaite%20obtenir%20plus%20d'informations%20concernant%20le%20Voyage%20Holistique%20du%2010%20au%2017%20ao%C3%BBt%20%C3%A0%20Mirleft." target="_blank" rel="noreferrer" aria-label="Contacter sur WhatsApp" data-i18n-aria="common.whatsappAria" data-i18n-wa="true" data-cta="sticky">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="24" height="24" fill="currentColor" aria-hidden="true" style="display:block">
         <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L32 503l137.9-36.1c32.6 17.8 69 27.2 106.4 27.2 122.4 0 222-99.6 222-222 0-59.3-23-115.1-65-157.1zM223.9 474c-33.1 0-65.7-8.9-94.1-25.7l-6.7-4-82.1 21.5 21.9-80-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.3-186.6 184.3zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
       </svg>
     </a>
 
     <!-- ── LIGHTBOX ───────────────────────────────────────── -->
-    <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Image agrandie">
-      <button aria-label="Fermer la galerie" id="closeLightbox"><i data-lucide="x"></i></button>
+    <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Image agrandie" data-i18n-aria="lightbox.aria">
+      <button aria-label="Fermer la galerie" id="closeLightbox" data-i18n-aria="lightbox.closeAria"><i data-lucide="x"></i></button>
       <img alt="" />
     </div>
 
     <!-- ── EXIT MODAL ────────────────────────────────────── -->
     <div class="exit-modal" id="exitModal" aria-hidden="true" role="dialog" aria-labelledby="exitTitle">
       <div class="exit-card">
-        <button class="modal-close" id="closeModal" aria-label="Fermer"><i data-lucide="x"></i></button>
-        <p class="eyebrow">Avant de partir</p>
-        <h2 id="exitTitle">Recevez les détails du séjour.</h2>
-        <p>Posez votre question directement sur WhatsApp pour recevoir les informations essentielles.</p>
-        <a class="btn btn-primary" href="https://wa.me/31625375673?text=Bonjour%20je%20souhaite%20obtenir%20plus%20d'informations%20concernant%20le%20Voyage%20Holistique%20du%2010%20au%2017%20ao%C3%BBt%20%C3%A0%20Mirleft." target="_blank" rel="noreferrer" data-cta="footer">Nous contacter sur WhatsApp</a>
+        <button class="modal-close" id="closeModal" aria-label="Fermer" data-i18n-aria="common.close"><i data-lucide="x"></i></button>
+        <p class="eyebrow" data-i18n="exit.eyebrow">Avant de partir</p>
+        <h2 id="exitTitle" data-i18n="exit.h2">Recevez les détails du séjour.</h2>
+        <p data-i18n="exit.desc">Posez votre question directement sur WhatsApp pour recevoir les informations essentielles.</p>
+        <a class="btn btn-primary" href="https://wa.me/31625375673?text=Bonjour%20je%20souhaite%20obtenir%20plus%20d'informations%20concernant%20le%20Voyage%20Holistique%20du%2010%20au%2017%20ao%C3%BBt%20%C3%A0%20Mirleft." target="_blank" rel="noreferrer" data-cta="footer" data-i18n="common.contactWhatsapp" data-i18n-wa="true">Nous contacter sur WhatsApp</a>
       </div>
     </div>
 
     <!-- ── PRIVACY MODAL ─────────────────────────────────── -->
     <div class="legal-modal" id="privacyModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="privacyTitle">
       <article class="legal-card" tabindex="-1">
-        <button class="modal-close legal-close" type="button" aria-label="Fermer" data-close-legal><i data-lucide="x"></i></button>
-        <p class="eyebrow">Confidentialité</p>
-        <h2 id="privacyTitle">Politique de confidentialité</h2>
+        <button class="modal-close legal-close" type="button" aria-label="Fermer" data-i18n-aria="common.close" data-close-legal><i data-lucide="x"></i></button>
+        <p class="eyebrow" data-i18n="privacy.eyebrow">Confidentialité</p>
+        <h2 id="privacyTitle" data-i18n="privacy.h2">Politique de confidentialité</h2>
         <div class="legal-content">
           <section>
-            <h3>Responsable du traitement</h3>
-            <p>Les données collectées dans le cadre de Voyage Holistique sont traitées par Holistic Health Academy, située à Maarif, Casablanca, Maroc.</p>
+            <h3 data-i18n="privacy.s1.title">Responsable du traitement</h3>
+            <p data-i18n="privacy.s1.desc">Les données collectées dans le cadre de Voyage Holistique sont traitées par Holistic Health Academy, située à Maarif, Casablanca, Maroc.</p>
           </section>
           <section>
-            <h3>Données collectées</h3>
-            <p>Lorsque vous remplissez le formulaire de réservation ou contactez l'équipe, nous pouvons collecter votre nom, votre adresse e-mail, votre numéro de téléphone, votre pays de résidence, votre préférence de chambre et le contenu de votre message.</p>
+            <h3 data-i18n="privacy.s2.title">Données collectées</h3>
+            <p data-i18n="privacy.s2.desc">Lorsque vous remplissez le formulaire de réservation ou contactez l'équipe, nous pouvons collecter votre nom, votre adresse e-mail, votre numéro de téléphone, votre pays de résidence, votre préférence de chambre et le contenu de votre message.</p>
           </section>
           <section>
-            <h3>Finalités</h3>
-            <p>Ces informations sont utilisées pour répondre à votre demande, gérer les réservations, assurer le suivi administratif du séjour et vous transmettre les informations pratiques liées à la retraite.</p>
+            <h3 data-i18n="privacy.s3.title">Finalités</h3>
+            <p data-i18n="privacy.s3.desc">Ces informations sont utilisées pour répondre à votre demande, gérer les réservations, assurer le suivi administratif du séjour et vous transmettre les informations pratiques liées à la retraite.</p>
           </section>
           <section>
-            <h3>Base légale</h3>
-            <p>Le traitement repose sur votre consentement lorsque vous nous contactez volontairement, ainsi que sur l'exécution de mesures précontractuelles ou contractuelles liées à votre demande de réservation.</p>
+            <h3 data-i18n="privacy.s4.title">Base légale</h3>
+            <p data-i18n="privacy.s4.desc">Le traitement repose sur votre consentement lorsque vous nous contactez volontairement, ainsi que sur l'exécution de mesures précontractuelles ou contractuelles liées à votre demande de réservation.</p>
           </section>
           <section>
-            <h3>Partage des données</h3>
-            <p>Vos données ne sont pas vendues. Elles peuvent être partagées uniquement avec les outils nécessaires au traitement de votre demande.</p>
+            <h3 data-i18n="privacy.s5.title">Partage des données</h3>
+            <p data-i18n="privacy.s5.desc">Vos données ne sont pas vendues. Elles peuvent être partagées uniquement avec les outils nécessaires au traitement de votre demande.</p>
           </section>
           <section>
-            <h3>Vos droits</h3>
-            <p>Vous pouvez demander l'accès, la rectification ou la suppression de vos données en écrivant à contact@holistichealth.academy.</p>
+            <h3 data-i18n="privacy.s6.title">Vos droits</h3>
+            <p data-i18n="privacy.s6.desc">Vous pouvez demander l'accès, la rectification ou la suppression de vos données en écrivant à contact@holistichealth.academy.</p>
           </section>
           <section>
-            <h3>Contact</h3>
-            <p>Pour toute question : contact@holistichealth.academy ou +31 6 25 37 56 73 / +212 668 108 964.</p>
+            <h3 data-i18n="privacy.s7.title">Contact</h3>
+            <p data-i18n="privacy.s7.desc">Pour toute question : contact@holistichealth.academy ou +31 6 25 37 56 73 / +212 668 108 964.</p>
           </section>
         </div>
       </article>
@@ -878,32 +899,32 @@
     <!-- ── LEGAL MODAL ───────────────────────────────────── -->
     <div class="legal-modal" id="legalModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="legalTitle">
       <article class="legal-card" tabindex="-1">
-        <button class="modal-close legal-close" type="button" aria-label="Fermer" data-close-legal><i data-lucide="x"></i></button>
-        <p class="eyebrow">Informations légales</p>
-        <h2 id="legalTitle">Mentions légales</h2>
+        <button class="modal-close legal-close" type="button" aria-label="Fermer" data-i18n-aria="common.close" data-close-legal><i data-lucide="x"></i></button>
+        <p class="eyebrow" data-i18n="legal.eyebrow">Informations légales</p>
+        <h2 id="legalTitle" data-i18n="legal.h2">Mentions légales</h2>
         <div class="legal-content">
           <section>
-            <h3>Éditeur du site</h3>
-            <p>Le site Voyage Holistique est édité par Holistic Health Academy.</p>
-            <p>Adresse : Maarif, Casablanca, Maroc.</p>
+            <h3 data-i18n="legal.s1.title">Éditeur du site</h3>
+            <p data-i18n="legal.s1.desc1">Le site Voyage Holistique est édité par Holistic Health Academy.</p>
+            <p data-i18n="legal.s1.desc2">Adresse : Maarif, Casablanca, Maroc.</p>
           </section>
           <section>
-            <h3>Contact</h3>
-            <p>Téléphone : +31 6 25 37 56 73 / +212 668 108 964</p>
-            <p>E-mail : contact@holistichealth.academy</p>
-            <p>Instagram : @laila_qottaya</p>
+            <h3 data-i18n="legal.s2.title">Contact</h3>
+            <p data-i18n="legal.s2.phone">Téléphone : +31 6 25 37 56 73 / +212 668 108 964</p>
+            <p data-i18n="legal.s2.email">E-mail : contact@holistichealth.academy</p>
+            <p data-i18n="legal.s2.instagram">Instagram : @laila_qottaya</p>
           </section>
           <section>
-            <h3>Directrice de publication</h3>
-            <p>La direction de publication est assurée par Holistic Health Academy.</p>
+            <h3 data-i18n="legal.s3.title">Directrice de publication</h3>
+            <p data-i18n="legal.s3.desc">La direction de publication est assurée par Holistic Health Academy.</p>
           </section>
           <section>
-            <h3>Propriété intellectuelle</h3>
-            <p>Les textes, images, graphismes, logos et éléments de mise en page présents sur ce site sont protégés. Toute reproduction ou utilisation non autorisée est interdite.</p>
+            <h3 data-i18n="legal.s4.title">Propriété intellectuelle</h3>
+            <p data-i18n="legal.s4.desc">Les textes, images, graphismes, logos et éléments de mise en page présents sur ce site sont protégés. Toute reproduction ou utilisation non autorisée est interdite.</p>
           </section>
           <section>
-            <h3>Données personnelles</h3>
-            <p>Les informations relatives au traitement des données personnelles sont détaillées dans la politique de confidentialité accessible depuis le pied de page.</p>
+            <h3 data-i18n="legal.s5.title">Données personnelles</h3>
+            <p data-i18n="legal.s5.desc">Les informations relatives au traitement des données personnelles sont détaillées dans la politique de confidentialité accessible depuis le pied de page.</p>
           </section>
         </div>
       </article>
@@ -913,8 +934,8 @@
     <footer class="footer">
       <div class="footer-content">
         <div class="footer-column footer-brand">
-          <img src="images/logo.png" alt="Voyage Holistique Logo" class="footer-logo" />
-          <p class="footer-description">Une retraite holistique haut de gamme dédiée aux femmes souhaitant retrouver énergie, équilibre et sérénité grâce à une approche naturelle et profondément humaine.</p>
+          <img src="images/logo.webp" alt="Voyage Holistique Logo" class="footer-logo" width="500" height="164" loading="lazy" decoding="async" />
+          <p class="footer-description" data-i18n="footer.brandDesc">Une retraite holistique haut de gamme dédiée aux femmes souhaitant retrouver énergie, équilibre et sérénité grâce à une approche naturelle et profondément humaine.</p>
           <div class="social-links">
             <a href="#" class="social-link" aria-label="Instagram">
               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -936,17 +957,17 @@
           </div>
         </div>
         <div class="footer-column footer-nav">
-          <h3 class="footer-title">Navigation</h3>
-          <a href="#difference">Pour qui</a>
-          <a href="#expert">Dr. Laila</a>
-          <a href="#activites">Programme</a>
-          <a href="#accommodation">Lieu</a>
-          <a href="#inclus">Ce qui est inclus</a>
-          <a href="#faq">FAQ</a>
-          <a href="#reservation">Réservation</a>
+          <h3 class="footer-title" data-i18n="footer.navTitle">Navigation</h3>
+          <a href="#difference" data-i18n="header.navPourQui">Pour qui</a>
+          <a href="#expert" data-i18n="header.navDrLaila">Dr. Laila</a>
+          <a href="#activites" data-i18n="header.navProgramme">Programme</a>
+          <a href="#accommodation" data-i18n="header.navLieu">Lieu</a>
+          <a href="#inclus" data-i18n="footer.linkInclus">Ce qui est inclus</a>
+          <a href="#faq" data-i18n="header.navFaq">FAQ</a>
+          <a href="#reservation" data-i18n="footer.linkReservation">Réservation</a>
         </div>
         <div class="footer-column footer-contact">
-          <h3 class="footer-title">Contact</h3>
+          <h3 class="footer-title" data-i18n="footer.contactTitle">Contact</h3>
           <a href="https://wa.me/31625375673" target="_blank" rel="noreferrer">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="currentColor"/>
@@ -965,23 +986,24 @@
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="currentColor" stroke-width="2" fill="none"/>
               <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2" fill="none"/>
             </svg>
-            Maarif, Casablanca · Maroc
+            <span data-i18n="footer.location">Maarif, Casablanca · Maroc</span>
           </div>
         </div>
         <div class="footer-column footer-info">
-          <h3 class="footer-title">Informations</h3>
-          <button type="button" data-legal-modal="privacyModal">Politique de confidentialité</button>
-          <button type="button" data-legal-modal="legalModal">Mentions légales</button>
-          <a href="#reservation">Conditions générales</a>
+          <h3 class="footer-title" data-i18n="footer.infoTitle">Informations</h3>
+          <button type="button" data-legal-modal="privacyModal" data-i18n="privacy.h2">Politique de confidentialité</button>
+          <button type="button" data-legal-modal="legalModal" data-i18n="legal.h2">Mentions légales</button>
+          <a href="#reservation" data-i18n="footer.cgv">Conditions générales</a>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2026 Voyage Holistique — Tous droits réservés.</p>
+        <p data-i18n="footer.copyright">© 2026 Voyage Holistique — Tous droits réservés.</p>
         <p>Holistic Health Academy</p>
       </div>
     </footer>
 
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-    <script src="script.js?v=20260702d"></script>
+    <script src="i18n.js?v=20260703-perf1"></script>
+    <script src="script.js?v=20260703-perf1"></script>
   </body>
 </html>
