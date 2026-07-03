@@ -169,6 +169,25 @@
           <button type="button" class="lang-btn" data-lang="nl" aria-pressed="false">NL</button>
         </div>
         <a class="header-cta" href="#reservation" data-cta="navbar" data-i18n="common.reserve">Réserver ma place</a>
+        <button type="button" class="mobile-menu-toggle" id="mobileMenuToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Ouvrir le menu" data-i18n-aria="header.menuAria">
+          <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+          <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+        <nav class="mobile-menu-nav" aria-label="Sections" data-i18n-aria="header.ariaSections">
+          <a href="#difference" data-i18n="header.navPourQui">Pour qui</a>
+          <a href="#expert" data-i18n="header.navDrLaila">Dr. Laila</a>
+          <a href="#activites" data-i18n="header.navProgramme">Programme</a>
+          <a href="#accommodation" data-i18n="header.navLieu">Lieu</a>
+          <a href="#faq" data-i18n="header.navFaq">FAQ</a>
+        </nav>
+        <div class="mobile-menu-lang" role="group" data-i18n-aria="header.langAria" aria-label="Choisir la langue">
+          <p class="mobile-menu-lang-label" data-i18n="header.langLabel">Langue</p>
+          <button type="button" class="lang-btn lang-btn-full" data-lang="fr" aria-pressed="true">Français</button>
+          <button type="button" class="lang-btn lang-btn-full" data-lang="en" aria-pressed="false">English</button>
+          <button type="button" class="lang-btn lang-btn-full" data-lang="nl" aria-pressed="false">Nederlands</button>
+        </div>
       </div>
     </header>
 
@@ -234,7 +253,8 @@
           <h2 data-i18n="activites.h2">Ce qui est inclus dans votre voyage</h2>
           <p class="activites-subtitle" data-i18n="activites.subtitle">Chaque journée est pensée pour vous aider à relâcher la pression, retrouver votre énergie et repartir plus alignée. Entre nature, mouvement et détente, ce voyage crée un vrai retour à vous-même dans un cadre élégant et apaisant.</p>
         </div>
-        <div class="activites-grid">
+        <div class="mobile-carousel">
+        <div class="activites-grid" aria-label="Programme du voyage, faites glisser pour voir plus">
           <div class="activite-card reveal">
             <div class="activite-img-wrapper">
               <img src="images/yoga.webp" alt="Yoga au lever du soleil" width="1100" height="619" loading="lazy" decoding="async" data-i18n-alt="activites.card1.title" />
@@ -320,6 +340,13 @@
             <p class="activite-desc" data-i18n="activites.card12.desc">Une expérience apaisante au bord de l'océan pour se reconnecter à la nature.</p>
           </div>
         </div>
+        <button type="button" class="carousel-arrow carousel-arrow-prev" data-carousel-prev aria-label="Élément précédent">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button type="button" class="carousel-arrow carousel-arrow-next" data-carousel-next aria-label="Élément suivant">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        </div>
         <div class="activites-bottom reveal">
           <h3 data-i18n="activites.bottomTitle">Un séjour pensé pour votre équilibre.</h3>
           <p data-i18n="activites.bottomDesc">Bien plus qu'un simple voyage, cette expérience vous offre l'opportunité de prendre soin de votre corps, de votre esprit et de votre énergie dans un cadre exceptionnel.</p>
@@ -379,7 +406,8 @@
           </p>
         </div>
 
-        <div class="value-grid">
+        <div class="mobile-carousel">
+        <div class="value-grid" aria-label="Situations, faites glisser pour voir plus">
           <div class="value-card reveal">
             <div class="value-card-icon-wrapper">
               <img src="images/stress-anxiete.webp" alt="" width="160" height="160" loading="lazy" decoding="async" />
@@ -422,6 +450,13 @@
             <h3 data-i18n="valueprop.card6.title">Prendre soin de soi</h3>
             <p data-i18n="valueprop.card6.desc">Vous cherchez une expérience humaine, douce et profondément ressourçante.</p>
           </div>
+        </div>
+        <button type="button" class="carousel-arrow carousel-arrow-prev" data-carousel-prev aria-label="Élément précédent">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button type="button" class="carousel-arrow carousel-arrow-next" data-carousel-next aria-label="Élément suivant">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
         </div>
 
         <div class="reassurance-block reveal">
@@ -525,7 +560,8 @@
             <h2 data-i18n="activites.h2">Ce qui est inclus dans votre voyage</h2>
             <p class="booking-subtitle" data-i18n="reservation.subtitle">Profitez d'une expérience complète à Mirleft, avec tout l'essentiel inclus pour vivre votre retraite en toute sérénité.</p>
           </div>
-          <div class="inclus-grid">
+          <div class="mobile-carousel">
+          <div class="inclus-grid" aria-label="Ce qui est inclus, faites glisser pour voir plus">
             <div class="inclus-card reveal">
               <div class="inclus-icon" aria-hidden="true">
                 <img src="images/airplane.webp" alt="" aria-hidden="true" width="34" height="34" loading="lazy" decoding="async">
@@ -575,6 +611,13 @@
               <h3 class="inclus-title" data-i18n="inclus.card7.title">Accompagnement quotidien</h3>
               <p class="inclus-desc" data-i18n="inclus.card7.desc">Présence et accompagnement de Pr. Laila Qottaya durant toute l'expérience.</p>
             </div>
+          </div>
+          <button type="button" class="carousel-arrow carousel-arrow-prev" data-carousel-prev aria-label="Élément précédent">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button type="button" class="carousel-arrow carousel-arrow-next" data-carousel-next aria-label="Élément suivant">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
           </div>
 
           <div class="pricing-card booking-pricing reveal">
@@ -634,7 +677,8 @@
           <h2 data-i18n="options.h2">Personnalisez votre expérience</h2>
           <p class="options-subtitle" data-i18n="options.subtitle">Pour celles qui souhaitent aller encore plus loin, plusieurs expériences individuelles peuvent être réservées pendant le séjour.</p>
         </div>
-        <div class="options-grid">
+        <div class="mobile-carousel">
+        <div class="options-grid" aria-label="Personnalisez votre expérience, faites glisser pour voir plus">
           <div class="option-card reveal">
             <div class="option-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
@@ -663,6 +707,13 @@
             <h3 class="option-title" data-i18n="options.card4.title">Balade à cheval sur la plage</h3>
             <p class="option-desc" data-i18n="options.card4.desc">Une expérience privilégiée face à l'océan Atlantique.</p>
           </div>
+        </div>
+        <button type="button" class="carousel-arrow carousel-arrow-prev" data-carousel-prev aria-label="Élément précédent">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button type="button" class="carousel-arrow carousel-arrow-next" data-carousel-next aria-label="Élément suivant">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
         </div>
       </section>
 
