@@ -1,0 +1,15 @@
+{
+  "name": "Voyage Holistique – Retraite Holistique Féminine",
+  "short_name": "Voyage Holistique",
+  "description": "Retraite holistique féminine à Mirleft, Maroc, du 10 au 17 août 2026, animée par Dr. Laila Qottaya et Holistic Health Academy.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FFFDF8",
+  "theme_color": "#FFFDF8",
+  "lang": "fr",
+  "icons": [
+    { "src": "images/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "images/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

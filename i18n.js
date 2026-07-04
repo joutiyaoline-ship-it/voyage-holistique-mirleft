@@ -31,6 +31,8 @@
 
   var T = {
     fr: {
+      "meta.title": "Retraite Holistique Féminine – Mirleft, Maroc | Voyage Holistique",
+      "meta.description": "Retraite bien-être pour femmes du 10 au 17 août 2026 à Mirleft, Maroc, avec Dr. Laila Qottaya. Yoga, méditation et soins holistiques face à l'océan.",
       "skip.link": "Aller au contenu",
       "header.ariaMain": "Navigation principale",
       "header.ariaSections": "Sections",
@@ -189,7 +191,7 @@
       "pricing.only": "SEULEMENT",
       "pricing.perPerson": "par personne",
       "pricing.payment": "Paiement en plusieurs fois disponible.",
-      "pricing.note": "Un acompte confirme votre place, le solde se règle avant le départ.",
+      "pricing.note": "Votre place est confirmée après règlement, et le paiement complet doit être finalisé avant le départ.",
       "form.ariaLabel": "Formulaire de réservation",
       "form.name": "Nom complet",
       "form.phone": "Téléphone",
@@ -257,9 +259,10 @@
       "mobilecta.aria": "Accès rapide",
       "lightbox.aria": "Image agrandie",
       "lightbox.closeAria": "Fermer la galerie",
-      "exit.eyebrow": "Avant de partir",
-      "exit.h2": "Recevez les détails du séjour.",
-      "exit.desc": "Posez votre question directement sur WhatsApp pour recevoir les informations essentielles.",
+      "exit.h2": "Avant de partir…",
+      "exit.desc": "Vous souhaitez recevoir les détails de la retraite sur WhatsApp ? Notre équipe peut répondre à vos questions et vous accompagner.",
+      "exit.ctaPrimary": "Oui, recevoir les détails sur WhatsApp",
+      "exit.ctaSecondary": "Continuer ma lecture",
       "privacy.eyebrow": "Confidentialité",
       "privacy.h2": "Politique de confidentialité",
       "privacy.s1.title": "Responsable du traitement",
@@ -302,6 +305,8 @@
       "footer.copyright": "© 2026 Voyage Holistique — Tous droits réservés."
     },
     en: {
+      "meta.title": "Holistic Women's Retreat – Mirleft, Morocco | Voyage Holistique",
+      "meta.description": "8-day holistic retreat for women, 10-17 August 2026 in Mirleft, Morocco, with Dr. Laila Qottaya. Yoga, meditation and oceanfront wellness care.",
       "skip.link": "Skip to content",
       "header.ariaMain": "Main navigation",
       "header.ariaSections": "Sections",
@@ -459,8 +464,8 @@
       "pricing.eyebrow": "ALL-INCLUSIVE RATE",
       "pricing.only": "ONLY",
       "pricing.perPerson": "per person",
-      "pricing.payment": "Payment in installments available.",
-      "pricing.note": "A deposit confirms your spot, the balance is paid before departure.",
+      "pricing.payment": "Installment payment available.",
+      "pricing.note": "Your spot is confirmed after payment, and the full amount must be completed before departure.",
       "form.ariaLabel": "Reservation form",
       "form.name": "Full Name",
       "form.phone": "Phone",
@@ -528,9 +533,10 @@
       "mobilecta.aria": "Quick access",
       "lightbox.aria": "Enlarged image",
       "lightbox.closeAria": "Close gallery",
-      "exit.eyebrow": "Before you go",
-      "exit.h2": "Get the details of the stay.",
-      "exit.desc": "Ask your question directly on WhatsApp to receive the essential information.",
+      "exit.h2": "Before you go…",
+      "exit.desc": "Would you like to receive the retreat details on WhatsApp? Our team can answer your questions and guide you.",
+      "exit.ctaPrimary": "Yes, send me the details on WhatsApp",
+      "exit.ctaSecondary": "Keep browsing",
       "privacy.eyebrow": "Privacy",
       "privacy.h2": "Privacy Policy",
       "privacy.s1.title": "Data Controller",
@@ -573,6 +579,8 @@
       "footer.copyright": "© 2026 Voyage Holistique — All rights reserved."
     },
     nl: {
+      "meta.title": "Holistische Retraite voor Vrouwen – Mirleft | Voyage Holistique",
+      "meta.description": "Holistische retraite voor vrouwen, 10-17 augustus 2026 in Mirleft, Marokko, met Dr. Laila Qottaya. Yoga, meditatie en wellness aan zee.",
       "skip.link": "Naar de inhoud",
       "header.ariaMain": "Hoofdnavigatie",
       "header.ariaSections": "Secties",
@@ -730,8 +738,8 @@
       "pricing.eyebrow": "ALLES-INBEGREPEN TARIEF",
       "pricing.only": "SLECHTS",
       "pricing.perPerson": "per persoon",
-      "pricing.payment": "Gespreide betaling mogelijk.",
-      "pricing.note": "Een aanbetaling bevestigt je plek, het saldo wordt voor vertrek betaald.",
+      "pricing.payment": "Betaling in termijnen mogelijk.",
+      "pricing.note": "Je plek is bevestigd na betaling, en het volledige bedrag moet vóór vertrek zijn voldaan.",
       "form.ariaLabel": "Reserveringsformulier",
       "form.name": "Volledige naam",
       "form.phone": "Telefoon",
@@ -799,9 +807,10 @@
       "mobilecta.aria": "Snelle toegang",
       "lightbox.aria": "Uitvergrote afbeelding",
       "lightbox.closeAria": "Galerij sluiten",
-      "exit.eyebrow": "Voor je vertrekt",
-      "exit.h2": "Ontvang de details van het verblijf.",
-      "exit.desc": "Stel je vraag rechtstreeks via WhatsApp om de belangrijkste informatie te ontvangen.",
+      "exit.h2": "Voor je vertrekt…",
+      "exit.desc": "Wil je de details van de retraite via WhatsApp ontvangen? Ons team beantwoordt graag je vragen en begeleidt je.",
+      "exit.ctaPrimary": "Ja, stuur me de details via WhatsApp",
+      "exit.ctaSecondary": "Verder lezen",
       "privacy.eyebrow": "Privacy",
       "privacy.h2": "Privacybeleid",
       "privacy.s1.title": "Verwerkingsverantwoordelijke",
@@ -870,6 +879,21 @@
     lang = SUPPORTED.indexOf(lang) !== -1 ? lang : DEFAULT_LANG;
     currentLang = lang;
     document.documentElement.setAttribute("lang", lang);
+
+    var metaTitle = t("meta.title", lang);
+    var metaDesc = t("meta.description", lang);
+    var ogLocale = { fr: "fr_FR", en: "en_US", nl: "nl_NL" }[lang];
+    function setMetaContent(selector, value) {
+      var el = document.querySelector(selector);
+      if (el && value) el.setAttribute("content", value);
+    }
+    if (metaTitle) document.title = metaTitle;
+    setMetaContent('meta[name="description"]', metaDesc);
+    setMetaContent('meta[property="og:title"]', metaTitle);
+    setMetaContent('meta[property="og:description"]', metaDesc);
+    setMetaContent('meta[property="og:locale"]', ogLocale);
+    setMetaContent('meta[name="twitter:title"]', metaTitle);
+    setMetaContent('meta[name="twitter:description"]', metaDesc);
 
     document.querySelectorAll("[data-i18n]").forEach(function (el) {
       el.textContent = t(el.getAttribute("data-i18n"), lang);

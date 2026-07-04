@@ -243,3 +243,38 @@
   .mobile-menu-toggle,
   .mobile-menu{display:none!important}
 }
+
+/* ── "Réserver ma place" CTAs: scroll-margin so the target clears the sticky header ── */
+#reservation{scroll-margin-top:130px}
+#reservationForm{scroll-margin-top:130px}
+
+/* ── EXIT-INTENT POPUP: soft WhatsApp CTA ── */
+.exit-card h2{font-size:clamp(2rem, 4vw, 2.9rem)}
+.exit-actions{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:14px;
+  margin-top:28px;
+}
+.exit-actions .btn-primary{width:100%;text-align:center;justify-content:center}
+.exit-secondary{
+  background:none;
+  border:none;
+  padding:2px 0;
+  margin:0;
+  font-family:var(--sans);
+  font-size:.92rem;
+  font-weight:600;
+  color:var(--muted);
+  text-decoration:underline;
+  text-decoration-color:rgba(43,175,217,.32);
+  text-underline-offset:3px;
+  cursor:pointer;
+  transition:color .25s,text-decoration-color .25s;
+}
+.exit-secondary:hover,
+.exit-secondary:focus-visible{
+  color:var(--forest);
+  text-decoration-color:var(--gold);
+}
