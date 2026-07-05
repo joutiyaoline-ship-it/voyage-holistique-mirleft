@@ -17,6 +17,14 @@
         'https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', '936528165885461');
         fbq('track', 'PageView');
+        if (window.__metaPixelQueue && window.__metaPixelQueue.length) {
+          window.__metaPixelQueue.forEach(function (q) {
+            var ev = q[0], params = q[1];
+            var method = ["PageView", "Lead", "ViewContent", "Contact"].indexOf(ev) !== -1 ? "track" : "trackCustom";
+            fbq(method, ev, params);
+          });
+          window.__metaPixelQueue = [];
+        }
       }
       function __scheduleMetaPixel() {
         if ('requestIdleCallback' in window) {
@@ -84,7 +92,7 @@
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20260703-perf1" />
+    <link rel="stylesheet" href="styles.css?v=20260705-written1" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -836,6 +844,145 @@
         </div>
       </section>
 
+      <!-- ── TÉMOIGNAGES AUDIO ───────────────────────────────── -->
+      <section class="section testimonials" id="testimonials">
+        <div class="section-heading testimonials-heading reveal">
+          <p class="eyebrow" data-i18n="testimonials.eyebrow">TÉMOIGNAGES AUDIO</p>
+          <h2 data-i18n="testimonials.h2">Écoutez les retours de nos participantes</h2>
+          <p class="testimonials-subtitle" data-i18n="testimonials.subtitle">Découvrez les témoignages authentiques de femmes ayant vécu cette retraite holistique. Écoutez leur voix, leurs émotions et leur expérience avant de réserver votre place.</p>
+        </div>
+        <div class="mobile-carousel">
+        <div class="testimonials-grid" aria-label="Témoignages audio, faites glisser pour voir plus">
+          <div class="testimonial-card reveal">
+            <div class="testimonial-top">
+              <div class="testimonial-avatar" aria-hidden="true">FA</div>
+              <div class="testimonial-id">
+                <p class="testimonial-name" data-i18n="testimonials.card1.name">Fatima A.</p>
+                <p class="testimonial-role" data-i18n="testimonials.card1.role">Participante au Voyage Holistique</p>
+              </div>
+            </div>
+            <div class="testimonial-audio">
+              <span class="testimonial-duration" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+                01:18
+              </span>
+              <audio class="testimonial-player" controls preload="metadata" data-audio-number="1" data-duration="01:18" data-i18n-aria="testimonials.card1.audioAria" aria-label="Témoignage audio de Fatima A.">
+                <source src="audio/testimonial-1.mp4" type="audio/mp4">
+              </audio>
+            </div>
+          </div>
+          <div class="testimonial-card reveal">
+            <div class="testimonial-top">
+              <div class="testimonial-avatar" aria-hidden="true">SB</div>
+              <div class="testimonial-id">
+                <p class="testimonial-name" data-i18n="testimonials.card2.name">Samira B.</p>
+                <p class="testimonial-role" data-i18n="testimonials.card2.role">Participante au Voyage Holistique</p>
+              </div>
+            </div>
+            <div class="testimonial-audio">
+              <span class="testimonial-duration" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+                02:45
+              </span>
+              <audio class="testimonial-player" controls preload="metadata" data-audio-number="2" data-duration="02:45" data-i18n-aria="testimonials.card2.audioAria" aria-label="Témoignage audio de Samira B.">
+                <source src="audio/testimonial-2.ogg" type="audio/ogg">
+              </audio>
+            </div>
+          </div>
+          <div class="testimonial-card reveal">
+            <div class="testimonial-top">
+              <div class="testimonial-avatar" aria-hidden="true">NH</div>
+              <div class="testimonial-id">
+                <p class="testimonial-name" data-i18n="testimonials.card3.name">Nadia H.</p>
+                <p class="testimonial-role" data-i18n="testimonials.card3.role">Participante au Voyage Holistique</p>
+              </div>
+            </div>
+            <div class="testimonial-audio">
+              <span class="testimonial-duration" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+                00:56
+              </span>
+              <audio class="testimonial-player" controls preload="metadata" data-audio-number="3" data-duration="00:56" data-i18n-aria="testimonials.card3.audioAria" aria-label="Témoignage audio de Nadia H.">
+                <source src="audio/testimonial-3.ogg" type="audio/ogg">
+              </audio>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="carousel-arrow carousel-arrow-prev" data-carousel-prev aria-label="Élément précédent">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button type="button" class="carousel-arrow carousel-arrow-next" data-carousel-next aria-label="Élément suivant">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        </div>
+      </section>
+
+      <!-- ── TÉMOIGNAGES ÉCRITS ──────────────────────────────── -->
+      <section class="section written-testimonials" id="written-testimonials">
+        <div class="section-heading written-heading reveal">
+          <h2 data-i18n="writtenTestimonials.h2">Ce qui reste après le silence.</h2>
+          <p class="written-subtitle" data-i18n="writtenTestimonials.subtitle">Des mots sincères partagés par les participantes après leur voyage holistique.</p>
+        </div>
+        <div class="written-slider reveal">
+          <button type="button" class="written-arrow written-arrow-prev" data-written-prev data-i18n-aria="writtenTestimonials.prevAria" aria-label="Témoignage précédent">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <div class="written-track-wrap">
+            <div class="written-track" id="writtenTrack">
+              <div class="written-slide">
+                <div class="written-card">
+                  <svg class="written-quote-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.17 6A5.17 5.17 0 0 0 2 11.17V18h6.83v-6.83H4.83c0-1.31 1.06-2.34 2.34-2.34V6zm10 0A5.17 5.17 0 0 0 12 11.17V18h6.83v-6.83h-4.02c0-1.31 1.06-2.34 2.34-2.34V6z"/></svg>
+                  <p class="written-text" data-i18n="writtenTestimonials.t1">Je suis arrivée seule et connaissant à peine Laila. Au terme de cette belle aventure, je repars avec une nouvelle famille de cœur et des amies. Laila voulait nous bichonner, nous surprendre et nous faire découvrir son univers… pari réussi.</p>
+                  <div class="written-stars" aria-hidden="true">★★★★★</div>
+                  <p class="written-name" data-i18n="writtenTestimonials.name">Participante au voyage</p>
+                  <p class="written-desc" data-i18n="writtenTestimonials.desc">Voyage Holistique · Été 2026</p>
+                </div>
+              </div>
+              <div class="written-slide">
+                <div class="written-card">
+                  <svg class="written-quote-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.17 6A5.17 5.17 0 0 0 2 11.17V18h6.83v-6.83H4.83c0-1.31 1.06-2.34 2.34-2.34V6zm10 0A5.17 5.17 0 0 0 12 11.17V18h6.83v-6.83h-4.02c0-1.31 1.06-2.34 2.34-2.34V6z"/></svg>
+                  <p class="written-text" data-i18n="writtenTestimonials.t2">Je n'ai pas les mots pour exprimer tout le bien-être et la sérénité que je ressens aujourd'hui. Ce séjour m'a rappelé l'importance de s'entourer de belles âmes pour dépasser nos maux et s'épanouir.</p>
+                  <div class="written-stars" aria-hidden="true">★★★★★</div>
+                  <p class="written-name" data-i18n="writtenTestimonials.name">Participante au voyage</p>
+                  <p class="written-desc" data-i18n="writtenTestimonials.desc">Voyage Holistique · Été 2026</p>
+                </div>
+              </div>
+              <div class="written-slide">
+                <div class="written-card">
+                  <svg class="written-quote-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.17 6A5.17 5.17 0 0 0 2 11.17V18h6.83v-6.83H4.83c0-1.31 1.06-2.34 2.34-2.34V6zm10 0A5.17 5.17 0 0 0 12 11.17V18h6.83v-6.83h-4.02c0-1.31 1.06-2.34 2.34-2.34V6z"/></svg>
+                  <p class="written-text" data-i18n="writtenTestimonials.t3">Un voyage mémorable, rempli de connexions humaines profondes. Merci à Laila pour son organisation chaleureuse, sa bienveillance et toute l'attention portée à chacune de nous.</p>
+                  <div class="written-stars" aria-hidden="true">★★★★★</div>
+                  <p class="written-name" data-i18n="writtenTestimonials.name">Participante au voyage</p>
+                  <p class="written-desc" data-i18n="writtenTestimonials.desc">Voyage Holistique · Été 2026</p>
+                </div>
+              </div>
+              <div class="written-slide">
+                <div class="written-card">
+                  <svg class="written-quote-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.17 6A5.17 5.17 0 0 0 2 11.17V18h6.83v-6.83H4.83c0-1.31 1.06-2.34 2.34-2.34V6zm10 0A5.17 5.17 0 0 0 12 11.17V18h6.83v-6.83h-4.02c0-1.31 1.06-2.34 2.34-2.34V6z"/></svg>
+                  <p class="written-text" data-i18n="writtenTestimonials.t4">Des âmes qui se sont retrouvées le temps d'une parenthèse, grâce à la magie de Laila. Nous avons pu nous ressourcer, partager, rire, pleurer et avancer ensemble.</p>
+                  <div class="written-stars" aria-hidden="true">★★★★★</div>
+                  <p class="written-name" data-i18n="writtenTestimonials.name">Participante au voyage</p>
+                  <p class="written-desc" data-i18n="writtenTestimonials.desc">Voyage Holistique · Été 2026</p>
+                </div>
+              </div>
+              <div class="written-slide">
+                <div class="written-card">
+                  <svg class="written-quote-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.17 6A5.17 5.17 0 0 0 2 11.17V18h6.83v-6.83H4.83c0-1.31 1.06-2.34 2.34-2.34V6zm10 0A5.17 5.17 0 0 0 12 11.17V18h6.83v-6.83h-4.02c0-1.31 1.06-2.34 2.34-2.34V6z"/></svg>
+                  <p class="written-text" data-i18n="writtenTestimonials.t5">Merci pour ta bienveillance, ta patience et toute l'attention dont tu as fait preuve tout au long de ce séjour. Ta présence, ta générosité et ta douceur m'ont profondément touchée.</p>
+                  <div class="written-stars" aria-hidden="true">★★★★★</div>
+                  <p class="written-name" data-i18n="writtenTestimonials.name">Participante au voyage</p>
+                  <p class="written-desc" data-i18n="writtenTestimonials.desc">Voyage Holistique · Été 2026</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="written-arrow written-arrow-next" data-written-next data-i18n-aria="writtenTestimonials.nextAria" aria-label="Témoignage suivant">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+        <div class="written-dots" id="writtenDots" role="tablist" aria-label="Témoignages"></div>
+      </section>
+
       <!-- ── FAQ ───────────────────────────────────────────── -->
       <section class="section faq" id="faq">
         <div class="section-heading reveal">
@@ -1175,7 +1322,7 @@
     </footer>
 
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-    <script src="i18n.js?v=20260703-perf1"></script>
-    <script src="script.js?v=20260703-perf1"></script>
+    <script src="i18n.js?v=20260705-written1"></script>
+    <script src="script.js?v=20260705-written1"></script>
   </body>
 </html>
