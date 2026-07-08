@@ -4,9 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Meta Pixel Code (deferred until after first paint so it never blocks rendering) -->
+    <!-- Meta Pixel Code -->
     <script>
-      function __loadMetaPixel() {
+      window.__ensureMetaPixel = function () {
+        if (window.fbq) return;
         !function(f,b,e,v,n,t,s)
         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
         n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -17,26 +18,15 @@
         'https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', '936528165885461');
         fbq('track', 'PageView');
-        if (window.__metaPixelQueue && window.__metaPixelQueue.length) {
-          window.__metaPixelQueue.forEach(function (q) {
-            var ev = q[0], params = q[1];
-            var method = ["PageView", "Lead", "ViewContent", "Contact"].indexOf(ev) !== -1 ? "track" : "trackCustom";
-            fbq(method, ev, params);
-          });
-          window.__metaPixelQueue = [];
-        }
-      }
-      function __scheduleMetaPixel() {
-        if ('requestIdleCallback' in window) {
-          requestIdleCallback(__loadMetaPixel, { timeout: 4000 });
-        } else {
-          setTimeout(__loadMetaPixel, 1000);
-        }
-      }
-      if (document.readyState === 'complete') {
-        __scheduleMetaPixel();
-      } else {
-        window.addEventListener('load', __scheduleMetaPixel);
+      };
+      window.__ensureMetaPixel();
+      if (window.__metaPixelQueue && window.__metaPixelQueue.length) {
+        window.__metaPixelQueue.forEach(function (q) {
+          var ev = q[0], params = q[1];
+          var method = ["PageView", "Lead", "ViewContent", "Contact"].indexOf(ev) !== -1 ? "track" : "trackCustom";
+          fbq(method, ev, params);
+        });
+        window.__metaPixelQueue = [];
       }
     </script>
     <noscript><img height="1" width="1" style="display:none"
@@ -1283,7 +1273,7 @@
           <a href="#accommodation" data-i18n="header.navLieu">Lieu</a>
           <a href="#inclus" data-i18n="footer.linkInclus">Ce qui est inclus</a>
           <a href="#faq" data-i18n="header.navFaq">FAQ</a>
-          <a href="#reservation" data-i18n="footer.linkReservation">Réservation</a>
+          <a href="#reservation" data-cta="footer" data-i18n="footer.linkReservation">Réservation</a>
         </div>
         <div class="footer-column footer-contact">
           <h3 class="footer-title" data-i18n="footer.contactTitle">Contact</h3>
