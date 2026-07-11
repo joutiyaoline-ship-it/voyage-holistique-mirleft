@@ -72,16 +72,13 @@
     <link rel="icon" href="images/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
     <link rel="manifest" href="manifest.json" />
-    <link rel="preconnect" href="https://unpkg.com" crossorigin />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://connect.facebook.net" />
+    <link rel="preconnect" href="https://www.clarity.ms" />
     <link rel="preload" as="image" href="images/hero-desktop.webp" media="(min-width: 1024px)" fetchpriority="high" />
     <link rel="preload" as="image" href="images/hero-mobile.webp" media="(max-width: 1023px)" fetchpriority="high" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css?v=20260706-navbar1" />
+    <link rel="preload" as="font" type="font/woff2" href="fonts/inter-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="fonts/cormorant-garamond-latin.woff2" crossorigin />
+    <link rel="stylesheet" href="styles.css?v=20260711-perf1" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -319,7 +316,7 @@
           <p class="eyebrow" aria-hidden="true" data-i18n="hero.eyebrow">VOYAGE HOLISTIQUE • ÉTÉ 2026</p>
           <h1 data-i18n-html="hero.h1">Retraite Holistique<br>Féminine</h1>
           <p class="hero-subtitle" data-i18n="hero.subtitle">au Bord de l'Océan</p>
-          <p class="hero-tagline"><span><i data-lucide="calendar" aria-hidden="true"></i><span data-i18n="hero.dates">10–17 août 2026</span></span><span><i data-lucide="plane" aria-hidden="true"></i><span data-i18n="hero.location">Mirleft, Maroc</span></span></p>
+          <p class="hero-tagline"><span><svg class="lucide lucide-calendar" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg><span data-i18n="hero.dates">10–17 août 2026</span></span><span><svg class="lucide lucide-plane" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg><span data-i18n="hero.location">Mirleft, Maroc</span></span></p>
           <p class="hero-all-inclusive">✓ All Inclusive</p>
           <div class="hero-copy">
             <strong data-i18n="hero.copyStrong">8 jours pour retrouver votre équilibre et votre énergie.</strong>
@@ -334,7 +331,7 @@
           <div class="hero-actions" aria-label="Actions principales" data-i18n-aria="hero.actionsAria">
             <a class="btn btn-primary" href="#reservation" data-cta="hero" data-i18n="common.reserve">Réserver ma place</a>
             <a class="btn btn-ghost" href="https://wa.me/31625375673?text=Bonjour%20je%20souhaite%20obtenir%20plus%20d'informations%20concernant%20le%20Voyage%20Holistique%20du%2010%20au%2017%20ao%C3%BBt%20%C3%A0%20Mirleft." target="_blank" rel="noreferrer" data-cta="hero" data-i18n-wa="true">
-              <i data-lucide="message-circle" aria-hidden="true"></i>
+              <svg class="lucide lucide-message-circle" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg>
               WhatsApp
             </a>
           </div>
@@ -1184,14 +1181,14 @@
 
     <!-- ── LIGHTBOX ───────────────────────────────────────── -->
     <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Image agrandie" data-i18n-aria="lightbox.aria">
-      <button aria-label="Fermer la galerie" id="closeLightbox" data-i18n-aria="lightbox.closeAria"><i data-lucide="x"></i></button>
+      <button aria-label="Fermer la galerie" id="closeLightbox" data-i18n-aria="lightbox.closeAria"><svg class="lucide lucide-x" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
       <img alt="" />
     </div>
 
     <!-- ── EXIT MODAL ────────────────────────────────────── -->
     <div class="exit-modal" id="exitModal" aria-hidden="true" role="dialog" aria-labelledby="exitTitle">
       <div class="exit-card">
-        <button class="modal-close" id="closeModal" aria-label="Fermer" data-i18n-aria="common.close"><i data-lucide="x"></i></button>
+        <button class="modal-close" id="closeModal" aria-label="Fermer" data-i18n-aria="common.close"><svg class="lucide lucide-x" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
         <h2 id="exitTitle" data-i18n="exit.h2">Avant de partir…</h2>
         <p data-i18n="exit.desc">Vous souhaitez recevoir les détails de la retraite sur WhatsApp&nbsp;? Notre équipe peut répondre à vos questions et vous accompagner.</p>
         <div class="exit-actions">
@@ -1204,7 +1201,7 @@
     <!-- ── PRIVACY MODAL ─────────────────────────────────── -->
     <div class="legal-modal" id="privacyModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="privacyTitle">
       <article class="legal-card" tabindex="-1">
-        <button class="modal-close legal-close" type="button" aria-label="Fermer" data-i18n-aria="common.close" data-close-legal><i data-lucide="x"></i></button>
+        <button class="modal-close legal-close" type="button" aria-label="Fermer" data-i18n-aria="common.close" data-close-legal><svg class="lucide lucide-x" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
         <p class="eyebrow" data-i18n="privacy.eyebrow">Confidentialité</p>
         <h2 id="privacyTitle" data-i18n="privacy.h2">Politique de confidentialité</h2>
         <div class="legal-content">
@@ -1243,7 +1240,7 @@
     <!-- ── LEGAL MODAL ───────────────────────────────────── -->
     <div class="legal-modal" id="legalModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="legalTitle">
       <article class="legal-card" tabindex="-1">
-        <button class="modal-close legal-close" type="button" aria-label="Fermer" data-i18n-aria="common.close" data-close-legal><i data-lucide="x"></i></button>
+        <button class="modal-close legal-close" type="button" aria-label="Fermer" data-i18n-aria="common.close" data-close-legal><svg class="lucide lucide-x" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
         <p class="eyebrow" data-i18n="legal.eyebrow">Informations légales</p>
         <h2 id="legalTitle" data-i18n="legal.h2">Mentions légales</h2>
         <div class="legal-content">
@@ -1346,8 +1343,7 @@
       </div>
     </footer>
 
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-    <script src="i18n.js?v=20260706-navbar1"></script>
-    <script src="script.js?v=20260706-navbar1"></script>
+    <script src="i18n.js?v=20260711-perf1" defer></script>
+    <script src="script.js?v=20260711-perf1" defer></script>
   </body>
 </html>
