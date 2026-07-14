@@ -3,6 +3,13 @@ edgeprofile-*/
 chromeprofile-*/
 firefoxprofile-*/
 
+# Build/audit tooling output
+.lh-audit/
+output/
+
+# Dependencies
+node_modules/
+
 # Claude Code / agent directories
 .agents/
 .claude/

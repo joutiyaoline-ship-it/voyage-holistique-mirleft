@@ -1,0 +1,50 @@
+{
+  "name": "voyage-holistic-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "i18n.js",
+  "dependencies": {
+    "ansi-regex": "^6.2.2",
+    "ansi-styles": "^6.2.3",
+    "chromium-bidi": "^16.0.1",
+    "clean-css-cli": "^5.6.3",
+    "cliui": "^9.0.1",
+    "devtools-protocol": "^0.0.1638949",
+    "emoji-regex": "^10.6.0",
+    "escalade": "^3.2.0",
+    "get-caller-file": "^2.0.5",
+    "get-east-asian-width": "^1.6.0",
+    "html-minifier-terser": "^7.2.0",
+    "lighthouse": "^13.4.0",
+    "mitt": "^3.0.1",
+    "modern-tar": "^0.7.6",
+    "puppeteer-core": "^25.3.0",
+    "sharp": "^0.35.3",
+    "string-width": "^7.2.0",
+    "strip-ansi": "^7.2.0",
+    "terser": "^5.49.0",
+    "typed-query-selector": "^2.12.2",
+    "webdriver-bidi-protocol": "^0.4.2",
+    "wrap-ansi": "^9.0.2",
+    "ws": "^8.21.0",
+    "y18n": "^5.0.8",
+    "yargs": "^18.0.0",
+    "yargs-parser": "^22.0.0",
+    "zod": "^3.25.76"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joutiyaoline-ship-it/voyage-holistique-mirleft.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/joutiyaoline-ship-it/voyage-holistique-mirleft/issues"
+  },
+  "homepage": "https://github.com/joutiyaoline-ship-it/voyage-holistique-mirleft#readme"
+}
