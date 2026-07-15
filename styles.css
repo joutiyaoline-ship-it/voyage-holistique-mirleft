@@ -466,3 +466,64 @@
 @media (prefers-reduced-motion:reduce){
   .mobile-announce-bar{transition:opacity .25s ease!important}
 }
+
+/* ── MOBILE CRO: hero stats card, Customize Your Experience, shortened intros, spacing ── */
+.activites-subtitle-mobile,
+.activites-bottom-desc-mobile,
+.testimonials-subtitle-mobile{display:none}
+
+@media (max-width:767px){
+  /* item 3: remove hero stats card (trust-band) on mobile */
+  .trust-band{display:none!important}
+
+  /* item 4: remove "Customize Your Experience" section on mobile */
+  #options{display:none!important}
+
+  /* item 5: shortened section intros on mobile, long copy hidden */
+  .activites-subtitle,
+  .activites-bottom-desc,
+  .testimonials-subtitle{display:none!important}
+
+  .activites-subtitle-mobile,
+  .activites-bottom-desc-mobile,
+  .testimonials-subtitle-mobile{
+    display:block!important;
+    max-width:560px;
+    margin:0 auto;
+    font-size:.92rem;
+    line-height:1.48;
+    color:var(--muted);
+  }
+  .activites-bottom-desc-mobile{margin-bottom:4px}
+
+  /* item 6: reduce vertical spacing between sections */
+  .section{padding-top:48px!important;padding-bottom:48px!important}
+  .activites-heading{margin-bottom:28px!important}
+  .testimonials-heading{margin-bottom:28px!important}
+  .activites-bottom{padding:26px 22px!important}
+  .reassurance-block{margin-bottom:20px!important}
+  .booking-content{gap:26px!important}
+}
+
+/* ── AUDIO TESTIMONIAL PLAYER: fix cropped/clipped native controls ── */
+/* neutralizes a stale legacy rule (min-height:260px) from an older card layout */
+.testimonial-card{
+  min-height:0!important;
+  height:auto!important;
+  overflow:visible!important;
+}
+.testimonial-top,
+.testimonial-id,
+.testimonial-audio{overflow:visible!important}
+.testimonial-audio{
+  width:100%;
+  min-width:0;
+}
+.testimonial-player{
+  display:block!important;
+  width:100%!important;
+  max-width:100%!important;
+  height:auto!important;
+  min-height:54px;
+  overflow:visible!important;
+}
