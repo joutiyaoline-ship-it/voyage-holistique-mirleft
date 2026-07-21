@@ -30,7 +30,7 @@
   var UI_TEXT = {
     fr: {
       eyebrow: "Contact WhatsApp",
-      title: "Comment pouvons-nous vous aider aujourd’hui ?",
+      title: "Comment pouvons-nous vous aider aujourd’hui ?",
       close: "Fermer",
       opt1: "Vérifier la disponibilité des 2 dernières places",
       opt2: "Paiement et réservation",
@@ -131,7 +131,7 @@
     }
 
     document.addEventListener("click", function (e) {
-      var trigger = e.target.closest && e.target.closest('a[href^="' + WA_PREFIX + '"]');
+      var trigger = e.target.closest && e.target.closest('[data-wa-trigger="modal"]');
       if (!trigger || modal.contains(trigger)) return;
       e.preventDefault();
       openModal(trigger);
