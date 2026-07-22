@@ -1057,15 +1057,127 @@
       <img alt="" />
     </div>
 
-    <!-- ── EXIT MODAL ────────────────────────────────────── -->
-    <div class="exit-modal" id="exitModal" aria-hidden="true" role="dialog" aria-labelledby="exitTitle">
-      <div class="exit-card">
+    <!-- ── EXIT SURVEY MODAL ─────────────────────────────── -->
+    <div class="exit-modal" id="exitModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Sondage avant de partir">
+      <div class="exit-card" role="document">
         <button class="modal-close" id="closeModal" aria-label="Fermer" data-i18n-aria="common.close"><svg class="lucide lucide-x" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-        <h2 id="exitTitle" data-i18n="exit.h2">Avant de partir…</h2>
-        <p data-i18n="exit.desc">Vous souhaitez recevoir les détails de la retraite sur WhatsApp&nbsp;? Notre équipe peut répondre à vos questions et vous accompagner.</p>
-        <div class="exit-actions">
-          <a class="btn btn-primary" href="https://wa.me/31625375673?text=Bonjour%20je%20souhaite%20obtenir%20plus%20d'informations%20concernant%20le%20Voyage%20Holistique%20du%2010%20au%2017%20ao%C3%BBt%20%C3%A0%20Mirleft." target="_blank" rel="noreferrer" data-cta="exit-modal" data-i18n="exit.ctaPrimary" data-i18n-wa="true" data-wa-trigger="modal">Oui, recevoir les détails sur WhatsApp</a>
-          <button type="button" class="exit-secondary" id="exitContinue" data-i18n="exit.ctaSecondary">Continuer ma lecture</button>
+
+        <!-- STEP 1 — reason -->
+        <div class="exit-step" data-exit-step="reason">
+          <h2>Avant de partir…</h2>
+          <p class="exit-survey-subtitle">Pouvez-vous nous dire ce qui vous empêche de réserver aujourd’hui&nbsp;?<br />Votre réponse nous aidera à améliorer nos prochaines retraites.</p>
+          <div class="wa-modal-options">
+            <button type="button" class="wa-option" data-exit-reason="budget">
+              <span class="wa-option-icon" aria-hidden="true">💳</span>
+              <span class="wa-option-body"><span class="wa-option-title">Le tarif dépasse mon budget</span></span>
+              <svg class="wa-option-arrow lucide lucide-chevron-right" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+            <button type="button" class="wa-option" data-exit-reason="dates">
+              <span class="wa-option-icon" aria-hidden="true">📅</span>
+              <span class="wa-option-body"><span class="wa-option-title">Les dates ne me conviennent pas</span></span>
+              <svg class="wa-option-arrow lucide lucide-chevron-right" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+            <button type="button" class="wa-option" data-exit-reason="questions">
+              <span class="wa-option-icon" aria-hidden="true">❓</span>
+              <span class="wa-option-body"><span class="wa-option-title">J'ai encore quelques questions</span></span>
+              <svg class="wa-option-arrow lucide lucide-chevron-right" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+            <button type="button" class="wa-option" data-exit-reason="not-for-me">
+              <span class="wa-option-icon" aria-hidden="true">❌</span>
+              <span class="wa-option-body"><span class="wa-option-title">Cette retraite ne me correspond pas</span></span>
+              <svg class="wa-option-arrow lucide lucide-chevron-right" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 2a — budget options -->
+        <div class="exit-step" data-exit-step="budget-options" hidden>
+          <button type="button" class="exit-secondary exit-back" data-exit-back>← Retour</button>
+          <h2 class="exit-step-title">Quel budget vous conviendrait davantage&nbsp;?</h2>
+          <div class="wa-modal-options">
+            <button type="button" class="wa-option" data-exit-budget="Moins de 7 000 MAD">
+              <span class="wa-option-body"><span class="wa-option-title">Moins de 7 000 MAD</span></span>
+              <svg class="wa-option-arrow lucide lucide-chevron-right" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+            <button type="button" class="wa-option" data-exit-budget="7 000 – 9 000 MAD">
+              <span class="wa-option-body"><span class="wa-option-title">7 000 – 9 000 MAD</span></span>
+              <svg class="wa-option-arrow lucide lucide-chevron-right" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+            <button type="button" class="wa-option" data-exit-budget="9 000 – 11 000 MAD">
+              <span class="wa-option-body"><span class="wa-option-title">9 000 – 11 000 MAD</span></span>
+              <svg class="wa-option-arrow lucide lucide-chevron-right" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+            <button type="button" class="wa-option" data-exit-budget="Plus de 11 000 MAD">
+              <span class="wa-option-body"><span class="wa-option-title">Plus de 11 000 MAD</span></span>
+              <svg class="wa-option-arrow lucide lucide-chevron-right" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 2b — dates options -->
+        <div class="exit-step" data-exit-step="dates-options" hidden>
+          <button type="button" class="exit-secondary exit-back" data-exit-back>← Retour</button>
+          <h2 class="exit-step-title">Quelle période vous conviendrait le mieux&nbsp;?</h2>
+          <div class="wa-modal-options">
+            <button type="button" class="wa-option" data-exit-date="Septembre">
+              <span class="wa-option-body"><span class="wa-option-title">Septembre</span></span>
+              <svg class="wa-option-arrow lucide lucide-chevron-right" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+            <button type="button" class="wa-option" data-exit-date="Octobre">
+              <span class="wa-option-body"><span class="wa-option-title">Octobre</span></span>
+              <svg class="wa-option-arrow lucide lucide-chevron-right" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+            <button type="button" class="wa-option" data-exit-date="Novembre">
+              <span class="wa-option-body"><span class="wa-option-title">Novembre</span></span>
+              <svg class="wa-option-arrow lucide lucide-chevron-right" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+            <button type="button" class="wa-option" data-exit-date="Décembre">
+              <span class="wa-option-body"><span class="wa-option-title">Décembre</span></span>
+              <svg class="wa-option-arrow lucide lucide-chevron-right" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+            <button type="button" class="wa-option" data-exit-date="Début 2027">
+              <span class="wa-option-body"><span class="wa-option-title">Début 2027</span></span>
+              <svg class="wa-option-arrow lucide lucide-chevron-right" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+            <button type="button" class="wa-option" data-exit-date="Autre">
+              <span class="wa-option-body"><span class="wa-option-title">Autre</span></span>
+              <svg class="wa-option-arrow lucide lucide-chevron-right" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 3 — contact form (shared by budget & dates flows) -->
+        <div class="exit-step" data-exit-step="contact-form" hidden>
+          <button type="button" class="exit-secondary exit-back" data-exit-back>← Retour</button>
+          <form class="exit-contact-form" id="exitSurveyForm" novalidate>
+            <label>
+              <span>Nom</span>
+              <input type="text" name="exitName" autocomplete="name" required aria-required="true" />
+            </label>
+            <label>
+              <span>Numéro de téléphone / WhatsApp</span>
+              <input type="tel" name="exitPhone" autocomplete="tel" required aria-required="true" inputmode="tel" />
+            </label>
+            <button type="submit" class="btn btn-primary" data-cta="exit-survey-submit">Envoyer</button>
+          </form>
+        </div>
+
+        <!-- STEP — questions branch (WhatsApp) -->
+        <div class="exit-step" data-exit-step="questions" hidden>
+          <button type="button" class="exit-secondary exit-back" data-exit-back>← Retour</button>
+          <p class="exit-survey-subtitle">Vous pouvez poser votre question directement sur WhatsApp.</p>
+          <a class="btn btn-primary" id="exitSurveyWhatsapp" href="https://wa.me/31625375673" target="_blank" rel="noreferrer" data-cta="exit-survey-whatsapp">Parler sur WhatsApp</a>
+        </div>
+
+        <!-- STEP — thank you (budget / dates completed) -->
+        <div class="exit-step exit-step-thanks" data-exit-step="thanks" hidden>
+          <p class="exit-survey-thanks-lead">Merci.</p>
+          <p class="exit-survey-thanks-detail" id="exitSurveyThanksDetail"></p>
+        </div>
+
+        <!-- STEP — thank you (not for me) -->
+        <div class="exit-step exit-step-thanks" data-exit-step="not-for-me-thanks" hidden>
+          <p class="exit-survey-thanks-lead">Merci pour votre retour.</p>
         </div>
       </div>
     </div>
@@ -1263,5 +1375,6 @@
     <script src="i18n.min.js?v=20260714-cro" defer></script>
     <script src="script.min.js?v=20260714-cro" defer></script>
     <script src="wa-modal.js?v=20260721b" defer></script>
+    <script src="exit-survey.js?v=20260721" defer></script>
   </body>
 </html>
